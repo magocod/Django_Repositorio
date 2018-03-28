@@ -1,11 +1,16 @@
 ## RepositorioUNEFA
-repositorio digital -> proyecto de pasantias UNEFA, Version 1.6 --> Proxima version + (Vuejs)
+repositorio digital -> proyecto de pasantias UNEFA, Version 1.6
+
+
 
 ## FRONT-END
 
 * Bootstrap 4.0.0 -> https://getbootstrap.com/
 * Materialize 0.100.2 -> http://archives.materializecss.com/0.100.2/
 
+```bash
+Proxima version vuejs 2
+```
 
 ## BACK-END
 
@@ -30,6 +35,20 @@ repositorio digital -> proyecto de pasantias UNEFA, Version 1.6 --> Proxima vers
 * Datatables 1.10.16
 * Chosen 1.8.3
 
+## Directorios Estructura
+-------------------
+
+      backend/             Procesamiento de informacion
+             /account/     Control de usuarios,perfiles,permisos
+             /api/         Intercambiar informacion JSON,XML
+             /fabricator/  Ingresar data de prueba
+             /grabber/     Formularios para ingresar data
+             /seeker/      Busquedas y filtrado
+             /storage/     Modelos y logica de negocio
+      kernel/              Configuracion general
+      static/              Archivos estaticos
+      templates/           Codigo Html
+     
 ## instrucciones
 
 instalar entorno virtual python e instalar librerias con pip
@@ -81,3 +100,4 @@ Ingresar a la direccion
 ```bash
 http://localhost:8000
 ```
+
