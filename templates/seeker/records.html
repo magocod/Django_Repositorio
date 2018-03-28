@@ -1,0 +1,96 @@
+{% extends 'core/base-m.html' %}
+{% load static %}
+
+{% block title %} 
+	Repositorio-Pruebas
+{% endblock %}
+
+
+{% block breadcrumb %}
+
+<a class="breadcrumb">Prueba</a> 
+<a class="breadcrumb">Capacidad</a> 
+
+{% endblock %}
+
+{% block add %}
+
+
+<div class="col s12 m5">
+
+    <div class="card-panel indigo darken-3 z-depth-5">
+        
+        <span class="white-text">
+            <h5>Datos actuales en el repositorio</h5>
+        </span>
+
+    <div class="chip teal darken-4 white-text text-white">
+        <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            Colecciones:     
+        <center>
+            <a class="btn-floating btn-small waves-effect waves-light teal darken-4 pulse">
+            	{{ registros.total_colecciones }}
+            </a>
+        </center>
+    </div>
+
+   	<div class="chip teal darken-4 white-text text-white">
+        <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            Items:          
+        <center>
+            <a class="btn-floating btn-small waves-effect waves-light teal darken-4 pulse">
+            	{{ registros.total_items }}
+            </a>
+        </center>
+    </div>
+
+    <div class="chip teal darken-4 white-text text-white">
+        <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            Tipo de items: 
+        <center>
+            <a class="btn-floating btn-small waves-effect waves-light teal darken-4 pulse">
+            	{{ registros.total_tipos_items }}
+        	</a>
+        </center>
+    </div>
+
+    <div class="chip teal darken-4 white-text text-white">
+        <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            Tags: 
+         <center>
+            <a class="btn-floating btn-small waves-effect waves-light teal darken-4 pulse">
+               	{{ registros.total_tags }}
+            </a>
+        </center>
+    </div>
+
+    <div class="chip teal darken-4 white-text text-white">
+        <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+              Categorias: 
+        <center>
+            <a class="btn-floating btn-small waves-effect waves-light teal darken-4 pulse">
+            	{{ registros.total_categorias }}
+        	</a>
+        </center>
+    </div>
+
+    <div class="chip teal darken-4 white-text text-white">
+        <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            Temas: 
+        <center>
+            <a class="btn-floating btn-small waves-effect waves-light teal darken-4 pulse">{{ registros.total_temas }}</a>
+        </center>
+    </div>
+
+<br>
+<br>
+<br>
+         
+    </div>
+    
+</div>
+
+<br>
+<br>
+
+{% endblock %}

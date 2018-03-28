@@ -1,0 +1,94 @@
+{% extends 'core/materialize.html' %}
+{% load static %}
+
+{% block extracss %}
+<link href="{% static 'materialize/css/ghpages.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+{% endblock %}
+
+
+{% block title %} 
+UNEFA-Repositorio
+{% endblock %}
+
+{% block content %}
+
+<header>
+
+<!-- vista parcial notificacion -->
+{% include 'includes/notification-m.html' %}
+
+
+<nav class="top-nav indigo darken-4">
+    <div class="container">
+
+      <div class="nav-wrapper">
+           
+          <a class="page-title">
+                UNEFA Repositorio
+          </a> 
+            
+      </div>
+    </div>
+</nav>
+
+<div class="container">
+    <a data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a>
+</div>
+
+<!-- vista parcial menu -->
+{% include 'includes/menu-m.html' %}
+
+
+</header>
+
+<main>
+
+<div class="container">
+  		
+{% block space %}
+
+
+<h4>Enlaces de Interes
+  <span>
+    <a ><i class="material-icons">near_me</i>...</a>
+  </span>
+</h4>
+
+<div class="carousel">
+    <a class="carousel-item z-depth-5" href="https://www.python.org"><img src="{% static 'icon/python.jpg' %}"></a>
+    <a class="carousel-item z-depth-5" href="http://materializecss.com/carousel.html"><img src="{% static 'icon/materialize.jpg' %}"></a>
+    <a class="carousel-item z-depth-5" href="https://getbootstrap.com"><img src="{% static 'icon/bootstrap.png' %}"></a>
+    <a class="carousel-item z-depth-5" href="https://vuejs.org"><img src="{% static 'icon/vue.jpg' %}"></a>
+    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com"><img src="{% static 'icon/django.png' %}"></a>
+    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com"><img src="{% static 'icon/ubuntu.jpg' %}"></a>
+</div>
+
+
+<h4>Añadidos recientemente
+  <span>
+    <a href="{% url 'seeker:recent_items' %}"><i class="material-icons">next_week</i>...</a>
+  </span>
+</h4>
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}
+
+</div>
+
+
+<!-- vista parcial boton -->
+{% include 'includes/button-m.html' %}
+
+</main>    
+  
+{% endblock %}
+
+
+

@@ -1,0 +1,80 @@
+<!-- Cargas estilos y javascrit -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Bootstrap4 CSS -->
+<link href="{% static 'bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet">
+  
+<!-- SB-Admin CSS -->
+<link href="{% static 'sbadmin/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+<link href="{% static 'sbadmin/css/sb-admin.min.css' %}" rel="stylesheet">
+
+<!--chosen-->
+<link href="{% static 'plugin/chosen/chosen.min.css' %}" rel="stylesheet">
+<link href="{% static 'plugin/chosen/chosen-bootstrap.css' %}" rel="stylesheet">
+
+<!--Datatables-->
+<link rel="stylesheet" href="{% static 'plugin/datatables/datatables.bootstrap4.min.css' %}">
+
+<!-- CSS extras-->
+{% block extracss %}
+  
+{% endblock %}
+
+<!-- titulo pagina -->
+<title>{% block title %} Nombre-Pagina {% endblock %}</title>
+
+</head>
+  
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+<!-- bloques-->
+{% block content %}
+  
+{% endblock %}
+
+
+<!-- javascripts -->
+<!-- jquery -->
+<script src="{% static 'plugin/jquery/jquery-3.2.1.min.js' %}"></script>
+<!-- jquery slim-->
+<script src="{% static 'plugin/jquery/jquery-3.2.1.slim.min.js' %}"></script>
+<!-- Popper-->
+<script src="{% static 'plugin/popper/popper.min.js' %}"></script>
+<!-- Bootstrap4 JS -->
+<script src="{% static 'bootstrap4/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'bootstrap4/js/bootstrap.bundle.min.js' %}"></script>
+<!-- jquery easing-->
+<script src="{% static 'plugin/jquery-easing/jquery-easing.min.js' %}"></script>
+<!-- SB-Admin JS -->
+<script src="{% static 'sbadmin/js/sb-admin.min.js' %}"></script>
+<!-- chosen -->
+<script src="{% static 'plugin/chosen/chosen.jquery.min.js' %}"></script>
+<!-- tinymce-->
+<script src="{% static 'plugin/tinymce/tinymce.min.js' %}"></script>
+<!-- dropzone-->
+<script src="{% static 'plugin/dropzone/dropzone.js' %}"></script>
+<!-- datatables -->
+<script type="text/javascript" charset="utf8" src="{% static 'plugin/datatables/datatables.min.js' %}"></script> 
+<!-- Vuejs -->
+<script src="{% static 'vue/vue.min.js' %}"></script>
+<!-- Funciones js -->
+<script src="{% static 'plugin/functions/f-bootstrap.js' %}"></script>
+<script src="{% static 'plugin/functions/f-plugin.js' %}"></script>
+
+<!-- javascripts extras -->
+{% block extrajs %}
+  
+{% endblock %}
+
+</body>
+
+</html>

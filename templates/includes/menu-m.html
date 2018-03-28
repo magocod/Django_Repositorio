@@ -1,0 +1,212 @@
+{% load static %}
+
+<ul id="nav-mobile" class="side-nav fixed indigo darken-4" style="transform: translateX(0%);">
+
+  <!--logo unefa-->
+  <li class="logo"><a href="{% url 'index' %}" id="logo-container" class="brand-logo">
+      <img src="{% static 'icon/unefa_escudo.jpg' %}" width="200" height="200">
+  </li>
+
+  <li class="bold">
+      <a href="{% url 'seeker:seeker_info' %}" class="waves-effect waves-red white-text text-white">
+        <i class="material-icons left white-text text-white">more</i>Informacion
+      </a>
+  </li>
+    
+  <li class="no-padding">
+
+      <ul class="collapsible collapsible-accordion">
+
+        <li class="bold">
+
+            <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white">
+              <i class="material-icons left white-text text-white">work</i>Colecciones
+            </a>
+
+            <div class="collapsible-body">
+              
+              <ul>
+
+                <li>
+                  <a href="{% url 'seeker:seeker_title_base' %}" class="waves-effect waves-red blue-grey lighten-3">
+                    <i class="material-icons">keyboard_hide</i>
+                      Titulo
+                  </a>
+                </li>
+
+                <li>
+                  <a href="{% url 'seeker:seeker_category_base' %}" class="waves-effect waves-red blue-grey lighten-3">
+                    <i class="material-icons">description</i>
+                      Categoria
+                  </a>
+                </li>
+
+                <li>
+                  <a href="{% url 'seeker:seeker_theme_base' %}" class="waves-effect waves-red blue-grey lighten-3">
+                    <i class="material-icons">content_paste</i>
+                      Tema
+                  </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'seeker:seeker_author_base' %}" class="waves-effect waves-red blue-grey lighten-3">
+                      <i class="material-icons">account_box</i>
+                      Autor
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'seeker:seeker_date_base' %}" class="waves-effect waves-red blue-grey lighten-3">
+                      <i class="material-icons">access_time</i>
+                        Fecha de publicacion
+                    </a>
+                </li>
+
+                <li>
+                  <a href="{% url 'seeker:recent_items' %}" class="waves-effect waves-red blue-grey lighten-3">
+                    <i class="material-icons">next_week</i>
+                      Recientes
+                  </a>
+                </li>
+
+
+                <li>
+                  <a class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nuevo filtro para busqueda">
+                    <i class="material-icons">extension</i>
+                      Proximamente
+                  </a>
+                </li>
+  
+              </ul>
+
+            </div>
+                  
+        </li>
+
+      </ul>
+  </li>
+
+  <li class="no-padding">
+
+      <ul class="collapsible collapsible-accordion">
+
+          <li class="bold">
+
+              <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white tooltipped" data-position="right" data-delay="50" data-tooltip="Usuario:yson / contraseña:24682468*">
+                <i class="material-icons left white-text text-white">assignment_ind</i>Admin
+              </a>
+              
+              <div class="collapsible-body">
+                	
+                  <ul>
+                      {% if user.is_authenticated %}
+                      <li>
+                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red blue-grey lighten-3">
+                            <i class="material-icons">contact_mail</i>
+                            {{ user.username }}-> Admin v1
+                        </a>
+                      </li>
+                      <li>
+                        <a href="{% url 'account:dashboard' %}" class="waves-effect waves-red blue-grey lighten-3">
+                            <i class="material-icons">contact_mail</i>
+                            {{ user.username }}-> Admin v2
+                        </a>
+                      </li>
+                      {% else %}
+                  		<li>
+                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pruebas ingreso de data">
+                          <i class="material-icons">backspace</i>
+                              Version 1
+                        </a>
+                      </li>
+                  		<li>
+                        <a href="{% url 'login' %}"class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="En construccion">
+                          <i class="material-icons">build</i>
+                            Version 2
+                        </a>
+                      </li>
+                      {% endif %}
+                	</ul>
+              </div>
+
+          </li>
+      </ul>
+
+   </li>
+
+    <li class="no-padding">
+          
+        <ul class="collapsible collapsible-accordion">
+            
+          <li class="bold">
+
+              <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white">
+                <i class="material-icons left white-text text-white">memory</i>Api
+              </a>
+                  
+          <div class="collapsible-body">
+            
+            <ul>
+                 
+              <li>
+                  <a href="{% url 'api:api_data' %}" class="waves-effect waves-red blue-grey lighten-3">
+                    <i class="material-icons">account_balance_wallet</i>
+                      Data
+                  </a>
+              </li>
+              <li>
+                  <a href="{% url 'api:api_data_links' %}" class="waves-effect waves-red blue-grey lighten-3">
+                    <i class="material-icons">cloud_circle</i>
+                      Links
+                  </a>
+              </li>
+                        
+            </ul>
+          </div>
+
+          </li>
+
+        </ul>
+    </li>
+      
+    <li class="bold">
+      <a class="waves-effect waves-red white-text text-white tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nueva funcionalidad">
+        <i class="material-icons left white-text text-white">extension</i>Proximamente
+      </a>
+    </li>
+
+    <li class="no-padding">
+
+      <ul class="collapsible collapsible-accordion">
+
+        <li class="bold">
+
+          <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white">
+            <i class="material-icons left white-text text-white">android</i>Pruebas
+          </a>
+          
+          <div class="collapsible-body">
+
+              <ul>                
+                  <li>
+                    <a href="{% url 'seeker:records' %}" class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Capacidad de almacenamiento">
+                      <i class="material-icons">broken_image</i>
+                        Registros de modelos
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="{% url 'seeker:all' %}" class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Tiempo de respuesta">
+                      <i class="material-icons">flash_on</i>
+                        Carga, paginacion
+                      </a>
+                  </li>          
+              </ul>
+          </div>
+
+        </li>
+      </ul>
+
+    </li>
+      
+</ul>

@@ -1,0 +1,249 @@
+{% extends 'account/base.html' %}
+
+{% block breadcrumb %}
+
+  <li class="breadcrumb-item active">
+    Busqueda
+  </li>
+
+{% endblock %}
+
+
+{% block junbotron %}
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-sm">
+  <div class="card border-success mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-success">Registrados:&nbsp;{{ registros.total_categorias }}
+    </div>
+      <div class="card-body text-success">
+        <h5 class="card-title">Categoria</h5>
+        <p class="card-text">
+
+        <form action="{% url 'grabber:category_search' %}" method="GET">
+          {% csrf_token %}
+          <select name="q" class="custom-select chosen-select-c">
+          {% for categoria in listas.lista_categorias %}     
+            <option value="{{categoria.id}}">{{categoria.nombre}}</option>
+          {% endfor %}
+          </select>
+          <hr class="border-success">
+          <center>
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </center> 
+        </form>
+
+        </p>
+      </div>
+
+<div class="card-footer bg-transparent border-success">
+      
+
+</div>
+
+  </div>
+</div>
+
+<div class="col-sm">
+  <div class="card border-success mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-success">Registrados:&nbsp;{{ registros.total_colecciones }}</div>
+      <div class="card-body text-success">
+        <h5 class="card-title">Coleccion</h5>
+        <p class="card-text">
+          
+        <form action="{% url 'grabber:collection_search' %}" method="GET">
+          {% csrf_token %}
+          <select name="q" class="custom-select chosen-select-cl">
+          {% for coleccion in listas.lista_colecciones %}     
+            <option value="{{coleccion.id}}">{{coleccion.nombre}}</option>
+          {% endfor %}
+          </select>
+          <hr class="border-success">
+          <center>
+          <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </center> 
+        </form>
+        
+        </p>
+      </div>
+
+<div class="card-footer bg-transparent border-success">
+      
+</div>
+
+  </div>
+</div>
+
+
+<div class="col-sm">
+  <div class="card border-warning mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-warning">Registrados:&nbsp;{{ registros.total_items }}</div>
+      <div class="card-body text-warning">
+        <h5 class="card-title">Item</h5>
+        <p class="card-text">
+
+          <form action="{% url 'grabber:item_search' %}" method="GET">
+          {% csrf_token %}
+          <select name="q" class="custom-select chosen-select-i">
+          {% for item in listas.lista_items %}     
+            <option value="{{item.id}}">{{item.nombre}}</option>
+          {% endfor %}
+          </select>
+          <hr class="border-warning">
+          <center>
+          <button class="btn btn-outline-warning" type="submit">Buscar</button>
+          </center> 
+        </form>
+
+        </p>
+      </div>
+
+<div class="card-footer bg-transparent border-warning">
+      
+
+</div>
+
+  </div>
+</div>
+
+</div>
+
+<br>
+<br>
+
+<div class="row">
+
+
+<div class="col-sm">
+
+  <div class="card border-info mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-info">Registrados:&nbsp;{{ registros.total_temas }}</div>
+      <div class="card-body text-info">
+        <h5 class="card-title">Tema</h5>
+        <p class="card-text">
+          
+      <form action="{% url 'grabber:theme_search' %}" method="GET">
+          {% csrf_token %}
+          <select name="q" class="custom-select chosen-select-t">
+          {% for tema in listas.lista_temas %}     
+            <option value="{{tema.id}}">{{tema.nombre}}</option>
+          {% endfor %}
+          </select>
+          <hr class="border-info">
+          <center>
+          <button class="btn btn-outline-info" type="submit">Buscar</button>
+          </center> 
+      </form>
+
+        </p>
+      </div>
+
+  <div class="card-footer bg-transparent border-info">
+
+      
+ 
+  </div>
+</div>
+
+</div>
+
+
+<div class="col-sm">
+
+  <div class="card border-info mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-info">Registrados:&nbsp;{{ registros.total_tipos_items }}</div>
+      <div class="card-body text-info">
+        <h5 class="card-title">Tipo de item</h5>
+        <p class="card-text">
+          
+        <form action="{% url 'grabber:item_type_search' %}" method="GET">
+          {% csrf_token %}
+          <select name="q" class="custom-select chosen-select-ti">
+          {% for tipo in listas.lista_tipos_items %}     
+            <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+          {% endfor %}
+          </select>
+          <hr class="border-info">
+          <center>
+          <button class="btn btn-outline-info" type="submit">Buscar</button>
+          </center> 
+        </form>
+
+        </p>
+      </div>
+
+  <div class="card-footer bg-transparent border-info">
+      
+  
+  </div>
+</div>
+
+</div>
+
+
+<div class="col-sm">
+
+  <div class="card border-info mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-transparent border-info">Registrados:&nbsp;{{ registros.total_tags }}</div>
+      <div class="card-body text-info">
+        <h5 class="card-title">Tag</h5>
+        <p class="card-text">
+
+        <form action="{% url 'grabber:tag_search' %}" method="GET">
+          {% csrf_token %}
+          <select name="q" class="custom-select chosen-select-ta">
+          {% for tag in listas.lista_tags %}     
+            <option value="{{tag.id}}">{{tag.nombre}}</option>
+          {% endfor %}
+          </select>
+          <hr class="border-info">
+          <center>
+          <button class="btn btn-outline-info" type="submit">Buscar</button>
+          </center> 
+        </form>
+          
+        </p>
+      </div>
+
+  <div class="card-footer bg-transparent border-info">
+      
+  
+
+  </div>
+</div>
+
+</div>
+
+</div>
+
+
+{% endblock %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+ //chosen ->select
+ $(".chosen-select-c").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-cl").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-i").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-t").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-ti").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-ta").chosen({no_results_text: "Oops, nothing found!"});
+
+ //texarea
+
+
+});
+
+//dropzone
+
+
+</script>
+
+{% endblock %}

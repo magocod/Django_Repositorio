@@ -1,0 +1,17 @@
+{% extends 'core/base-m.html' %}
+{% load static %}
+
+{% block breadcrumb %}
+<a class="breadcrumb">Busqueda</a>
+<a href="{% url 'seeker:seeker_theme_base' %}" class="breadcrumb">Tema</a>
+<a class="breadcrumb">Coleccion</a>      
+{% endblock %}
+
+{% block add %}
+
+{% include 'seeker/collection/list.html' %}
+
+{% include 'includes/pagination-m.html' %}
+
+
+{% endblock %}

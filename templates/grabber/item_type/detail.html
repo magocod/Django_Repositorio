@@ -1,0 +1,47 @@
+{% extends 'account/base.html' %}
+
+{% block breadcrumb %}
+
+  <li class="breadcrumb-item active">
+    tipo de item
+  </li>
+
+  <li class="breadcrumb-item active">
+    Detalles
+  </li>
+
+{% endblock %}
+
+
+{% block junbotron %}
+
+
+<div class="card">
+  <div class="card-header text-success">
+    Tipo de recurso digital
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ item_type.nombre }}</h5>
+    <p class="card-text">{{ item_type.descripcion }}</p>
+    <a href="{% url 'grabber:item_type_update' item_type.id %}" class="btn btn-primary">Modificar</a>
+  </div>
+</div>
+
+<br>
+
+<div class="card">
+  <div class="card-header">
+    Proximamente
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>funcionalidad sin definir completamente</p>
+      <footer class="blockquote-footer">creada desde<cite title="Source Title">&nbsp;Fecha</cite></footer>
+    </blockquote>
+  </div>
+</div>
+
+<br>
+
+
+{% endblock %}

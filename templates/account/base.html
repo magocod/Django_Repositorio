@@ -1,0 +1,157 @@
+{% extends 'core/bootstrap.html' %}
+{% load static %}
+
+
+{% block title %} 
+	Dashboard
+{% endblock %}
+
+
+
+{% block content %}
+
+<!--vista parcial-->
+{% include 'account/navbar.html' %}
+
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+
+      
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+
+        <li class="breadcrumb-item">
+          <a href="{% url 'account:dashboard' %}">Dashboard</a>
+        </li>
+
+        {% block breadcrumb %}
+
+        <li class="breadcrumb-item active">
+          Resumen
+        </li>
+
+        {% endblock %}
+
+      </ol>
+      
+
+      <div class="jumbotron jumbotron-fluid bg-dark">
+        <div class="container">
+          {% block junbotron %}
+          <!--contenido-->
+          <div class="row">
+
+          <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-Info mb-3" style="max-width: 18rem;">
+              <div class="card-header">Usuario</div>
+                <div class="card-body">
+                  <h5 class="card-title">Datos: </h5>
+                    <p class="card-text">
+                      Nombre de usuario: {{ user.username }}
+                      <br>
+                      Nombre: {{ user.first_name }}
+                      <br>
+                      Apellido: {{ user.last_name }}
+                      <br>
+                      Correo: {{ user.email }}
+
+                    </p>
+                    
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-sm-6 mb-3">
+            <div class="card text-white bg-Info mb-3" style="max-width: 18rem;">
+              <div class="card-header">Resumen</div>
+                <div class="card-body">
+                  <h5 class="card-title">Datos: </h5>
+
+                    <p class="card-text">
+
+                      Colecciones: {{ registros.total_colecciones }}
+                      <br>
+                      Items: {{ registros.total_items }}
+                      <br>
+                      Tipos de items: {{ registros.total_tipos_items }}
+                      <br>
+                      Tags: {{ registros.total_tags }}
+                      <br>
+                      Categorias: {{ registros.total_categorias }}
+                      <br>
+                      Temas: {{ registros.total_temas }}
+                      <br>
+                      Usuarios: {{ registros.total_usuarios }}
+
+                    </p>
+                    
+                </div>
+            </div>
+          </div>
+
+          </div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Añadido Recientemente</h5>
+        <p class="card-text">Proximamente</p>
+        <a href="#" class="btn btn-primary">ver</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Funcion sin definir</h5>
+        <p class="card-text">Proximamente</p>
+        <a href="#" class="btn btn-primary">ver</a>
+      </div>
+    </div>
+  </div>
+</div>
+     
+          {% endblock %}
+        </div>
+      </div>
+      
+
+<!--vista parcial-->
+{% include 'account/footer.html' %} 
+
+    </div>
+</div>
+
+
+  
+{% endblock %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+ //chosen ->select
+ $(".chosen-select-t").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-one").chosen({no_results_text: "Oops, nothing found!"});
+ $(".chosen-select-two").chosen({no_results_text: "Oops, nothing found!"});
+
+ //texarea
+
+
+
+
+});
+
+
+
+//dropzone
+
+
+</script>
+
+{% endblock %}

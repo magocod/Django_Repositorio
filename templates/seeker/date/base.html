@@ -1,0 +1,70 @@
+{% extends 'core/base-m.html' %}
+{% load static %}
+
+{% block breadcrumb %}
+
+<a class="breadcrumb">Busqueda</a>
+<a class="breadcrumb">Fecha </a>  
+
+{% endblock %}
+
+{% block add %}
+
+<div class="row">
+    <div class="col s12">
+        <div class="row">
+          
+          <form action="{% url 'seeker:seeker_date_creation' %}" method="GET">
+
+          <div class="input-field col s6">
+            <h4>Fecha: </h4>
+              <i class="material-icons prefix">event_available</i>
+                  <input name="q" type="date" required>
+          </div>
+
+          <div class="input-field col s6">
+
+              <button class="btn black waves-effect waves-light" type="submit" data-position="right" data-delay="50" data-tooltip="Buscar">
+                <i class="material-icons left">flash_on</i>
+                Accion
+              </button> 
+          </div>
+
+          </form>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col s12">
+        <div class="row">
+          
+          <form action="{% url 'seeker:seeker_date_publication' %}" method="GET">
+
+          <div class="input-field col s6">
+            <h4>Fecha de publicacion: </h4>
+              <i class="material-icons prefix">event_available</i>
+                  <input name="q" type="date" required>
+          </div>
+
+          <div class="input-field col s6">
+              <button class="btn black waves-effect waves-light" type="submit" data-position="right" data-delay="50" data-tooltip="Buscar">
+                <i class="material-icons left">flash_on</i>
+                  Accion
+              </button> 
+          </div>
+
+          </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+<br>
+<br>
+
+{% endblock %}

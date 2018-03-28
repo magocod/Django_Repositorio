@@ -1,0 +1,39 @@
+{% if object_list %}
+
+{% for tema in object_list %}
+
+<ul class="collapsible popout" data-collapsible="accordion">
+
+    <li>
+      <div class="collapsible-header indigo darken-3 white-text text-white">
+        <i class="material-icons">content_paste</i>
+              {{ tema.nombre }} 
+      </div>
+
+      <div class="collapsible-body">
+        <ul class="collection">
+
+          <ul class="collection with-header">
+            <li class="collection-item">{{ tema.descripcion }}</li>
+            <li class="collection-item">{{ tema.metadato_1 }}</li>
+            <li class="collection-item">{{ tema.metadato_2 }}</li>
+            <li class="collection-item">{{ tema.metadato_3 }}</li>
+          </ul>
+          
+          <br>
+          <a href="{% url 'seeker:seeker_theme_collections' tema.id %}" class="waves-effect waves-light btn black tooltipped" data-position="right" data-delay="50" data-tooltip="Listar">
+            <i class="material-icons left">send</i>
+              Colecciones
+          </a>
+
+        </ul>
+      </div>
+
+    </li>
+</ul>
+
+{% endfor %}
+
+{% else %}
+<p>No hay registros.</p>
+{% endif %}

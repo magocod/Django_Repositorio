@@ -1,0 +1,78 @@
+<!-- Cargas estilos y javascrit -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Materialize CSS -->
+<link href="{% static 'materialize/css/materialize.min.css' %}" rel="stylesheet">
+<!--Datatables-->
+<link rel="stylesheet" href="{% static 'plugin/datatables/datatables.min.css' %}">
+<!-- Google-api icons CSS -->
+<link href="{% static 'materialize/icon/icon-googleapi.min.css' %}" rel="stylesheet">
+
+
+<!-- footer -->
+<style type="text/css">
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+</style>
+  
+<!-- CSS extras-->
+{% block extracss %}
+  
+{% endblock %}
+
+  
+
+<title>{% block title %} Nombre-Pagina {% endblock %}</title>
+
+</head>
+	
+<body class="blue-grey lighten-3">
+  
+<!-- bloques-->
+{% block content %}
+
+  
+{% endblock %}
+
+<!-- vista parcial footer -->
+{% include 'includes/footer-m.html' %}
+
+<!-- javascripts -->
+<!-- jquery -->
+<script src="{% static 'plugin/jquery/jquery-3.2.1.min.js' %}"></script>
+<!-- Materialize JS -->
+<script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+<!-- datatables -->
+<script type="text/javascript" charset="utf8" src="{% static 'plugin/datatables/datatables.min.js' %}"></script> 
+<!-- funciones JS-->
+<script src="{% static 'plugin/functions/f-materialize.js' %}"></script>
+<!-- Vuejs -->
+<script src="{% static 'vue/vue.js' %}"></script>
+
+
+<!-- javascripts extras -->
+{% block extrajs %}
+  
+{% endblock %}
+
+</body>
+
+</html>

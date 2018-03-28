@@ -1,0 +1,51 @@
+{% extends 'core/base-m.html' %}
+{% load static %}
+
+{% block breadcrumb %}
+
+<a class="breadcrumb">Busqueda</a>
+<a class="breadcrumb">Categoria</a> 
+
+{% endblock %}
+
+{% block add %}
+
+{% if object_list %}
+
+{% for category in object_list %}
+
+<ul class="collapsible popout" data-collapsible="accordion">
+
+    <li>
+      
+      <div class="collapsible-header indigo darken-3 white-text text-white">
+
+        <div class="chip teal darken-4 white-text text-white">
+            <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+              {{ category.nombre }} 
+        </div>
+
+        <a class="waves-effect waves-light btn black text-white white-text" href="{% url 'seeker:seeker_category_collections' category.id %}">
+          <i class="material-icons right">send</i>Colecciones
+        </a>
+       
+
+      </div>
+
+      <div class="collapsible-body">
+        {{ category.descripcion }}
+      </div>
+
+    </li>
+</ul>
+
+{% endfor %}
+
+{% else %}
+<p>No hay registros.</p>
+{% endif %}
+
+<br>
+<br>
+
+{% endblock %}

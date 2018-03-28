@@ -1,0 +1,194 @@
+{% extends 'account/base.html' %}
+
+
+
+{% block breadcrumb %}
+
+    <li class="breadcrumb-item active">
+        item
+    </li>
+
+    <li class="breadcrumb-item active">
+        Editar
+    </li>
+
+{% endblock %}
+
+
+{% block junbotron %}
+
+<h1>Recurso Digital</h1>
+
+<form method="post" enctype="multipart/form-data">
+
+<!--token seguridad-->
+{% csrf_token %}
+
+<br>
+<hr class="border-success">
+
+<h2>Contenido</h2>
+
+  <div class="form-group row">
+
+    <label for="{{ form.nombre.label }}" class="col-sm-2 col-form-label col-form-label-lg">Nombre</label>
+
+    <div class="col-sm-10">
+      {{ form.nombre }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.nombre.label }}" class="col-sm-2 col-form-label col-form-label-lg">Descripcion</label>
+
+    <div class="col-sm-10">
+      {{ form.descripcion }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.identificador.label }}" class="col-sm-2 col-form-label col-form-label-lg">Identificador</label>
+
+    <div class="col-sm-10">
+      {{ form.identificador }}
+    </div>
+
+  </div>
+
+    <div class="form-group row">
+
+    <label for="{{ form.autor.label }}" class="col-sm-2 col-form-label col-form-label-lg">Autor</label>
+
+    <div class="col-sm-10">
+      {{ form.autor }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.fecha.label }}" class="col-sm-2 col-form-label col-form-label-lg">Fecha Creacion</label>
+
+    <div class="col-sm-10">
+      {{ form.fecha }}
+    </div>
+
+  </div>
+
+<br>
+<hr class="border-success">
+
+<h2>Caracteristicas</h2>
+
+  <div class="form-group row">
+
+    <label for="{{ form.tema.label }}" class="col-sm-2 col-form-label col-form-label-lg">Tematica</label>
+
+    <div class="col-sm-10">
+      {{ form.tema }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.tipo.label }}" class="col-sm-2 col-form-label col-form-label-lg">Tipo de recurso</label>
+
+    <div class="col-sm-10">
+      {{ form.tipo }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.tags.label }}" class="col-sm-2 col-form-label col-form-label-lg">Añadir Etiquetas</label>
+
+    <div class="col-sm-10">
+      {{ form.tags }}
+    </div>
+
+  </div>
+
+
+<br>
+<hr class="border-success">
+
+<h2>Añadir a Colecciones</h2>
+
+  <div class="form-group row">
+
+    <label for="{{ form.tema.label }}" class="col-sm-2 col-form-label col-form-label-lg">Colecciones</label>
+
+    <div class="col-sm-10">
+      {{ form.colecciones }}
+    </div>
+
+  </div>
+
+<br>
+<hr class="border-success">
+
+
+  <div class="form-group row">
+
+    <label for="{{ form.url.label }}" class="col-sm-2 col-form-label col-form-label-lg">URL contenido web externo</label>
+
+    <div class="col-sm-10">
+      {{ form.url }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.url_video.label }}" class="col-sm-2 col-form-label col-form-label-lg">URL enlace video</label>
+
+    <div class="col-sm-10">
+      {{ form.url_video }}
+    </div>
+
+  </div>
+
+<br>
+<hr class="border-success">
+
+<h2>Ficheros</h2>
+
+  <div class="form-group row">
+
+    <label for="{{ form.archivo_1.label }}" class="col-sm-2 col-form-label col-form-label-lg">Agregar</label>
+
+    <div class="col-sm-10">
+      {{ form.archivo_1 }}
+    </div>
+
+  </div>
+
+  <div class="form-group row">
+
+    <label for="{{ form.archivo_2.label }}" class="col-sm-2 col-form-label col-form-label-lg">Agregar</label>
+
+    <div class="col-sm-10">
+      {{ form.archivo_2 }}
+    </div>
+
+  </div>
+
+<br>
+<hr class="border-success">
+
+  <button class="btn btn-primary" type="submit">Guardar</button> 
+
+<br>
+<hr class="border-success">
+
+</form>
+
+
+{% endblock %}
+

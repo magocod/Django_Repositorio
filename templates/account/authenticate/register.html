@@ -1,0 +1,54 @@
+{% extends 'core/bootstrap.html' %}
+{% load static %}
+
+{% block title %} 
+Iniciar Sesion
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Registrar Cuenta de usuario</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputName">Nombre</label>
+                <input class="form-control" id="exampleInputName" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputLastName">Apellido</label>
+                <input class="form-control" id="exampleInputLastName" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Correo electronico</label>
+            <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">Contraseña</label>
+                <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Password">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleConfirmPassword">Confirmar Contraseña</label>
+                <input class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirm password">
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-primary btn-block" href="">Registrar</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="{% url 'login' %}">Iniciar Sesion</a>
+          <a class="d-block small" href="{% url 'user_password' %}">Recuperar Contraseña</a>
+        </div>
+      </div>
+    </div>
+</div>
+
+  
+{% endblock %}
