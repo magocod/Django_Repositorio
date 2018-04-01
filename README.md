@@ -1,7 +1,6 @@
 ## RepositorioUNEFA
-repositorio digital -> proyecto de pasantias UNEFA, Version 1.6
 
-
+> Repositorio digital, proyecto de pasantias UNEFA
 
 ## FRONT-END
 
@@ -9,7 +8,7 @@ repositorio digital -> proyecto de pasantias UNEFA, Version 1.6
 * Materialize 0.100.2 -> http://archives.materializecss.com/0.100.2/
 
 ```bash
-Proxima version vuejs 2
+Proxima version Vuejs -> https://github.com/magocod/Vue_repositorio
 ```
 
 ## BACK-END
