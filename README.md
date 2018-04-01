@@ -1,4 +1,4 @@
-## RepositorioUNEFA
+## Repositorio UNEFA
 
 > Repositorio digital, proyecto de pasantias UNEFA
 
