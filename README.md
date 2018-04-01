@@ -8,7 +8,10 @@
 * Materialize 0.100.2 -> http://archives.materializecss.com/0.100.2/
 
 ```bash
-Proxima version Vuejs -> https://github.com/magocod/Vue_repositorio
+#Proxima version 
+
+Vuejs -> https://github.com/magocod/Vue_repositorio
+
 ```
 
 ## BACK-END
