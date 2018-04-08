@@ -5,7 +5,7 @@
 ## FRONT-END
 
 * Bootstrap 4.0.0 -> https://getbootstrap.com/
-* Materialize 0.100.2 -> http://archives.materializecss.com/0.100.2/
+* Materialize 1.0.0-beta -> http://materializecss.com/
 
 ```bash
 #Proxima version 
