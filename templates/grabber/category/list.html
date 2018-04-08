@@ -34,7 +34,7 @@
       <th>{{ categoria.id }}</th>
       <th>{{ categoria.nombre }}</th>
       <th>
-        <a class="btn btn-outline-info">
+        <a href="{% url 'grabber:category_detail' categoria.id %}" class="btn btn-outline-info">
           Detalles
         </a>
         <a href="{% url 'grabber:category_update' categoria.id %}" class="btn btn-outline-success">

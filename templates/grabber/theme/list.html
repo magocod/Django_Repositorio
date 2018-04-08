@@ -33,7 +33,7 @@
       <th>{{ tema.id }}</th>
       <th>{{ tema.nombre }}</th>
       <th>
-        <a class="btn btn-outline-info">
+        <a href="{% url 'grabber:theme_detail' tema.id %}" class="btn btn-outline-info">
           Detalles
         </a>
         <a href="{% url 'grabber:theme_update' tema.id %}" class="btn btn-outline-success">

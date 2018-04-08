@@ -41,6 +41,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 # Application definition
 
 INSTALLED_APPS = [
+	#django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -180,6 +181,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 #api renderizar
 REST_FRAMEWORK = {
 
+   'DEFAULT_PERMISSION_CLASSES': (
+   'rest_framework.permissions.AllowAny',
+    ),
+
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
@@ -195,3 +200,11 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 100
 
 }
+
+#email mailtrap
+#EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = 'fb49918a61595b'
+EMAIL_HOST_PASSWORD = 'f41911cfabfaa7'
+EMAIL_PORT = '2525'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

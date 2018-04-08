@@ -24,7 +24,7 @@ def Search_collection_category(request, pk):
 	#busqueda de la coleccion
 	consulta = Collection.objects.filter(categorias=categoria.id).prefetch_related('categorias')
 	#paginador
-	paginator = Paginator(consulta, 10)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	colecciones = paginator.get_page(page)
 	
@@ -40,6 +40,17 @@ def Search_collection_pk(request, pk):
 	#enviar data a la vista
 	return render(request, 'seeker/category/collection.html', {'collection': coleccion})
 
+#clave nombre
+def Search_collection_string(request):
+	#optener dato del request
+	q = request.GET.get('q', '')
+	#busqueda de la coleccion
+	consulta = get_object_or_404(Collection, nombre__exact=q)
+	#get_object_or_404(Collection, id=pk)
+	
+	#enviar data a la vista
+	return render(request, 'seeker/category/collection.html', {'collection': consulta})
+
 #Items de coleccion	
 def Search_collection_items(request, pk):
 	#busqueda de la coleccion
@@ -47,7 +58,7 @@ def Search_collection_items(request, pk):
 	consulta = Item.objects.filter(colecciones=coleccion.pk).select_related('tipo')
 
 	#paginador
-	paginator = Paginator(consulta, 10)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 	
@@ -72,7 +83,7 @@ def Search_letters(request):
 	#busqueda de items
 	consulta = Item.objects.filter(nombre__contains=q).select_related('tipo')
 	#paginador
-	paginator = Paginator(consulta, 10)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 	#enviar data a la vista
@@ -84,7 +95,7 @@ def Search_letter(request, slug):
 	#busqueda de items
 	consulta = Item.objects.filter(nombre__contains=slug).select_related('tipo')
 	#paginador
-	paginator = Paginator(consulta, 10)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 	#enviar data a la vista
@@ -97,7 +108,7 @@ def Search_theme_letters(request):
 	#busqueda de items
 	consulta = Theme.objects.filter(nombre__contains=q)
 	#paginador
-	paginator = Paginator(consulta, 10)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 	#enviar data a la vista
@@ -106,7 +117,7 @@ def Search_theme_letters(request):
 def Search_theme_collections(request, pk):
 	collection_list = Collection.objects.filter(tema=pk)
 	#paginador
-	paginator = Paginator(collection_list, 10)
+	paginator = Paginator(collection_list, 20)
 	page = request.GET.get('page')
 	collections = paginator.get_page(page)
 	#enviar data a la vista
@@ -119,7 +130,7 @@ def Search_author(request):
 	#busqueda de items
 	consulta = Item.objects.filter(autor__icontains=q).select_related('tipo')
 	#paginador
-	paginator = Paginator(consulta, 15)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 
@@ -135,7 +146,7 @@ def Search_date(request):
 	consulta = Item.objects.filter(fecha__gte=q).select_related('tipo')
 
 	#paginador
-	paginator = Paginator(consulta, 15)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 
@@ -147,9 +158,9 @@ def Search_date_publication(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
 	#busqueda de items
-	consulta = Item.objects.filter(creado__gte=q).select_related('tipo')
+	consulta = Item.objects.filter(publicado__gte=q).select_related('tipo')
 	#paginador
-	paginator = Paginator(consulta, 15)
+	paginator = Paginator(consulta, 20)
 	page = request.GET.get('page')
 	items = paginator.get_page(page)
 

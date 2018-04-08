@@ -122,16 +122,30 @@
 
         </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configurar">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Proximamente</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
+
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti6" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-user"></i>
+            <span class="nav-link-text text-Light">Usuario</span>
           </a>
+
+          <ul class="sidenav-second-level collapse" id="collapseMulti6">
+
+            <li>
+                <a class="text-light" href="{% url 'account:user_list' %}">Listar</a>
+            </li>
+
+            <li>
+                <a class="text-light" href="{% url 'account:user_create' %}">Registrar</a>
+            </li>
+         
+          </ul>
+
         </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Historial">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-cog"></i>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configurar">
+          <a class="nav-link">
+            <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Proximamente</span>
           </a>
         </li>

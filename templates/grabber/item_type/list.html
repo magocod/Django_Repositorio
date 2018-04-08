@@ -33,7 +33,7 @@
       <th>{{ tipo.id }}</th>
       <th>{{ tipo.nombre }}</th>
       <th>
-        <a class="btn btn-outline-info">
+        <a href="{% url 'grabber:item_type_detail' tipo.id %}" class="btn btn-outline-info">
           Detalles
         </a>
         <a href="{% url 'grabber:item_type_update' tipo.id %}" class="btn btn-outline-success">

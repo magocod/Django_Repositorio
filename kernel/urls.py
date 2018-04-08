@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 #manejo de rutas
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 #paquete herramientas de depuración
 import debug_toolbar
@@ -28,11 +28,14 @@ import debug_toolbar
 #vistas django - login
 from django.contrib.auth.views import login, logout_then_login
 
+#reseteo de contraseña
+from django.contrib.auth.views import password_reset, password_reset_done, password_reset_confirm, password_reset_complete
+
 #vista inicial
 from kernel.views import Indexv1
 
 #vistas usuario
-from backend.account.views import User_login, User_register, User_password
+from backend.account.views import User_login, User_register
 
 urlpatterns = [
 
@@ -62,8 +65,21 @@ urlpatterns = [
     path('logout', logout_then_login, name='logout'),
     #registrar fuera del admin
     path('register', User_register.as_view(), name='user_register'),
-    #recuperar contraseña
-    path('password', User_password.as_view(), name='user_password'),
+
+    #recuperacion de contraseña
+    path('reset/password_reset', password_reset, 
+        {'template_name':'account/password/reset_form.html',
+        'email_template_name': 'account/password/reset_email.html'}, 
+        name='password_reset'), 
+    path('password_reset_done', password_reset_done, 
+        {'template_name': 'account/password/reset_done.html'}, 
+        name='password_reset_done'),
+    re_path(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>.+)/$', password_reset_confirm, 
+        {'template_name': 'account/password/reset_confirm.html'},
+        name='password_reset_confirm'
+        ),
+    path(r'reset/done', password_reset_complete, {'template_name': 'account/password/reset_complete.html'},
+        name='password_reset_complete'),
 
     #añadir directorios del storage
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

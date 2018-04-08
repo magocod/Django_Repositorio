@@ -1,0 +1,80 @@
+{% extends 'account/base.html' %}
+
+{% block breadcrumb %}
+
+  <li class="breadcrumb-item active">
+    Usuarios
+  </li>
+
+{% endblock %}
+
+
+{% block junbotron %}
+
+
+{% include 'includes/messages-b.html' %} 
+    
+{% if object_list %}
+
+<div class="table-responsive">
+<table id="tabla-c" class="table table-hover table-bordered">
+
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Operacion</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for user in object_list %}
+    <tr>
+      <th>{{ user.id }}</th>
+      <th>{{ user.username }}</th>
+      <th>
+        <a href="{% url 'account:user_detail' user.id %}" class="btn btn-outline-info">
+          Detalles
+        </a>
+        <a href="{% url 'account:user_update' user.id %}" class="btn btn-outline-success">
+          Modificar
+        </a>
+        <a href="{% url 'account:user_delete' user.id %}" class="btn btn-outline-danger">
+          Eliminar
+        </a>
+        <!--
+        <a href="{% url 'account:user_active' user.id %}" class="btn btn-outline-secondary">
+          Estado
+        </a>
+        -->
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+</div>
+
+
+{% else %}
+<p>No hay registros.</p>
+{% endif %}
+
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}
+
+{% block extrajs %}
+  
+<script type="text/javascript">
+
+$(document).ready( function () {
+    $('#tabla-c').DataTable();
+} );
+</script>
+
+{% endblock %}

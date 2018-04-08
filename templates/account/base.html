@@ -92,25 +92,130 @@
 
           </div>
 
+
+
+<h5 class="card-title">Añadido Recientemente</h5>
+
 <div class="row">
+
+  {% if reciente.category_r != null %}
+
   <div class="col-sm-6">
-    <div class="card">
+    <div class="card text-white">
+      <div class="card-header">Categorias</div>
       <div class="card-body">
-        <h5 class="card-title">Añadido Recientemente</h5>
-        <p class="card-text">Proximamente</p>
-        <a href="#" class="btn btn-primary">ver</a>
+        {% for category in reciente.category_r %}
+        <a href="{% url 'grabber:category_detail' category.id %}" class="card-text">
+          {{category.nombre}}&nbsp;&nbsp;--&nbsp;&nbsp;{{category.publicado}}
+          &nbsp;&nbsp;--&nbsp;&nbsp;{{category.publicado|timesince}}
+        </a>
+        <hr class="border-success">
+        {% endfor %}
+      
       </div>
     </div>
   </div>
+  {% else %}
+  <!---->
+  {% endif %}
+
+  {% if reciente.collection_r != null %}
+
   <div class="col-sm-6">
-    <div class="card">
+    <div class="card text-white">
+      <div class="card-header">Colecciones</div>
       <div class="card-body">
-        <h5 class="card-title">Funcion sin definir</h5>
-        <p class="card-text">Proximamente</p>
-        <a href="#" class="btn btn-primary">ver</a>
+        {% for collection in reciente.collection_r %}
+
+        <a href="{% url 'grabber:collection_detail' collection.id %}" class="card-text">
+          {{collection.nombre}}&nbsp;&nbsp;--&nbsp;&nbsp;{{collection.publicado}}
+          &nbsp;&nbsp;--&nbsp;&nbsp;{{collection.publicado|timesince}}
+        </a>
+        <hr class="border-success">
+        {% endfor %}
+      
       </div>
     </div>
   </div>
+  {% else %}
+  <!---->
+  {% endif %}
+</div>
+
+<br>
+
+
+<div class="row">
+
+  {% if reciente.item_r != null %}
+
+  <div class="col-sm-6">
+    <div class="card text-white">
+      <div class="card-header">Recursos Digitales</div>
+      <div class="card-body">
+        {% for item in reciente.item_r %}
+        <a href="{% url 'grabber:item_detail' item.id %}" class="card-text">
+          {{item.nombre}}&nbsp;&nbsp;--&nbsp;&nbsp;{{item.publicado}}
+          &nbsp;&nbsp;--&nbsp;&nbsp;{{item.publicado|timesince}}
+        </a>
+        <hr class="border-success">
+        {% endfor %}
+      
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <!---->
+  {% endif %}
+
+  {% if reciente.theme_r != null %}
+
+  <div class="col-sm-6">
+    <div class="card text-white">
+      <div class="card-header">Tematicas</div>
+      <div class="card-body">
+        {% for tema in reciente.theme_r %}
+        <a href="{% url 'grabber:theme_detail' tema.id %}" class="card-text">
+          {{tema.nombre}}&nbsp;&nbsp;--&nbsp;&nbsp;{{tema.publicado}}
+          &nbsp;&nbsp;--&nbsp;&nbsp;{{tema.publicado|timesince}}
+        </a>
+        <hr class="border-success">
+        {% endfor %}
+      
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <!---->
+  {% endif %}
+
+</div>
+
+<br>
+
+<div class="row">
+
+  {% if reciente.itemtype_r != null %}
+
+  <div class="col-sm-6">
+    <div class="card text-white">
+      <div class="card-header">Tipos de recursos digitales</div>
+      <div class="card-body">
+        {% for item in reciente.itemtype_r %}
+        <a href="{% url 'grabber:item_type_detail' item.id %}" class="card-text">
+          {{item.nombre}}&nbsp;&nbsp;--&nbsp;&nbsp;{{item.publicado}}
+          &nbsp;&nbsp;--&nbsp;&nbsp;{{item.publicado|timesince}}
+        </a>
+        <hr class="border-success">
+        {% endfor %}
+      
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <!---->
+  {% endif %}
+
 </div>
      
           {% endblock %}

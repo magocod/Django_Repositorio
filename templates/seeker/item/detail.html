@@ -25,25 +25,25 @@
     </li>
 
     <li>
-      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">add_location</i>Identificador</div>
-      <div class="collapsible-body"><span>{{ item.identificador }}</span></div>
-    </li>
-
-    <li>
       <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">card_membership</i>Tipo</div>
       <div class="collapsible-body"><span>{{ item.tipo }}</span></div>
     </li>
 
+    {% if item.url != null %}
     <li>
       <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">collections</i>URL</div>
       <div class="collapsible-body">
+
+        
         <a class="btn waves-light black tooltipped" target="_blank" href="{{ item.url }}" data-activates='dropdown1' data-position="botton" data-delay="50" data-tooltip="link">
           <i class="material-icons">public</i>
         </a>
           &nbsp;&nbsp;&nbsp;{{ item.url }}
-
       </div>
     </li>
+    {% else %}
+        <!---->
+    {% endif %}
 
     <li>
       <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">event_available</i>Fechas</div>
@@ -108,14 +108,14 @@
                 {{ item.nombre_archivo1 }}             
               </a>
 
-              <a class="btn dropdown-button" href="#!" data-activates="dropdown1">
+              <a class="btn dropdown-trigger black" href="#!" data-target="dropdown1">
                 Detalles
                 <i class="material-icons right">arrow_drop_down</i>
               </a>
 
               <ul id="dropdown1" class="dropdown-content">
-                <li><a >extension:&nbsp;{{ item.extension_archivo1 }}</a></li>
-                <li><a >tamaño:&nbsp;{{ item.tamaño_archivo1 }}&nbsp;MB</a></li>
+                <li><a class="text-black black-text">&nbsp;{{ item.extension_archivo1 }}</a></li>
+                <li><a class="text-black black-text">&nbsp;{{ item.tamaño_archivo1 }}&nbsp;MB</a></li>
               </ul>
   
               {% else %}
@@ -130,14 +130,14 @@
               {{ item.nombre_archivo2 }} 
               </a>
 
-              <a class="btn dropdown-button" href="#!" data-activates="dropdown2">
+              <a class="btn dropdown-trigger black" href="#!" data-target="dropdown2">
                 Detalles
                 <i class="material-icons right">arrow_drop_down</i>
               </a>
 
               <ul id="dropdown2" class="dropdown-content">
-                <li><a >extension:&nbsp;{{ item.extension_archivo2 }}</a></li>
-                <li><a >tamaño:&nbsp;{{ item.tamaño_archivo2 }}&nbsp;MB</a></li>
+                <li><a class="text-black black-text">&nbsp;{{ item.extension_archivo2 }}</a></li>
+                <li><a class="text-black black-text">&nbsp;{{ item.tamaño_archivo2 }}&nbsp;MB</a></li>
               </ul>
                   
               {% else %}
@@ -148,20 +148,23 @@
          </div>
     </li>
 
+    {% if item.url_video != null %}
+
     <li>
       <div class="collapsible-header white-text indigo darken-4"><i class="material-icons">play_circle_filled</i>Video</div>
          
          <div class="collapsible-body">
-          {% if item.url_video != null %}
+          
             <div class="video-container">
               <iframe width="560" height="315" src="{{ item.url_video }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
-          {% else %}
-         <!--sin registro-->
-         {% endif %}
+         
          </div>
         
     </li>
+    {% else %}
+    <!--sin registro-->
+    {% endif %}
 
 </ul>
 

@@ -31,7 +31,7 @@ class Item_type_serializer(ModelSerializer):
 		#modelo
 		model = Item_type
 		#campos
-		fields = ('id','nombre','descripcion', 'metadato_1', 'metadato_2', 'metadato_3')
+		fields = ('id','nombre','descripcion', 'publicado', 'metadato_1', 'metadato_2', 'metadato_3')
 
 
 class Tag_serializer(ModelSerializer):
@@ -48,7 +48,7 @@ class Category_serializer(ModelSerializer):
 		#modelo
 		model = Category
 		#campos
-		fields = ('id','nombre','descripcion')
+		fields = ('id','nombre','descripcion', 'publicado',)
 
 class Theme_serializer(ModelSerializer):
 
@@ -56,7 +56,7 @@ class Theme_serializer(ModelSerializer):
 		#modelo
 		model = Theme
 		#campos
-		fields = ('id', 'nombre', 'metadato_1', 'metadato_2', 'metadato_3')
+		fields = ('id', 'nombre', 'publicado', 'metadato_1', 'metadato_2', 'metadato_3')
 
 
 #serializadores XML
@@ -65,4 +65,4 @@ class Item_type_serializerv2(HyperlinkedModelSerializer):
 	
     class Meta:
     	model = Item_type
-    	fields = ('id','nombre','descripcion', 'metadato_1', 'metadato_2', 'metadato_3')
+    	fields = ('id','nombre','descripcion', 'publicado', 'metadato_1', 'metadato_2', 'metadato_3')

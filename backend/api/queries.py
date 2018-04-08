@@ -83,3 +83,20 @@ def recent_uploads():
 
 				}
 	return diccionario
+
+def recent_activities():
+#consultas
+	qs1 = Item.objects.all().order_by('-publicado')[:3]
+	qs2 = Collection.objects.all().order_by('-publicado')[:3]
+	qs3 = Theme.objects.all().order_by('-publicado')[:3]
+	qs4 = Item_type.objects.all().order_by('-publicado')[:3]
+	qs5 = Category.objects.all().order_by('-publicado')[:3]
+	
+	#guardar en diccionario
+	diccionario={"item_r":qs1,
+				 "collection_r":qs2,
+				 "theme_r":qs3,
+				 "itemtype_r":qs4,
+				 "category_r":qs5,
+				}
+	return diccionario

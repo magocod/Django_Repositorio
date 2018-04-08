@@ -33,7 +33,7 @@
       <th>{{ coleccion.id }}</th>
       <th>{{ coleccion.nombre }}</th>
       <th>
-        <a class="btn btn-outline-info">
+        <a href="{% url 'grabber:collection_detail' coleccion.id %}" class="btn btn-outline-info">
           Detalles
         </a>
         <a href="{% url 'grabber:collection_update' coleccion.id %}" class="btn btn-outline-success">

@@ -1,18 +1,20 @@
 {% load static %}
 
-<ul id="nav-mobile" class="side-nav fixed indigo darken-4" style="transform: translateX(0%);">
+<ul id="nav-mobile" class="sidenav sidenav-fixed indigo darken-4">
 
-  <!--logo unefa-->
+        <!--logo unefa-->
   <li class="logo"><a href="{% url 'index' %}" id="logo-container" class="brand-logo">
-      <img src="{% static 'icon/unefa_escudo.jpg' %}" width="200" height="200">
+      <img src="{% static 'icon/unefa_escudo.jpg' %}" width="200" height="200"></a>
   </li>
+
+  <br>
 
   <li class="bold">
       <a href="{% url 'seeker:seeker_info' %}" class="waves-effect waves-red white-text text-white">
         <i class="material-icons left white-text text-white">more</i>Informacion
       </a>
   </li>
-    
+
   <li class="no-padding">
 
       <ul class="collapsible collapsible-accordion">
@@ -55,12 +57,7 @@
                     </a>
                 </li>
 
-                <li>
-                    <a href="{% url 'seeker:seeker_date_base' %}" class="waves-effect waves-red blue-grey lighten-3">
-                      <i class="material-icons">access_time</i>
-                        Fecha de publicacion
-                    </a>
-                </li>
+ 
 
                 <li>
                   <a href="{% url 'seeker:recent_items' %}" class="waves-effect waves-red blue-grey lighten-3">
@@ -92,12 +89,12 @@
 
           <li class="bold">
 
-              <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white tooltipped" data-position="right" data-delay="50" data-tooltip="Usuario:yson / contraseña:24682468*">
+              <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white tooltipped" data-position="right" data-tooltip="us=yson / c=24682468*">
                 <i class="material-icons left white-text text-white">assignment_ind</i>Admin
               </a>
               
               <div class="collapsible-body">
-                	
+                  
                   <ul>
                       {% if user.is_authenticated %}
                       <li>
@@ -113,20 +110,20 @@
                         </a>
                       </li>
                       {% else %}
-                  		<li>
+                      <li>
                         <a href="{% url 'admin:index' %}" class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pruebas ingreso de data">
                           <i class="material-icons">backspace</i>
                               Version 1
                         </a>
                       </li>
-                  		<li>
+                      <li>
                         <a href="{% url 'login' %}"class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="En construccion">
                           <i class="material-icons">build</i>
                             Version 2
                         </a>
                       </li>
                       {% endif %}
-                	</ul>
+                  </ul>
               </div>
 
           </li>
@@ -208,5 +205,7 @@
       </ul>
 
     </li>
-      
+
+
+
 </ul>

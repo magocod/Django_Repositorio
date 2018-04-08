@@ -1,10 +1,6 @@
 {% extends 'core/materialize.html' %}
 {% load static %}
 
-{% block extracss %}
-<link href="{% static 'materialize/css/ghpages.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
-{% endblock %}
-
 
 {% block title %} 
 UNEFA-Repositorio
@@ -17,22 +13,18 @@ UNEFA-Repositorio
 <!-- vista parcial notificacion -->
 {% include 'includes/notification-m.html' %}
 
+<nav class="indigo darken-4">
+    <div class="nav-wrapper">
+      
+      <a class="brand-logo">UNEFA-VIRTUAL&nbsp;&nbsp;Repositorio</a>
 
-<nav class="top-nav indigo darken-4">
-    <div class="container">
-
-      <div class="nav-wrapper">
-           
-          <a class="page-title">
-                UNEFA Repositorio
-          </a> 
-            
-      </div>
     </div>
 </nav>
 
 <div class="container">
-    <a data-activates="nav-mobile" class="button-collapse top-nav full hide-on-large-only"><i class="material-icons">menu</i></a>
+  <a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only text-white white-text">
+    <i class="material-icons">menu</i> 
+  </a>
 </div>
 
 <!-- vista parcial menu -->
@@ -45,6 +37,7 @@ UNEFA-Repositorio
 
 <div class="container">
   		
+<div class="container">
 {% block space %}
 
 
@@ -71,7 +64,6 @@ UNEFA-Repositorio
 </h4>
 
 
-
 <br>
 <br>
 <br>
@@ -79,6 +71,8 @@ UNEFA-Repositorio
 
 
 {% endblock %}
+
+</div>
 
 </div>
 

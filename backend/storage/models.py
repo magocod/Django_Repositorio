@@ -29,6 +29,9 @@ class Theme(models.Model):
     metadato_2 = models.CharField(max_length=100, null=True, blank=True)
     metadato_3 = models.CharField(max_length=100, null=True, blank=True)
 
+    #fechas
+    publicado = models.DateTimeField(auto_now_add=True)
+
     #metodos
     def __str__(self):
         return self.nombre
@@ -44,6 +47,9 @@ class Item_type(models.Model):
     metadato_1 = models.CharField(max_length=100, null=True, blank=True)
     metadato_2 = models.CharField(max_length=100, null=True, blank=True)
     metadato_3 = models.CharField(max_length=100, null=True, blank=True)
+
+    #fechas
+    publicado = models.DateTimeField(auto_now_add=True)
 
     #metodos
     def __str__(self):
@@ -68,6 +74,9 @@ class Category(models.Model):
     #atributos
     nombre = models.CharField(max_length=100, unique=True)
     descripcion = models.TextField(max_length=500)
+
+    #fechas
+    publicado = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.nombre

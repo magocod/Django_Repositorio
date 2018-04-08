@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from backend.seeker.views import Info_seeker, Title_seeker_base, Category_seeker_base, Author_seeker_base, Date_seeker_base, Theme_seeker_base
 
 from backend.seeker.searches import Search_collection_pk, Search_author, Search_letters_exacts, Search_collection_items, Search_date, Search_date_publication 
-from backend.seeker.searches import Search_theme_letters, Search_letters, Search_letter, Search_theme_collections, Search_collection_category, Search_letters_exacts
+from backend.seeker.searches import Search_theme_letters, Search_letters, Search_letter, Search_theme_collections, Search_collection_category, Search_letters_exacts, Search_collection_string
 from backend.seeker.views import All_seeker, Records_seeker, Item_seeker, Recent_items
 from backend.seeker.filter_views import Theme_searchv1, Theme_search_collection, Theme_search_items
 
@@ -55,9 +55,12 @@ urlpatterns = [
 	path('autor/busqueda', Search_author, name='seeker_author_search'),
 
 	#busqueda por fechas
-	path('fecha', Date_seeker_base.as_view(), name='seeker_date_base'),
-	path('fecha/creacion', Search_date, name='seeker_date_creation'),
-	path('fecha/año', Search_date_publication, name='seeker_date_publication'),
+	#path('fecha', Date_seeker_base.as_view(), name='seeker_date_base'),
+	#path('fecha/creacion', Search_date, name='seeker_date_creation'),
+	#path('fecha/año', Search_date_publication, name='seeker_date_publication'),
+
+	#busqueda autocompletada
+	path('coleccion/autocompletado', Search_collection_string, name='search_collection_string'),
 
 	
 ]

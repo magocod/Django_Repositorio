@@ -33,7 +33,7 @@
       <th>{{ item.id }}</th>
       <th>{{ item.nombre }}</th>
       <th>
-        <a class="btn btn-outline-info">
+        <a href="{% url 'grabber:item_detail' item.id %}" class="btn btn-outline-info">
           Detalles
         </a>
         <a href="{% url 'grabber:item_update' item.id %}" class="btn btn-outline-success">

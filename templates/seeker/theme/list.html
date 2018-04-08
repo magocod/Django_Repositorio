@@ -15,9 +15,21 @@
 
           <ul class="collection with-header">
             <li class="collection-item">{{ tema.descripcion }}</li>
+            {% if tema.metadato_1 != null %}
             <li class="collection-item">{{ tema.metadato_1 }}</li>
+            {% else %}
+            <!---->
+            {% endif %}
+            {% if tema.metadato_1 != null %}
             <li class="collection-item">{{ tema.metadato_2 }}</li>
+            {% else %}
+            <!---->
+            {% endif %}
+            {% if tema.metadato_1 != null %}
             <li class="collection-item">{{ tema.metadato_3 }}</li>
+            {% else %}
+            <!---->
+            {% endif %}
           </ul>
           
           <br>

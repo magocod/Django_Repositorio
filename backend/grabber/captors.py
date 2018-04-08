@@ -127,3 +127,37 @@ def Search_tag(request):
 
     #enviar data a la vista
     return render(request, 'grabber/tag/detail.html', {'tag': consulta})
+
+
+#detalles
+class Category_detail(DetailView):
+    #modelo
+    model = Category
+    #template
+    template_name = 'grabber/category/detail.html' 
+
+class Collection_detail(DetailView):
+    #modelo
+    model = Collection
+    #template
+    template_name = 'grabber/collection/detail.html'
+
+
+class Item_detail(DetailView):
+    #modelo
+    model = Item
+    #template
+    template_name = 'grabber/item/detail.html'
+
+class Theme_detail(DetailView):
+    #modelo
+    model = Theme
+    #template
+    template_name = 'grabber/theme/detail.html'
+
+class Item_type_detail(DetailView):
+    #modelo
+    model = Item_type
+    #template
+    template_name = 'grabber/item_type/detail.html'
+
