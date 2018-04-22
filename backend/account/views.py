@@ -19,7 +19,7 @@ from django.views.generic import View, TemplateView, CreateView, ListView, Updat
 from django.contrib.messages.views import SuccessMessageMixin
 
 #queries
-from backend.api.queries import registros_totales, recent_activities
+from backend.seeker.queries import registros_totales, recent_activities
 
 #formularios
 from backend.account.forms import User_form, User_activate
@@ -28,14 +28,6 @@ from backend.account.forms import User_form, User_activate
 from django.contrib.auth.models import User
 
 # Create your views here.
-
-class User_login(TemplateView):
-    #plantilla
-    template_name = "account/authenticate/login.html"
-
-class User_register(TemplateView):
-    #plantilla
-    template_name = "account/authenticate/register.html"
 
 class Dashboard(View):
 
@@ -111,3 +103,14 @@ class User_active(SuccessMessageMixin, UpdateView):
     #redirigir
     success_url = reverse_lazy('account:user_list')
     success_message = "Actualizado el estado del usuario"
+
+
+#sin usar
+
+class User_login(TemplateView):
+    #plantilla
+    template_name = "account/authenticate/login.html"
+
+class User_register(TemplateView):
+    #plantilla
+    template_name = "account/authenticate/register.html"

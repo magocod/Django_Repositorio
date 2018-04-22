@@ -10,16 +10,13 @@
 
 
 
-
-
-
 <div class="row">
 
 {% for item in registros.ultimos %}
     <div class="col s12 m3">
       <div class="card z-depth-5">
         <div class="card-image">
-          <img src="{% static 'images/default/jpg-2.jpg' %}">
+          <img src="{% static 'images/recurso_digital.jpg' %}">
           
           <a href="{% url 'seeker:seeker_item' item.id %}" class="btn-floating halfway-fab waves-effect waves-light red pulse">
             <i class="material-icons">add</i>
@@ -47,7 +44,7 @@
         <div class="card small z-depth-5">
 
             <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator responsive-img" src="{% static 'images/default/imagen-default-2.jpg' %}" alt="sin imagen">
+                  <img class="activator responsive-img" src="{% static 'images/coleccion.jpg' %}" alt="sin imagen">
             </div>
 
           <div class="card-content">
@@ -66,8 +63,8 @@
           </div>
 
           <div class="card-action blue-grey darken-3">
-            <a href="{% url 'seeker:seeker_category_collection' coleccion.id %}" class="white-text text-white" >Detalles</a>
-            <a href="{% url 'seeker:seeker_category_listitems' coleccion.id %}" class="white-text text-white" >Recursos</a>
+            <a href="{% url 'seeker:collection_pk' coleccion.id %}" class="white-text text-white" >Detalles</a>
+            <a href="{% url 'seeker:search_collection_items' coleccion.id %}" class="white-text text-white" >Recursos</a>
           </div>
 
         </div>

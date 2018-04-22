@@ -63,7 +63,7 @@
 
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti4" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-book"></i>
-            <span class="nav-link-text text-warning">Item</span>
+            <span class="nav-link-text text-warning">Recurso digital</span>
           </a>
 
           <ul class="sidenav-second-level collapse" id="collapseMulti4">
@@ -122,6 +122,7 @@
 
         </li>
 
+        {% if user.is_superuser == True %}
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
 
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti6" data-parent="#exampleAccordion">
@@ -142,6 +143,9 @@
           </ul>
 
         </li>
+        {% else %}
+        <!---->
+        {% endif %}
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Configurar">
           <a class="nav-link">

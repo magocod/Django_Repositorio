@@ -11,10 +11,10 @@ from django.http import HttpResponse, HttpRequest
 from django.views.generic import View, TemplateView, ListView, DetailView
 
 #modelos
-from backend.storage.models import Category, Item, Theme
+from backend.storage.models import Category, Item, Theme, Tag
 
 #queries
-from backend.api.queries import registros_totales, recent_uploads
+from backend.seeker.queries import registros_totales, recent_uploads
 
 from django.db.models.aggregates import Count
 
@@ -35,7 +35,7 @@ class Records_seeker(View):
         #variable almacena consulta
         registros = registros_totales()
 
-        template = loader.get_template('seeker/records.html')
+        template = loader.get_template('seeker/test/records.html')
         #enviar contexto -> convertir en diccionario
         context = {
         'registros':registros,
@@ -48,7 +48,7 @@ class All_seeker(ListView):
     queryset = Item.objects.order_by('id')
     context_object_name = 'object_list'
     #plantilla
-    template_name = 'seeker/all.html'
+    template_name = 'seeker/test/all.html'
 
 
 #detalles item
@@ -117,3 +117,10 @@ class Date_seeker_base(TemplateView):
     #plantilla
     template_name = "seeker/date/base.html"
 
+
+class Tag_seeker_base(ListView):
+    #modelo
+    queryset = Tag.objects.values('id','nombre')
+    context_object_name = 'object_list'
+    #plantilla
+    template_name = "seeker/tag/base.html"

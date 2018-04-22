@@ -2,50 +2,14 @@
 
 {% block breadcrumb %}
 <a class="breadcrumb">Busqueda</a>
-<a  href="{% url 'seeker:seeker_author_base' %}" class="breadcrumb">Autor</a>
+<a  href="{% url 'seeker:author_base' %}" class="breadcrumb">Autor</a>
 <a  class="breadcrumb">Resultado</a>     
 {% endblock %}
 
 {% block add %}
 
-<!-- Modal Trigger -->
-<button class="btn waves-effect waves-light indigo darken-4 modal-trigger tooltipped" data-position="right" data-delay="50" data-tooltip="Buscar en resultados" href="#modal1">Busqueda
-    <i class="material-icons right">send</i>
-</button>
+{% include 'seeker/item/autocomplete.html' %}
 
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-
-  <form action="{% url 'seeker:seeker_title_letters_exacts' %}" method="GET">
- 
-
-    <div class="modal-content">
-
-      <h4>Busqueda</h4>
-  
-
-      <div class="row">
-        <div class="col s12">
-          <div class="row">
-
-            <div class="input-field col s12">
-              <i class="material-icons prefix">textsms</i>
-              <input name="q" type="text" id="autocomplete-input" class="autocomplete" required>
-                <label for="autocomplete-input">Autocompletado</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-      <button class="btn black" type="submit" data-position="right" data-delay="50" data-tooltip="Buscar en resultados">Accion</button> 
-    </div>
-
-  </form>
-</div>
-{% include 'seeker/organize.html' %}
 
 <br>
 <br>
@@ -53,52 +17,7 @@
 
 {% if object_list %}
 
-<ul class="collapsible popout" data-collapsible="accordion">
-
-    {% for item in object_list %}
-    <li>
-      <div class="collapsible-header indigo darken-3 white-text text-white"><i class="material-icons">assignment_ind</i>
-        {{ item.nombre }} -> {{ item.autor }}
-      </div>
-
-      <div class="collapsible-body">
-        <ul class="collection collapsible">
-
-            <li>
-              <div class="collapsible-header"><i class="material-icons">assignment_late</i>Resumen</div>
-              <div class="collapsible-body">
-                <span> 
-                {{ item.descripcion }}
-                </span> 
-              </div>
-            </li>
-
-            <li class="collection-item"><i class="material-icons left">card_membership</i>
-              <a class="black-text text-black" >{{ item.tipo}}
-              </a>
-            </li>
-
-            <li>
-              <div class="collapsible-header"><i class="material-icons">cloud_download</i>Archivos</div>
-              <div class="collapsible-body">
-                <center>
-                <a class="waves-effect waves-light btn indigo darken-4"><i class="material-icons left">file_download</i>Adjunto 1</a>
-                <a class="waves-effect waves-light btn indigo darken-4"><i class="material-icons left">file_download</i>Adjunto 2</a>
-                </center>
-              </div>
-            </li>
-
-            <li class="collection-item"><i class="material-icons left">add_box</i>
-              <a href="{% url 'seeker:seeker_item' item.id %}" class="black-text text-black" >Detalles
-              </a>
-            </li>
-    
-        </ul>
-      </div>
-
-    </li>
-    {% endfor %}
-</ul>
+{% include 'seeker/item/list.html' %}
 
 {% include 'includes/pagination-m.html' %}
 

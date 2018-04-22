@@ -47,15 +47,68 @@ UNEFA-Repositorio
   </span>
 </h4>
 
-<div class="carousel">
-    <a class="carousel-item z-depth-5" href="https://www.python.org"><img src="{% static 'icon/python.jpg' %}"></a>
-    <a class="carousel-item z-depth-5" href="http://materializecss.com/carousel.html"><img src="{% static 'icon/materialize.jpg' %}"></a>
-    <a class="carousel-item z-depth-5" href="https://getbootstrap.com"><img src="{% static 'icon/bootstrap.png' %}"></a>
-    <a class="carousel-item z-depth-5" href="https://vuejs.org"><img src="{% static 'icon/vue.jpg' %}"></a>
-    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com"><img src="{% static 'icon/django.png' %}"></a>
-    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com"><img src="{% static 'icon/ubuntu.jpg' %}"></a>
+<div class="carousel carousel-slider center">
+
+    <div class="carousel-item purple darken-4 white-text" href="#one!">
+
+      <h2>
+        <a class="white-text" href="http://seadu.unefa.edu.ve/">
+          UNEFA-VIRTUAL SEADU
+        </a>
+      </h2>
+
+      <p class="white-text">Ingresar a las aulas virtuales
+      </p>
+
+      <div>
+        <img width="400" height="300" src="{% static 'images/carousel/moodle.png' %}">
+      </div>
+      
+    </div>
+
+    <div class="carousel-item teal darken-4 white-text" href="#two!">
+      <h2>UNEFA-VIRTUAL Portal</h2>
+      <div>
+        <img width="400" height="300" src="{% static 'images/404.png' %}">
+      </div>
+    </div>
+
+    <div class="carousel-item brown darken-4 white-text" href="#three!">
+      <h2>Sin definir</h2>
+      <div>
+        <img width="400" height="300" src="{% static 'images/404.png' %}">
+      </div>
+    </div>
+
+    <div class="carousel-item blue-grey darken-4 white-text" href="#four!">
+      <h2>Sin definir</h2>
+      <div>
+        <img width="400" height="300" src="{% static 'images/404.png' %}">
+      </div>
+    </div>
+
 </div>
 
+<div class="carousel">
+    <a class="carousel-item z-depth-5" href="https://www.python.org">
+      <img src="{% static 'icon/jpg/python.jpg' %}">
+    </a>
+    <a class="carousel-item z-depth-5" href="http://materializecss.com/carousel.html">
+      <img src="{% static 'icon/jpg/materialize.jpg' %}">
+    </a>
+    <a class="carousel-item z-depth-5" href="https://getbootstrap.com">
+      <img src="{% static 'icon/png/bootstrap.png' %}">
+    </a>
+    <a class="carousel-item z-depth-5" href="https://vuejs.org">
+      <img src="{% static 'icon/jpg/vue.jpg' %}">
+    </a>
+    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com">
+      <img src="{% static 'icon/png/django.png' %}">
+    </a>
+    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com">
+      <img src="{% static 'icon/jpg/ubuntu.jpg' %}">
+    </a>
+</div>
 
 <h4>Añadidos recientemente
   <span>
@@ -63,9 +116,6 @@ UNEFA-Repositorio
   </span>
 </h4>
 
-
-<br>
-<br>
 <br>
 <br>
 
@@ -80,7 +130,9 @@ UNEFA-Repositorio
 <!-- vista parcial boton -->
 {% include 'includes/button-m.html' %}
 
-</main>    
+</main>
+
+   
   
 {% endblock %}
 

@@ -13,4 +13,4 @@ from backend.storage.models import Item_type, Tag, Collection, Item, Category, T
 @receiver(pre_save, sender=Item)
 def actual_items(sender, instance, **kwargs):
     instance.actualizado = date.today()
-    instance.save()
+    

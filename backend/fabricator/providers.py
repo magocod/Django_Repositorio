@@ -23,6 +23,20 @@ def random_metadato(length=60):
               'metadato 5','metadato 6']
     return u''.join(random.choice(myList))
 
+def random_addressed(length=60):
+ 
+    myList = ['publico 1','publico 2', 
+              'publico 3','publico 4',
+              'publico 5','publico 6']
+    return u''.join(random.choice(myList))
+
+def random_license(length=60):
+ 
+    myList = ['GNU-GPL','BSD',
+              'AGPL','Apache',
+              'Creative-commons','Copyleft']
+    return u''.join(random.choice(myList))
+
 def alphabet():
 
 	#lista de letras

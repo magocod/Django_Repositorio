@@ -37,6 +37,7 @@ from kernel.views import Indexv1
 #vistas usuario
 from backend.account.views import User_login, User_register
 
+
 urlpatterns = [
 
     #paquetes

@@ -3,14 +3,14 @@
 
 {% block breadcrumb %}
 <a class="breadcrumb">Busqueda</a>
-<a class="breadcrumb">Tema</a>     
+<a class="breadcrumb">Tematica</a>     
 {% endblock %}
 
 {% block add %}
 
 <nav class="black">
     <div class="nav-wrapper">
-      <form action="{% url 'seeker:seeker_theme_letters' %}" method="GET">
+      <form action="{% url 'seeker:theme_letters' %}" method="GET">
         {% csrf_token %}
         <div class="input-field">
           <input name="q" placeholder="Busqueda" id="search" type="search" required>

@@ -21,11 +21,11 @@
       <div class="collapsible-header indigo darken-3 white-text text-white">
 
         <div class="chip teal darken-4 white-text text-white">
-            <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            <img src="{% static 'icon/jpg/py-m3.jpg' %}" alt="nada">
               {{ category.nombre }} 
         </div>
 
-        <a class="waves-effect waves-light btn black text-white white-text" href="{% url 'seeker:seeker_category_collections' category.id %}">
+        <a class="waves-effect waves-light btn black text-white white-text tooltipped" data-position="right" data-tooltip="Listar colecciones" href="{% url 'seeker:category_collections' category.id %}">
           <i class="material-icons right">work</i>
         </a>
        

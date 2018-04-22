@@ -22,7 +22,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ collection.nombre }}</h5>
-    <p class="card-text">{{ collection.first_name }}</p>
+    <p class="card-text">{{ collection.descripcion }}</p>
     <a href="{% url 'grabber:collection_update' collection.id %}" class="btn btn-primary">Modificar</a>
   </div>
 </div>
@@ -35,7 +35,7 @@
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
-
+      <p>{{ collection.items_cantidad }} --> Recursos digitales</p>
       <footer class="blockquote-footer">creada desde<cite title="Source Title">&nbsp;{{ collection.publicado }}</cite></footer>
     </blockquote>
   </div>
@@ -43,5 +43,53 @@
 
 <br>
 
+<div class="card">
+
+  <div class="card-body">
+
+<div class="table-responsive">
+
+<table id="tabla-c" class="table table-hover table-bordered">
+
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Detalles</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for item in collection.items_registrados %}
+    <tr>
+      <th>{{ item.id }}</th>
+      <th>{{ item.nombre }}</th>
+      <th>
+        <a href="{% url 'grabber:item_detail' item.id %}" class="btn btn-outline-info">
+          <i class="fa fa-fw fa-check"></i>
+        </a>
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+</div>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block extrajs %}
+  
+<script type="text/javascript">
+
+$(document).ready( function () {
+    $('#tabla-c').DataTable();
+} );
+</script>
 
 {% endblock %}

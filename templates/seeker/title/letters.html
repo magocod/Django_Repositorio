@@ -4,7 +4,7 @@
 {% block breadcrumb %}
 
 <a class="breadcrumb">Busqueda</a>
-<a href="{% url 'seeker:seeker_title_base' %}" class="breadcrumb">Titulo</a>
+<a href="{% url 'seeker:title_base' %}" class="breadcrumb">Titulo</a>
 <a class="breadcrumb">Letra</a>
 
 {% endblock %}
@@ -13,47 +13,9 @@
 
 {% if object_list %}
 
-<!-- Modal Trigger -->
-<button class="btn waves-effect waves-light indigo darken-4 modal-trigger tooltipped" data-position="right" data-delay="50" data-tooltip="Buscar en resultados" href="#modal1">
-    Busqueda
-    <i class="material-icons right">send</i>
-</button>
 
+{% include 'seeker/item/autocomplete.html' %}
 
-<!-- Modal Structure -->
-<div id="modal1" class="modal">
-
-  <form action="{% url 'seeker:seeker_title_letters_exacts' %}" method="GET">
- 
-
-    <div class="modal-content">
-
-      <h4>Busqueda</h4>
-  
-
-      <div class="row">
-        <div class="col s12">
-          <div class="row">
-
-            <div class="input-field col s12">
-              <i class="material-icons prefix">textsms</i>
-              <input name="q" type="text" id="autocomplete-input" class="autocomplete" required>
-                <label for="autocomplete-input">Autocompletado</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="modal-footer">
-      <button class="btn black" type="submit" data-position="right" data-delay="50" data-tooltip="Buscar en resultados">Accion</button> 
-    </div>
-
-  </form>
-</div>
-
-{% include 'seeker/organize.html' %}
 
 <br>
 <br>

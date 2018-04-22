@@ -24,8 +24,8 @@ from backend.storage.utilities import validate_file_extension
 class Theme(models.Model):
     #atributos
     nombre = models.CharField(max_length=100, unique=True)
-    descripcion = models.TextField(max_length=500)
-    metadato_1 = models.CharField(max_length=100, null=True, blank=True)
+    descripcion = models.TextField(max_length=600)
+    dirigido_a = models.CharField(max_length=100, null=True, blank=True)
     metadato_2 = models.CharField(max_length=100, null=True, blank=True)
     metadato_3 = models.CharField(max_length=100, null=True, blank=True)
 
@@ -38,15 +38,31 @@ class Theme(models.Model):
 
     class Meta:
         ordering = ('id',)
+
+    def items_asignados(instance):
+        cantidad= Item.objects.filter(tema=instance.id).count()
+        return cantidad
+
+    def items_registrados(instance):
+        registros= Item.objects.filter(tema=instance.id).select_related('tipo')
+        return registros
+
+    def collections_asignados(instance):
+        cantidad= Collection.objects.filter(tema=instance.id).count()
+        return cantidad
+
+    def collections_registrados(instance):
+        registros= Collection.objects.filter(tema=instance.id).prefetch_related('categorias')
+        return registros
 
 
 class Item_type(models.Model):
     #atributos
     nombre = models.CharField(max_length=100, unique=True)
-    descripcion = models.TextField(max_length=500)
-    metadato_1 = models.CharField(max_length=100, null=True, blank=True)
-    metadato_2 = models.CharField(max_length=100, null=True, blank=True)
-    metadato_3 = models.CharField(max_length=100, null=True, blank=True)
+    descripcion = models.TextField(max_length=600)
+    plataforma = models.CharField(max_length=100, null=True, blank=True)
+    instalar = models.CharField(max_length=100, null=True, blank=True)
+    extension = models.CharField(max_length=100, null=True, blank=True)
 
     #fechas
     publicado = models.DateTimeField(auto_now_add=True)
@@ -57,6 +73,14 @@ class Item_type(models.Model):
 
     class Meta:
         ordering = ('id',)
+
+    def items_asignados(instance):
+        cantidad= Item.objects.filter(tipo=instance.id).count()
+        return cantidad
+
+    def items_registrados(instance):
+        registros= Item.objects.filter(tipo=instance.id).select_related('tema')
+        return registros
 
 
 class Tag(models.Model):
@@ -73,7 +97,7 @@ class Tag(models.Model):
 class Category(models.Model):
     #atributos
     nombre = models.CharField(max_length=100, unique=True)
-    descripcion = models.TextField(max_length=500)
+    descripcion = models.TextField(max_length=600)
 
     #fechas
     publicado = models.DateTimeField(auto_now_add=True)
@@ -84,16 +108,22 @@ class Category(models.Model):
     class Meta:
         ordering = ('id',)
 
+    def collections_cantidad(instance):
+        cantidad = Collection.objects.filter(categorias=instance.id).count()
+        return cantidad
+
+    def collections_registrados(instance):
+        cantidad = Collection.objects.filter(categorias=instance.id)
+        return cantidad
+
 
 class Collection(models.Model):
 
     #atributos
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField(max_length=500)
+    descripcion = models.TextField(max_length=600)
     autor = models.CharField(max_length=100)
-    identificador = models.CharField(max_length=100, unique=True)
     tema = models.ForeignKey(Theme,  on_delete=models.SET_NULL, null=True)
-    url_video = models.URLField(max_length=200, null=True, blank=True)
 
     #fechas
     publicado = models.DateTimeField(auto_now_add=True)
@@ -120,9 +150,9 @@ class Item(models.Model):
 
     #atributos
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField(max_length=500)
+    descripcion = models.TextField(max_length=600)
     autor = models.CharField(max_length=100)
-    identificador = models.CharField(max_length=100, unique=True)
+    licencia = models.CharField(max_length=100)
 
     #fechas
     fecha = models.DateField() 
@@ -143,7 +173,6 @@ class Item(models.Model):
 
     #url
     url = models.URLField(max_length=200, null=True, blank=True)
-    url_video = models.URLField(max_length=200, null=True, blank=True)
 
     #archivos
     archivo_1 = models.FileField(upload_to=directorio_files, blank=True)

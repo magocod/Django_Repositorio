@@ -3,7 +3,7 @@
 {% block breadcrumb %}
 
   <li class="breadcrumb-item active">
-    item
+    Recurso digital
   </li>
 
   <li class="breadcrumb-item active">
@@ -34,14 +34,25 @@
     Registros
   </div>
   <div class="card-body">
+
+    <ul class="list-group">
+      <li class="list-group-item"><a >Tipo: {{ item.tipo }}</a></li>
+      <li class="list-group-item"><a >Tema: {{ item.tema }}</a></li>
+    </ul>
+
+    <hr>
+
     <blockquote class="blockquote mb-0">
 
       <footer class="blockquote-footer">creada desde<cite title="Source Title">&nbsp;{{ item.publicado }}</cite></footer>
     </blockquote>
+
   </div>
 </div>
 
 <br>
+
+
 
 
 {% endblock %}

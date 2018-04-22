@@ -6,18 +6,22 @@
 <head>
 	
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<meta name="description" content="unefa repositorio digital, coordinacion educacion a distancia">
+<meta name="author" content="unefa coordinacion educacion a distancia">
 
 <!-- Materialize CSS -->
 <link href="{% static 'materialize/css/materialize.min.css' %}" rel="stylesheet">
 <link href="{% static 'materialize/css/ghpages.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
 <!--Datatables-->
 <link rel="stylesheet" href="{% static 'plugin/datatables/datatables.min.css' %}">
+
 <!-- Google-api icons CSS -->
-<!--<link href="{% static 'materialize/icon/icon-googleapi.min.css' %}" rel="stylesheet">-->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="{% static 'materialize/icon/icon-googleapi.min.css' %}" rel="stylesheet">
+<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
 
 <!-- footer -->
 <style type="text/css">
@@ -32,7 +36,10 @@
     flex: 1 0 auto;
   }
 
+
 </style>
+
+<link rel="shortcut icon" href="{%  static 'favicon.png' %}">
   
 <!-- CSS extras-->
 {% block extracss %}
@@ -45,7 +52,7 @@
 
 </head>
 	
-<body class="blue-grey lighten-3">
+<body class="blue lighten-5">
   
 <!-- bloques-->
 {% block content %}
@@ -54,7 +61,8 @@
 {% endblock %}
 
 <!-- vista parcial footer -->
-{% include 'includes/footer-m.html' %}
+{% include 'includes/footer-m.html' %} 
+
 
 <!-- javascripts -->
 <!-- jquery -->
@@ -63,16 +71,19 @@
 <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
 <!-- datatables -->
 <script type="text/javascript" charset="utf8" src="{% static 'plugin/datatables/datatables.min.js' %}"></script> 
-<!-- funciones JS-->
-<!--<script src="{% static 'plugin/functions/f-materialize.js' %}"></script>-->
-<!-- Vuejs -->
-<script src="{% static 'vue/vue.js' %}"></script>
 
+<!-- funciones JS-->
 
 <script type="text/javascript">
 
 $(document).ready(function(){
-    $('.carousel').carousel();
+
+   $('.carousel').carousel();
+    setInterval(function() {
+      $('.carousel').carousel('next');
+      },  
+      3000); // every 2 seconds
+
 });
 
 $(document).ready(function(){
@@ -106,8 +117,8 @@ $(document).ready(function(){
     $('.tabs').tabs();
 });
 
-
 </script>
+
 <!-- javascripts extras -->
 {% block extrajs %}
 

@@ -18,8 +18,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #vistas
 
-#colecciones 
-def Search_collection_category(request, pk):
+#busqueda colecciones de categoria
+def Search_category_collections(request, pk):
 	categoria = get_object_or_404(Category, id=pk)
 	#busqueda de la coleccion
 	consulta = Collection.objects.filter(categorias=categoria.id).prefetch_related('categorias')
@@ -29,19 +29,19 @@ def Search_collection_category(request, pk):
 	colecciones = paginator.get_page(page)
 	
 	#enviar data a la vista
-	return render(request, 'seeker/category/collections.html', {'object_list': colecciones})
+	return render(request, 'seeker/collection/search.html', {'object_list': colecciones})
 
-#clave primaria
+#busqueda coleccion  -> clave primaria
 def Search_collection_pk(request, pk):
 	#busqueda de la coleccion
 	coleccion = Collection.objects.filter(id=pk).prefetch_related('categorias').get(id=pk)
 	#get_object_or_404(Collection, id=pk)
 	
 	#enviar data a la vista
-	return render(request, 'seeker/category/collection.html', {'collection': coleccion})
+	return render(request, 'seeker/collection/detail.html', {'collection': coleccion})
 
-#clave nombre
-def Search_collection_string(request):
+#busqueda coleccion -> nombre exacto
+def Search_collection_exact(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
 	#busqueda de la coleccion
@@ -49,9 +49,9 @@ def Search_collection_string(request):
 	#get_object_or_404(Collection, id=pk)
 	
 	#enviar data a la vista
-	return render(request, 'seeker/category/collection.html', {'collection': consulta})
+	return render(request, 'seeker/collection/detail.html', {'collection': consulta})
 
-#Items de coleccion	
+#busqueda items en colecciones
 def Search_collection_items(request, pk):
 	#busqueda de la coleccion
 	coleccion = get_object_or_404(Collection, id=pk)
@@ -63,21 +63,22 @@ def Search_collection_items(request, pk):
 	items = paginator.get_page(page)
 	
 	#enviar data a la vista
-	return render(request, 'seeker/category/items.html', {'object_list': items})
+	return render(request, 'seeker/collection/items.html', {'object_list': items})
 
-#string exacto
-def Search_letters_exacts(request):
+
+
+#busqueda item -> nombre exacto
+def Search_item_exacts(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
 	#busqueda de items
 	consulta = get_object_or_404(Item, nombre__exact=q)
-	#paginador
 
-	#enviar data a la vista
 	return render(request, 'seeker/item/detail.html', {'item': consulta})
-	
-#string
-def Search_letters(request):
+
+
+#busqueda items -> cadena de caracteres 
+def Search_item_letters(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
 	#busqueda de items
@@ -89,8 +90,8 @@ def Search_letters(request):
 	#enviar data a la vista
 	return render(request, 'seeker/title/letters.html', {'object_list': items})
 
-#char
-def Search_letter(request, slug):
+#busqueda items -> caracter
+def Search_item_letter(request, slug):
 	#optener dato del request
 	#busqueda de items
 	consulta = Item.objects.filter(nombre__contains=slug).select_related('tipo')
@@ -101,7 +102,8 @@ def Search_letter(request, slug):
 	#enviar data a la vista
 	return render(request, 'seeker/title/letters.html', {'object_list': items})
 
-#campo tema
+
+#busqueda de tema -> cadena de caracteres
 def Search_theme_letters(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
@@ -114,6 +116,7 @@ def Search_theme_letters(request):
 	#enviar data a la vista
 	return render(request, 'seeker/theme/letters.html', {'object_list': items})
 
+#busqueda de colecciones -> tema
 def Search_theme_collections(request, pk):
 	collection_list = Collection.objects.filter(tema=pk)
 	#paginador
@@ -121,9 +124,19 @@ def Search_theme_collections(request, pk):
 	page = request.GET.get('page')
 	collections = paginator.get_page(page)
 	#enviar data a la vista
-	return render(request, 'seeker/theme/collection.html', {'object_list': collections})
+	return render(request, 'seeker/collection/search.html', {'object_list': collections})
 
-#campo autor
+#busqueda de tema -> nombre exacto
+def Search_theme_exact(request):
+	#optener dato del request
+	q = request.GET.get('q', '')
+	#busqueda de items
+	consulta = get_object_or_404(Theme, nombre__exact=q)
+
+	return render(request, 'seeker/theme/detail.html', {'theme': consulta})
+
+
+#busqueda de items -> autor
 def Search_author(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
@@ -135,10 +148,10 @@ def Search_author(request):
 	items = paginator.get_page(page)
 
 	#enviar data a la vista
-	return render(request, 'seeker/author/letters.html', {'object_list': items})	
-		
-#campo fecha
+	return render(request, 'seeker/author/letters.html', {'object_list': items})
 
+		
+#busqueda de item -> fecha
 def Search_date(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
@@ -153,7 +166,7 @@ def Search_date(request):
 	#enviar data a la vista
 	return render(request, 'seeker/date/items.html', {'object_list': items})
 
-#campo fecha de publicacion
+#busqueda de item -> fecha de publicacion
 def Search_date_publication(request):
 	#optener dato del request
 	q = request.GET.get('q', '')

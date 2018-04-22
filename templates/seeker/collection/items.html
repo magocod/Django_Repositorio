@@ -1,0 +1,62 @@
+{% extends 'core/base-m.html' %}
+
+{% block breadcrumb %}
+<a class="breadcrumb">Busqueda</a>
+<a class="breadcrumb">coleccion </a>
+<a class="breadcrumb">recursos digitales </a>    
+{% endblock %}
+
+
+{% block add %}
+
+{% if object_list %}
+
+
+{% include 'seeker/item/autocomplete.html' %}
+   
+{% include 'seeker/item/list.html' %}
+
+{% include 'includes/pagination-m.html' %}
+        
+         
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+{% else %}
+<p>No se encontro registro</p>
+{% endif %}
+
+
+{% endblock %}
+
+{% block extrajs %}
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+  $('input.autocomplete').autocomplete({
+
+    data: {
+
+    {% for item in object_list %}
+      "{{item.nombre}}": null,
+    {% endfor %}
+
+    },
+    
+    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    onAutocomplete: function(val) {
+      // Callback function when value is autcompleted.
+    },
+    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+  });
+});
+
+</script>
+
+ {% endblock %}

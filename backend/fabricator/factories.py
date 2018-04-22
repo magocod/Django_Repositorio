@@ -14,7 +14,7 @@ import datetime
 from pytz import UTC
 
 #proveedores
-from backend.fabricator.providers import random_string, random_metadato
+from backend.fabricator.providers import random_string, random_metadato, random_addressed, random_license
 
 #modelos
 from backend.storage.models import Collection, Category, Theme, Item, Item_type, Tag
@@ -31,7 +31,7 @@ class Themefactory(factory.django.DjangoModelFactory):
 	#añadir valores aleatorios
 	nombre = factory.Sequence(lambda n: 'tema_{}'.format(n))
 	descripcion = factory.LazyAttribute(lambda t: random_string())
-	metadato_1 = factory.LazyAttribute(lambda t: random_metadato())
+	dirigido_a = factory.LazyAttribute(lambda t: random_addressed())
 	metadato_2 = factory.LazyAttribute(lambda t: random_metadato())
 	metadato_3 = factory.LazyAttribute(lambda t: random_metadato())
 
@@ -44,7 +44,6 @@ class Collectionfactory(factory.django.DjangoModelFactory):
 	nombre = factory.Sequence(lambda n: 'coleccion_{}'.format(n))
 	autor = factory.Faker('first_name', locale='en_US')
 	descripcion = factory.LazyAttribute(lambda t: random_string())
-	identificador = factory.Sequence(lambda n: 'identificador_coleccion{}'.format(n))
 	#relacion clave foranea
 	#tema = factory.SubFactory(Themefactory)
 	tema = factory.Iterator(Theme.objects.all())
@@ -78,9 +77,9 @@ class Item_typefactory(factory.django.DjangoModelFactory):
 	#añadir valores aleatorios
 	nombre = factory.Sequence(lambda n: 'tipo_item_{}'.format(n))
 	descripcion = factory.LazyAttribute(lambda t: random_string())
-	metadato_1 = factory.LazyAttribute(lambda t: random_metadato())
-	metadato_2 = factory.LazyAttribute(lambda t: random_metadato())
-	metadato_3 = factory.LazyAttribute(lambda t: random_metadato())
+	plataforma = factory.LazyAttribute(lambda t: random_metadato())
+	instalar = factory.LazyAttribute(lambda t: random_metadato())
+	extension = factory.LazyAttribute(lambda t: random_metadato())
 
 class Tagfactory(factory.django.DjangoModelFactory):
 	class Meta:
@@ -99,7 +98,7 @@ class Itemfactory(factory.django.DjangoModelFactory):
 	nombre = factory.Sequence(lambda n: 'item_{}'.format(n))
 	descripcion = factory.LazyAttribute(lambda t: random_string())
 	autor = factory.Faker('first_name', locale='en_US')
-	identificador = factory.Sequence(lambda n: 'identificador_item{}'.format(n))
+	licencia = factory.LazyAttribute(lambda t: random_license())
 	#tipo = factory.SubFactory(Item_typefactory)
 	tipo = factory.Iterator(Item_type.objects.all())
 	tema = factory.Iterator(Theme.objects.all())

@@ -52,32 +52,37 @@
 
 <h2>Caracteristicas</h2>
 
+<div class="alert alert-success" role="alert">
+  Especifique en esta seccion elementos requeridos para usar este tipo de recurso digital
+</div>
+
+
   <div class="form-group row">
 
-    <label for="{{ form.metadato_1.label }}" class="col-sm-2 col-form-label col-form-label-lg">Metadato 1</label>
+    <label for="{{ form.plataforma.label }}" class="col-sm-2 col-form-label col-form-label-lg">Especificacion Sistema Operativo</label>
 
     <div class="col-sm-10">
-      {{ form.metadato_1 }}
+      {{ form.plataforma }}
     </div>
 
   </div>
 
   <div class="form-group row">
 
-    <label for="{{ form.metadato_2.label }}" class="col-sm-2 col-form-label col-form-label-lg">Metadato 2</label>
+    <label for="{{ form.instalar.label }}" class="col-sm-2 col-form-label col-form-label-lg">Plugin o extension</label>
 
     <div class="col-sm-10">
-      {{ form.metadato_2 }}
+      {{ form.instalar }}
     </div>
 
   </div>
 
   <div class="form-group row">
 
-    <label for="{{ form.metadato_3.label }}" class="col-sm-2 col-form-label col-form-label-lg">Metadato 3</label>
+    <label for="{{ form.extension.label }}" class="col-sm-2 col-form-label col-form-label-lg">Instalacion de Herramienta informatica</label>
 
     <div class="col-sm-10">
-      {{ form.metadato_3 }}
+      {{ form.extension }}
     </div>
 
   </div>

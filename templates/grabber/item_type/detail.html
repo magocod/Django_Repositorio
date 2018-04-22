@@ -31,7 +31,7 @@
 
 <div class="card">
   <div class="card-header">
-    Registros
+    Recursos digitales
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
@@ -43,5 +43,52 @@
 
 <br>
 
+<div class="card">
+
+  <div class="card-body">
+
+<div class="table-responsive">
+
+<table id="tabla-c" class="table table-hover table-bordered">
+
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Detalles</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for item in item_type.items_registrados %}
+    <tr>
+      <th>{{ item.id }}</th>
+      <th>{{ item.nombre }}</th>
+      <th>
+        <a href="{% url 'grabber:item_detail' item.id %}" class="btn btn-outline-info">
+          <i class="fa fa-fw fa-check"></i>
+        </a>
+      </th>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+</div>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block extrajs %}
+  
+<script type="text/javascript">
+
+$(document).ready( function () {
+    $('#tabla-c').DataTable();
+} );
+</script>
 
 {% endblock %}

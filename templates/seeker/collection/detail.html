@@ -1,0 +1,126 @@
+{% extends 'core/base-m.html' %}
+{% load static %}
+
+{% block breadcrumb %}
+<a class="breadcrumb">Busqueda</a>
+<a  class="breadcrumb">coleccion </a>    
+{% endblock %}
+
+
+{% block add %}
+
+
+{% if collection %}
+
+{% include 'seeker/item/autocomplete.html' %}
+
+<!-- Dropdown Trigger -->
+<a class='dropdown-trigger btn black tooltipped' data-position="right" data-tooltip="Recursos" data-target='dropdown1'>
+  <i class="material-icons left">collections</i>
+</a>
+
+<!-- Dropdown Structure -->
+<ul id='dropdown1' class='dropdown-content'>
+  <li>
+    <a class="text-black black-text tooltipped" data-position="right" data-tooltip="Disponibles">
+      <i class="material-icons">account_balance_wallet</i>
+        {{collection.items_cantidad}}
+    </a>
+  </li>
+
+  <li>
+    <a href="{% url 'seeker:search_collection_items' collection.id %}" class="text-black black-text tooltipped" data-position="right" data-tooltip="Listar">
+      <i class="material-icons">border_color</i>
+    </a>  
+  </li>
+</ul>
+
+
+
+
+<ul class="collapsible" data-collapsible="accordion">
+    
+    <li>
+      <div class="collapsible-header black white-text"><i class="material-icons">dashboard</i>{{ collection.nombre }}</div>
+      
+    </li>
+
+    <li>
+      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">assignment_late</i>Descripcion</div>
+      <div class="collapsible-body"><span>{{ collection.descripcion }}</span></div>
+    </li>
+
+    <li>
+      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">assignment_ind</i>Tematica</div>
+      <div class="collapsible-body">
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <i class="material-icons circle green">apps</i>
+              <p class="title text-black black-text">
+                Nombre:&nbsp;{{ collection.tema }}
+                <br>
+                Dirigido A:&nbsp;{{ collection.tema.dirigido_a }}
+                
+              </p>
+              <a class="secondary-content"><i class="material-icons">grade</i></a>
+          </li> 
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">card_membership</i>Categorias</div>
+      <div class="collapsible-body">
+        {% for cat in collection.categorias.all %}
+          <div class="chip teal darken-4 white-text text-white">
+              <img src="{% static 'icon/jpg/py-m3.jpg' %}" alt="nada">
+                {{ cat.nombre }} 
+          </div>
+        {% endfor %}
+      </div>
+    </li>
+
+
+</ul>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% block extrajs %}
+
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+  $('input.autocomplete').autocomplete({
+
+    data: {
+
+    {% for item in collection.items_registrados %}
+      "{{item.nombre}}": null,
+    {% endfor %}
+
+    },
+    
+    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    onAutocomplete: function(val) {
+      // Callback function when value is autcompleted.
+    },
+    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+  });
+});
+
+</script>
+
+ {% endblock %}
+
+{% else %}
+<p>No se encontro registro</p>
+{% endif %}
+
+{% endblock %}

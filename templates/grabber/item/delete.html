@@ -3,7 +3,7 @@
 {% block breadcrumb %}
 
   <li class="breadcrumb-item active">
-    categoria
+    Recurso digital
   </li>
 
   <li class="breadcrumb-item active">
@@ -19,18 +19,22 @@
       <!--token seguridad-->
       {% csrf_token %}
       <div class="form-row">
+
+      <div class="alert alert-danger" role="alert">
     
       <h3>¿Desea eliminar el registro de {{ object.nombre }}?</h3>
-
-      </div> 
 
       <button class="btn btn-primary" type="submit" onclick="return confirm('Esta seguro')">
         Eliminar
       </button>
 
-      <a class= "btn btn-default" href="{% url 'grabber:item_list' %}">
+      <a class= "btn btn-primary" href="{% url 'grabber:item_list' %}">
         Cancelar
       </a> 
+
+      </div> 
+
+      </div>
       
 </form>
 

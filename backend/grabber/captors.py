@@ -19,7 +19,7 @@ from backend.storage.models import Item_type, Tag, Collection, Item, Category, T
 from django.shortcuts import get_object_or_404
 
 #queries
-from backend.api.queries import registros_totales, lista_elementos
+from backend.seeker.queries import registros_totales, lista_elementos
 
 #formularios
 from backend.grabber.forms import Tag_form, Collection_form, Item_type_form, Item_form, Theme_form, Category_form
@@ -30,12 +30,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 # Create your views here.
 #funciones
 
-def agregate(lista, objeto):
-
-    for coleccion in lista:
-
-        coleccion.items.add(objeto)
-     
 
 class Enter_data(View):
 

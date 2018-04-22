@@ -4,7 +4,7 @@
 
 ## FRONT-END
 
-* Bootstrap 4.0.0 -> https://getbootstrap.com/
+* Bootstrap 4.1.0 -> https://getbootstrap.com/
 * Materialize 1.0.0-beta -> http://materializecss.com/
 
 ```bash
@@ -16,7 +16,7 @@ Vuejs -> https://github.com/magocod/Vue_repositorio
 
 ## BACK-END
 
-* Django 2.0.3 -> https://www.djangoproject.com/
+* Django 2.0.4 -> https://www.djangoproject.com/
 * Django-rest-framework 3.7.7-> http://www.django-rest-framework.org/
 * Sqlite3 3.22.0 --> https://www.sqlite.org/index.html
 * Postgresql 10.3 --> https://www.postgresql.org/

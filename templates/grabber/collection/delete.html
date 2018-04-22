@@ -19,21 +19,34 @@
 <form method="post">
       <!--token seguridad-->
       {% csrf_token %}
+
       <div class="form-row">
+
+      <div class="alert alert-danger" role="alert">
     
       <h3>¿Desea eliminar el registro de {{ object.nombre }}?</h3>
-
-      </div> 
 
       <button class="btn btn-primary" type="submit" onclick="return confirm('Esta seguro')">
         Eliminar
       </button>
 
-      <a class= "btn btn-default" href="{% url 'grabber:collection_list' %}">
+      <a class= "btn btn-primary" href="{% url 'grabber:collection_list' %}">
         Cancelar
       </a> 
       
+      </div>
+
+      </div> 
+      
 </form>
+
+<hr>
+
+<div class="alert alert-warning" role="alert">
+  ¿Tenga presente que la siguiente coleccion se encuentran registradas?
+  <br>
+  {{ object.items_cantidad }} --> Recursos digitales
+</div> 
 
 
 {% endblock %}

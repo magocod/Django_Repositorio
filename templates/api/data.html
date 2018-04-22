@@ -18,13 +18,18 @@
     
     <div class="card-panel  indigo darken-3 z-depth-5">
         <span class="white-text">
-          	Data del Repositorio -> Modelos -> JSON
+          	Formato JSON
         </span>
 
 <br>
-<br>
+<hr>
           
     <center>
+
+        <a href="{% url 'api:api_data_category' %}" class="waves-effect waves-light btn pulse deep-purple darken-4">
+            <i class="material-icons left">settings_applications</i>
+                Categorias
+        </a>
 
         <a href="{% url 'api:api_data_coleccion' %}" class="waves-effect waves-light btn pulse teal darken-4">
             <i class="material-icons left">settings_applications</i>
@@ -36,21 +41,17 @@
                 Items
         </a>
 
-        <a href="{% url 'api:api_data_item_type' %}" class="waves-effect waves-light btn pulse blue-grey darken-4">
-            <i class="material-icons left">settings_applications</i>
-                Tipos de items
-        </a>
-
 <br>
+<hr>
 
         <a href="{% url 'api:api_data_tag' %}" class="waves-effect waves-light btn pulse grey darken-4">
             <i class="material-icons left">settings_applications</i>
                 Tags
         </a>
 
-        <a href="{% url 'api:api_data_category' %}" class="waves-effect waves-light btn pulse deep-purple darken-4">
+        <a href="{% url 'api:api_data_item_type' %}" class="waves-effect waves-light btn pulse blue-grey darken-4">
             <i class="material-icons left">settings_applications</i>
-                Categorias
+                Tipos de items
         </a>
 
         <a href="{% url 'api:api_data_theme' %}" class="waves-effect waves-light btn pulse deep-orange darken-4">
@@ -58,9 +59,24 @@
                 Temas
         </a>
 
+      
+<br>
+<hr>  
+
+
+        <a href="{% url 'api:api_records' %}" class="waves-effect waves-light btn pulse grey darken-4">
+            <i class="material-icons left">business_center</i>
+                Registros
+        </a>
+
+        <a href="{% url 'api:api_element_lists' %}" class="waves-effect waves-light btn pulse grey darken-4">
+            <i class="material-icons left">chrome_reader_mode</i>
+                Elementos
+        </a>
+
     </center>
 
-<br>
+<hr>
         
     </div>
 
@@ -71,30 +87,53 @@
     
     <div class="card-panel  indigo darken-3 z-depth-5">
         <span class="white-text">
-            Data del Repositorio -> API - REST
+            API -> BrowserAPI
         </span>
 
+<br>
+<hr>
+          
     <center>
 
-        <a href="http://127.0.0.1:8000/api/rest" class="waves-effect waves-light btn pulse grey darken-4">
-            <i class="material-icons left">storage</i>
-                Repositorio
-        </a>
-        
-        <a href="{% url 'api:api_records' %}" class="waves-effect waves-light btn pulse grey darken-4">
-            <i class="material-icons left">business_center</i>
-                Registros
+        <a href="{% url 'api:api_category' %}" class="waves-effect waves-light btn pulse deep-purple darken-4">
+            <i class="material-icons left">settings_applications</i>
+                Categorias
         </a>
 
-        <a href="{% url 'api:api_element_lists' %}" class="waves-effect waves-light btn pulse grey darken-4">
-            <i class="material-icons left">chrome_reader_mode</i>
-                Elementos
+        <a href="{% url 'api:api_coleccion' %}" class="waves-effect waves-light btn pulse teal darken-4">
+            <i class="material-icons left">settings_applications</i>
+                Colecciones
         </a>
-    
-    </center>
+
+        <a href="{% url 'api:api_item' %}" class="waves-effect waves-light btn pulse brown darken-4">
+            <i class="material-icons left">settings_applications</i>   
+                Items
+        </a>
 
 <br>
-          
+<hr>
+
+        <a href="{% url 'api:api_tag' %}" class="waves-effect waves-light btn pulse grey darken-4">
+            <i class="material-icons left">settings_applications</i>
+                Tags
+        </a>
+
+        <a href="{% url 'api:api_item_type' %}" class="waves-effect waves-light btn pulse blue-grey darken-4">
+            <i class="material-icons left">settings_applications</i>
+                Tipos de items
+        </a>
+
+        <a href="{% url 'api:api_theme' %}" class="waves-effect waves-light btn pulse deep-orange darken-4">
+            <i class="material-icons left">settings_applications</i>
+                Temas
+        </a>
+ 
+<br>
+<hr>  
+
+    </center>
+
+        
     </div>
 
 </div>

@@ -17,7 +17,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 from backend.storage.models import Item_type, Tag, Collection, Item, Category, Theme
 
 #queries
-from backend.api.queries import registros_totales
+from backend.seeker.queries import registros_totales
 
 #formularios
 from backend.grabber.forms import Tag_form, Collection_form, Item_type_form, Item_form, Theme_form, Category_form

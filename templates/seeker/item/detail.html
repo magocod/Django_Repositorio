@@ -4,15 +4,20 @@
 {% block breadcrumb %}
 
 <a class="breadcrumb">Detalles</a>
-<a class="breadcrumb">Item</a> 
+<a class="breadcrumb">Recurso digital</a> 
 
 {% endblock %}
 
 {% block add %}
 
-<h4>Datos del item: {{ item.nombre }}</h4>
+<h4></h4>
 
 <ul class="collapsible" data-collapsible="accordion">
+    
+    <li>
+      <div class="collapsible-header black white-text"><i class="material-icons">dashboard</i>{{ item.nombre }}</div>
+      
+    </li>
 
     <li>
       <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">assignment_late</i>Descripcion</div>
@@ -25,8 +30,33 @@
     </li>
 
     <li>
-      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">card_membership</i>Tipo</div>
-      <div class="collapsible-body"><span>{{ item.tipo }}</span></div>
+      <div class="collapsible-header indigo darken-4 white-text" data-position="bottom"><i class="material-icons">card_membership</i>Tipo de recurso: {{ item.tipo }}</div>
+      <div class="collapsible-body">
+
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <i class="material-icons circle green">developer_board</i>
+              <p class="title text-black black-text tooltipped" data-position="bottom" data-tooltip="requerido para usar el recurso">
+
+                Sistema operativo:&nbsp;{{ item.tipo.plataforma }}
+                <br>
+                {% if item.tipo.instalar != null %}
+                  Requiere instalar el siguiente plugin:&nbsp;{{ item.tipo.instalar }}
+                {% else %}
+                <!---->
+                {% endif %}
+                <br>
+                {% if item.tipo.extension != null %}
+                  Requiere instalar la siguiente herramienta:&nbsp;{{ item.tipo.extension }}
+                {% else %}
+                <!---->
+                {% endif %} 
+              </p>
+              <a class="secondary-content"><i class="material-icons">grade</i></a>
+          </li> 
+        </ul>
+
+      </div>
     </li>
 
     {% if item.url != null %}
@@ -35,7 +65,7 @@
       <div class="collapsible-body">
 
         
-        <a class="btn waves-light black tooltipped" target="_blank" href="{{ item.url }}" data-activates='dropdown1' data-position="botton" data-delay="50" data-tooltip="link">
+        <a class="btn waves-light black tooltipped" target="_blank" href="{{ item.url }}" data-activates='dropdown1' data-position="botton" data-tooltip="link">
           <i class="material-icons">public</i>
         </a>
           &nbsp;&nbsp;&nbsp;{{ item.url }}
@@ -46,7 +76,7 @@
     {% endif %}
 
     <li>
-      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">event_available</i>Fechas</div>
+      <div class="collapsible-header indigo darken-4 white-text"><i class="material-icons">event_available</i>Fecha</div>
 
         <div class="collapsible-body">
 
@@ -54,13 +84,13 @@
           <li class="collection-item avatar">
             <i class="material-icons circle green">event_available</i>
               <p class="title text-black black-text">
-              Fecha:&nbsp; {{ item.fecha }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.fecha|timesince }}
+              Fecha de elaboracion:&nbsp; {{ item.fecha }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.fecha|timesince }}
               <br>
               Publicado:&nbsp; {{ item.publicado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.publicado|timesince }}
               <br>
               Ultima actualizacion:&nbsp; {{ item.actualizado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.actualizado|timesince }}
               </p>
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+              <a class="secondary-content"><i class="material-icons">grade</i></a>
           </li> 
         </ul>
 
@@ -74,7 +104,7 @@
 
         {% for coleccion in item.colecciones.all %}
         <div class="chip teal darken-4 white-text text-white">
-            <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            <img src="{% static 'icon/jpg/py-m3.jpg' %}" alt="nada">
               {{ coleccion.nombre }} 
         </div>
         {% endfor %}
@@ -88,7 +118,7 @@
 
         {% for tag in item.tags.all %}
         <div class="chip teal darken-4 white-text text-white">
-            <img src="{% static 'icon/py-m3.jpg' %}" alt="nada">
+            <img src="{% static 'icon/jpg/py-m3.jpg' %}" alt="nada">
               {{ tag.nombre }} 
         </div>
         {% endfor %}
@@ -96,7 +126,7 @@
     </li>
 
     <li>
-        <div class="collapsible-header white-text indigo darken-4"><i class="material-icons">cloud_download</i>Archivos</div>
+        <div class="collapsible-header white-text teal darken-4"><i class="material-icons">cloud_download</i>Archivos</div>
          <div class="collapsible-body">
     
 
@@ -148,23 +178,6 @@
          </div>
     </li>
 
-    {% if item.url_video != null %}
-
-    <li>
-      <div class="collapsible-header white-text indigo darken-4"><i class="material-icons">play_circle_filled</i>Video</div>
-         
-         <div class="collapsible-body">
-          
-            <div class="video-container">
-              <iframe width="560" height="315" src="{{ item.url_video }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            </div>
-         
-         </div>
-        
-    </li>
-    {% else %}
-    <!--sin registro-->
-    {% endif %}
 
 </ul>
 
