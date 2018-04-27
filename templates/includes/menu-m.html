@@ -1,18 +1,44 @@
+
 {% load static %}
 
 <ul id="nav-mobile" class="sidenav sidenav-fixed indigo darken-4">
 
-        <!--logo unefa-->
-  <li class="logo"><a href="{% url 'index' %}" id="logo-container" class="brand-logo">
-      <img src="{% static 'icon/gif/unefalogo.gif' %}" width="200" height="200"></a>
+  <!--logo unefa-->
+  <li class="logo">
+      <a href="{% url 'index' %}" class="brand-logo">
+      <img class="responsive-img" src="{% static 'icon/gif/unefalogo-min.gif' %}" width="200" height="200" alt="escudos_unefa"></a>
   </li>
 
   <br>
 
-  <li class="bold">
-      <a href="{% url 'seeker:info' %}" class="waves-effect waves-red white-text text-white">
-        <i class="material-icons left white-text text-white">more</i>Informacion
-      </a>
+  <li class="no-padding">
+          
+        <ul class="collapsible collapsible-accordion">
+            
+          <li class="bold">
+
+              <a class="collapsible-header indigo darken-4 waves-effect waves-red white-text text-white">
+                <i class="material-icons left white-text text-white">more</i>Informacion
+              </a>
+                  
+          <div class="collapsible-body">
+            
+            <ul>
+                 
+              <li>
+                  <a href="{% url 'seeker:info' %}" class="waves-effect waves-red">
+                    <i class="material-icons">home</i>
+                      Repositorio
+                  </a>
+              </li>
+           
+                        
+            </ul>
+          </div>
+
+          </li>
+
+        </ul>
   </li>
 
   <li class="no-padding">
@@ -21,7 +47,7 @@
 
         <li class="bold">
 
-            <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white">
+            <a class="collapsible-header indigo darken-4 waves-effect waves-red white-text text-white">
               <i class="material-icons left white-text text-white">work</i>Colecciones
             </a>
 
@@ -30,35 +56,35 @@
               <ul>
 
                 <li>
-                  <a href="{% url 'seeker:title_base' %}" class="waves-effect waves-red blue lighten-5">
+                  <a href="{% url 'seeker:title_base' %}" class="waves-effect waves-red">
                     <i class="material-icons">keyboard_hide</i>
                       Titulo
                   </a>
                 </li>
 
                 <li>
-                  <a href="{% url 'seeker:category_base' %}" class="waves-effect waves-red blue lighten-5">
+                  <a href="{% url 'seeker:category_base' %}" class="waves-effect waves-red">
                     <i class="material-icons">description</i>
                       Categoria
                   </a>
                 </li>
 
                 <li>
-                  <a href="{% url 'seeker:theme_base' %}" class="waves-effect waves-red blue lighten-5">
+                  <a href="{% url 'seeker:theme_base' %}" class="waves-effect waves-red">
                     <i class="material-icons">content_paste</i>
                       Tematica
                   </a>
                 </li>
 
                 <li>
-                    <a href="{% url 'seeker:author_base' %}" class="waves-effect waves-red blue lighten-5">
+                    <a href="{% url 'seeker:author_base' %}" class="waves-effect waves-red">
                       <i class="material-icons">account_box</i>
                       Autor
                     </a>
                 </li>
 
                 <li>
-                  <a href="{% url 'seeker:recent_items' %}" class="waves-effect waves-red blue lighten-5">
+                  <a href="{% url 'seeker:recent_items' %}" class="waves-effect waves-red">
                     <i class="material-icons">next_week</i>
                       Recientes
                   </a>
@@ -66,7 +92,7 @@
 
 
                 <li>
-                  <a class="waves-effect waves-red blue lighten-5 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nuevo filtro para busqueda">
+                  <a class="waves-effect waves-red tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nuevo filtro para busqueda">
                     <i class="material-icons">extension</i>
                       Proximamente
                   </a>
@@ -87,7 +113,7 @@
 
           <li class="bold">
 
-              <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white tooltipped" data-position="right" data-tooltip="us=yson / c=24682468*">
+              <a class="collapsible-header indigo darken-4 waves-effect waves-red white-text text-white">
                 <i class="material-icons left white-text text-white">assignment_ind</i>Admin
               </a>
               
@@ -96,27 +122,27 @@
                   <ul>
                       {% if user.is_authenticated %}
                       <li>
-                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red blue lighten-5">
+                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red">
                             <i class="material-icons">contact_mail</i>
                             {{ user.username }}-> Admin v1
                         </a>
                       </li>
                       <li>
-                        <a href="{% url 'account:dashboard' %}" class="waves-effect waves-red blue lighten-5">
+                        <a href="{% url 'account:dashboard' %}" class="waves-effect waves-red">
                             <i class="material-icons">contact_mail</i>
                             {{ user.username }}-> Admin v2
                         </a>
                       </li>
                       {% else %}
                       <li>
-                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red blue lighten-5 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pruebas ingreso de data">
+                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red tooltipped" data-position="bottom" data-tooltip="Pruebas ingreso de data">
                           <i class="material-icons">backspace</i>
                               Version 1
                         </a>
                       </li>
                       <li>
-                        <a href="{% url 'login' %}" class="waves-effect waves-red blue lighten-5 tooltipped" data-position="bottom" data-delay="50" data-tooltip="En construccion">
-                          <i class="material-icons">build</i>
+                        <a href="{% url 'login' %}" class="waves-effect waves-red tooltipped" data-position="bottom" data-tooltip="Version Beta">
+                          <i class="material-icons">dashboard</i>
                             Version 2
                         </a>
                       </li>
@@ -129,13 +155,13 @@
 
    </li>
 
-    <li class="no-padding">
+   <li class="no-padding">
           
         <ul class="collapsible collapsible-accordion">
             
           <li class="bold">
 
-              <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white">
+              <a class="collapsible-header indigo darken-4 waves-effect waves-red white-text text-white">
                 <i class="material-icons left white-text text-white">memory</i>Api
               </a>
                   
@@ -144,14 +170,14 @@
             <ul>
                  
               <li>
-                  <a href="{% url 'api:api_data' %}" class="waves-effect waves-red blue lighten-5">
+                  <a href="{% url 'api:api_data' %}" class="waves-effect waves-red">
                     <i class="material-icons">account_balance_wallet</i>
                       Data
                   </a>
               </li>
               <li>
-                  <a href="{% url 'api:api_data_links' %}" class="waves-effect waves-red blue lighten-5">
-                    <i class="material-icons">cloud_circle</i>
+                  <a href="{% url 'api:api_data_links' %}" class="waves-effect waves-red">
+                    <i class="material-icons">dns</i>
                       Links
                   </a>
               </li>
@@ -165,7 +191,7 @@
     </li>
       
     <li class="bold">
-      <a class="waves-effect waves-red white-text text-white tooltipped" data-position="bottom" data-delay="50" data-tooltip="Nueva funcionalidad">
+      <a class="waves-effect waves-red white-text text-white tooltipped" data-position="bottom" data-tooltip="Nueva funcionalidad">
         <i class="material-icons left white-text text-white">extension</i>Proximamente
       </a>
     </li>
@@ -178,7 +204,7 @@
 
         <li class="bold">
 
-          <a class="collapsible-header indigo darken-4 lighten-3 waves-effect waves-red white-text text-white">
+          <a class="collapsible-header indigo darken-4 waves-effect waves-red white-text text-white">
             <i class="material-icons left white-text text-white">android</i>Pruebas
           </a>
           
@@ -186,14 +212,14 @@
 
               <ul>                
                   <li>
-                    <a href="{% url 'seeker:test_records' %}" class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Capacidad de almacenamiento">
+                    <a href="{% url 'seeker:test_records' %}" class="waves-effect waves-red tooltipped" data-position="bottom" data-tooltip="Capacidad de almacenamiento">
                       <i class="material-icons">broken_image</i>
                         Registros de modelos
                     </a>
                   </li>
                   
                   <li>
-                    <a href="{% url 'seeker:test_charge' %}" class="waves-effect waves-red blue-grey lighten-3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Tiempo de respuesta">
+                    <a href="{% url 'seeker:test_charge' %}" class="waves-effect waves-red tooltipped" data-position="bottom"  data-tooltip="Tiempo de respuesta">
                       <i class="material-icons">flash_on</i>
                         Carga, paginacion
                       </a>

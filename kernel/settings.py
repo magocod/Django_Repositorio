@@ -34,7 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 #Django Debug Toolbar - habilitar paneles
-INTERNAL_IPS = ('127.0.0.1')
+#INTERNAL_IPS = ('127.0.0.1')
 
 # Application definition
 

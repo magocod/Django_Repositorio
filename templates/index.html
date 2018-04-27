@@ -1,6 +1,19 @@
 {% extends 'core/materialize.html' %}
 {% load static %}
 
+{% block async %}
+
+<!-- service worker-->
+<script async type="text/javascript">
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('{% static 's_w.js' %}')
+             .then(function() { console.log('Service Worker Registered'); });
+}
+</script>
+
+{% endblock %}
 
 {% block title %} 
 UNEFA-Repositorio
@@ -22,7 +35,7 @@ UNEFA-Repositorio
 </nav>
 
 <div class="container">
-  <a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only text-white white-text">
+  <a data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only text-white white-text">
     <i class="material-icons">menu</i> 
   </a>
 </div>
@@ -35,96 +48,73 @@ UNEFA-Repositorio
 
 <main>
 
-<div class="container">
-  		
-<div class="container">
+
 {% block space %}
-
-
-<h4>Enlaces de Interes
-  <span>
-    <a ><i class="material-icons">near_me</i>...</a>
-  </span>
-</h4>
 
 <div class="carousel carousel-slider center">
 
-    <div class="carousel-item purple darken-4 white-text" href="#one!">
-
-      <h2>
-        <a class="white-text" href="http://seadu.unefa.edu.ve/">
-          UNEFA-VIRTUAL SEADU
-        </a>
-      </h2>
-
-      <p class="white-text">Ingresar a las aulas virtuales
-      </p>
-
+    <div class="carousel-item red darken-4 white-text" href="#one!">
+      
+      <br>
+      <a target="_blank" href="http://seadu.unefa.edu.ve" rel="noopener" class="white-text flow-text">
+        UNEFA-VIRTUAL SEADU 
+      </a>
+     
       <div>
-        <img width="400" height="300" src="{% static 'images/carousel/moodle.png' %}">
+        <img class="responsive-img" width="600" height="300" src="{% static 'images/carousel/moodle-min.png' %}" alt="logo_unefa_virtual">
       </div>
+
       
     </div>
 
-    <div class="carousel-item teal darken-4 white-text" href="#two!">
-      <h2>UNEFA-VIRTUAL Portal</h2>
+    <div class="carousel-item indigo darken-4 white-text" href="#two!">
+
+      <br>
+      <a target="_blank" href="http://wendycod.pythonanywhere.com/" rel="noopener" class="white-text flow-text">
+        UNEFA-VIRTUAL Portal
+      </a>
+
       <div>
-        <img width="400" height="300" src="{% static 'images/404.png' %}">
+        <img class="responsive-img" width="800" height="300" src="{% static 'images/carousel/ubuntu-min.jpg' %}" alt="logo_pag_2">
       </div>
+
     </div>
 
-    <div class="carousel-item brown darken-4 white-text" href="#three!">
-      <h2>Sin definir</h2>
+    <div class="carousel-item indigo darken-4 white-text" href="#three!">
+      
+      <br>
+      <a class="white-text flow-text">
+        Sin definir
+      </a>
+
       <div>
-        <img width="400" height="300" src="{% static 'images/404.png' %}">
+        <img class="responsive-img" width="400" height="300" src="{% static 'images/error/404-min.png' %}" alt="logo_pag_3">
       </div>
+
+    
     </div>
 
-    <div class="carousel-item blue-grey darken-4 white-text" href="#four!">
-      <h2>Sin definir</h2>
+    <div class="carousel-item indigo darken-4 white-text" href="#four!">
+      
+      <br>
+      <a class="white-text flow-text">
+        Sin definir
+      </a>
+
       <div>
-        <img width="400" height="300" src="{% static 'images/404.png' %}">
+        <img class="responsive-img" width="400" height="300" src="{% static 'images/error/404-min.png' %}" alt="logo_pag_4">
       </div>
+
     </div>
 
 </div>
 
-<div class="carousel">
-    <a class="carousel-item z-depth-5" href="https://www.python.org">
-      <img src="{% static 'icon/jpg/python.jpg' %}">
-    </a>
-    <a class="carousel-item z-depth-5" href="http://materializecss.com/carousel.html">
-      <img src="{% static 'icon/jpg/materialize.jpg' %}">
-    </a>
-    <a class="carousel-item z-depth-5" href="https://getbootstrap.com">
-      <img src="{% static 'icon/png/bootstrap.png' %}">
-    </a>
-    <a class="carousel-item z-depth-5" href="https://vuejs.org">
-      <img src="{% static 'icon/jpg/vue.jpg' %}">
-    </a>
-    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com">
-      <img src="{% static 'icon/png/django.png' %}">
-    </a>
-    <a class="carousel-item z-depth-5" href="https://www.djangoproject.com">
-      <img src="{% static 'icon/jpg/ubuntu.jpg' %}">
-    </a>
-</div>
 
-<h4>Añadidos recientemente
-  <span>
-    <a href="{% url 'seeker:recent_items' %}"><i class="material-icons">next_week</i>...</a>
-  </span>
-</h4>
-
-<br>
-<br>
 
 
 {% endblock %}
 
-</div>
 
-</div>
 
 
 <!-- vista parcial boton -->
@@ -135,6 +125,7 @@ UNEFA-Repositorio
    
   
 {% endblock %}
+
 
 
 

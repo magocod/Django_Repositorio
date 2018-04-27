@@ -65,4 +65,4 @@ class Item_type_serializerv2(HyperlinkedModelSerializer):
 	
     class Meta:
     	model = Item_type
-    	fields = ('id','nombre','descripcion', 'publicado', 'dirigido_a', 'metadato_2', 'metadato_3')
+    	fields = ('id','nombre','descripcion', 'publicado', 'plataforma', 'instalar', 'extension')

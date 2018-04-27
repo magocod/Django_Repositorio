@@ -12,16 +12,19 @@
 <meta name="description" content="unefa repositorio digital, coordinacion educacion a distancia">
 <meta name="author" content="unefa coordinacion educacion a distancia">
 
+<!-- PWA -->
+<meta name="theme-color" content="#4285f4">
+<link rel="manifest" href="{% static 'manifest.json' %}">
+
 <!-- Materialize CSS -->
-<link href="{% static 'materialize/css/materialize.min.css' %}" rel="stylesheet">
-<link href="{% static 'materialize/css/ghpages.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+<link href="{% static 'materialize/css/materialize.min.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
+<link href="{% static 'materialize/css/ghpages.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
 <!--Datatables-->
-<link rel="stylesheet" href="{% static 'plugin/datatables/datatables.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugin/datatables/datatables.min.css' %}" media="none" onload="if(media!='all')media='all'">
 
 <!-- Google-api icons CSS -->
-<link href="{% static 'materialize/icon/icon-googleapi.min.css' %}" rel="stylesheet">
+<link href="{% static 'materialize/icon/icon-googleapi.min.css' %}" rel="stylesheet" media="none" onload="if(media!='all')media='all'">
 <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
-
 
 <!-- footer -->
 <style type="text/css">
@@ -36,7 +39,6 @@
     flex: 1 0 auto;
   }
 
-
 </style>
 
 <link rel="shortcut icon" href="{%  static 'favicon.png' %}">
@@ -46,13 +48,16 @@
   
 {% endblock %}
 
-  
+{% block async %}
+
+{% endblock %}
+
 
 <title>{% block title %} Nombre-Pagina {% endblock %}</title>
 
 </head>
 	
-<body class="blue lighten-5">
+<body>
   
 <!-- bloques-->
 {% block content %}
@@ -69,55 +74,52 @@
 <script src="{% static 'plugin/jquery/jquery-3.2.1.min.js' %}"></script>
 <!-- Materialize JS -->
 <script src="{% static 'materialize/js/materialize.min.js' %}"></script>
+
 <!-- datatables -->
-<script type="text/javascript" charset="utf8" src="{% static 'plugin/datatables/datatables.min.js' %}"></script> 
+<script async type="text/javascript" src="{% static 'plugin/datatables/datatables.min.js' %}"></script>
 
 <!-- funciones JS-->
 
 <script type="text/javascript">
 
-$(document).ready(function(){
+  $('.carousel.carousel-slider').carousel({
+    fullWidth: true,
+    indicators: true
 
-   $('.carousel').carousel();
-    setInterval(function() {
-      $('.carousel').carousel('next');
-      },  
-      3000); // every 2 seconds
-
-});
-
-$(document).ready(function(){
-    $('.collapsible').collapsible();
-});
+  });
 
 
-$(document).ready(function(){
-    $('.tooltipped').tooltip();
-});
-
-
-$(document).ready(function(){
-    $('.fixed-action-btn').floatingActionButton();
-});
-
-$(document).ready(function(){
-    $('.sidenav').sidenav();
-});
-
-$(document).ready(function(){
-    $('.modal').modal();
-});
-
-
-$(document).ready(function(){
-    $('.dropdown-trigger').dropdown();
-});
-
-$(document).ready(function(){
-    $('.tabs').tabs();
-});
+$(document).ready(function() {
+    $(".collapsible").collapsible()
+}
+),
+$(document).ready(function() {
+    $(".tooltipped").tooltip()
+}
+),
+$(document).ready(function() {
+    $(".fixed-action-btn").floatingActionButton()
+}
+),
+$(document).ready(function() {
+    $(".sidenav").sidenav()
+}
+),
+$(document).ready(function() {
+    $(".modal").modal()
+}
+),
+$(document).ready(function() {
+    $(".dropdown-trigger").dropdown()
+}
+),
+$(document).ready(function() {
+    $(".tabs").tabs()
+}
+);
 
 </script>
+
 
 <!-- javascripts extras -->
 {% block extrajs %}

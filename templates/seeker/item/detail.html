@@ -104,7 +104,7 @@
 
         {% for coleccion in item.colecciones.all %}
         <div class="chip teal darken-4 white-text text-white">
-            <img src="{% static 'icon/jpg/py-m3.jpg' %}" alt="nada">
+            <img src="{% static 'icon/jpg/py-m3-min.jpg' %}" alt="nada">
               {{ coleccion.nombre }} 
         </div>
         {% endfor %}
@@ -118,7 +118,7 @@
 
         {% for tag in item.tags.all %}
         <div class="chip teal darken-4 white-text text-white">
-            <img src="{% static 'icon/jpg/py-m3.jpg' %}" alt="nada">
+            <img src="{% static 'icon/jpg/py-m3-min.jpg' %}" alt="nada">
               {{ tag.nombre }} 
         </div>
         {% endfor %}

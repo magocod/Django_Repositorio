@@ -16,15 +16,15 @@
     <div class="col s12 m3">
       <div class="card z-depth-5">
         <div class="card-image">
-          <img src="{% static 'images/recurso_digital.jpg' %}">
+          <img src="{% static 'images/reciente/recurso_digital-min.jpg' %}">
           
           <a href="{% url 'seeker:seeker_item' item.id %}" class="btn-floating halfway-fab waves-effect waves-light red pulse">
             <i class="material-icons">add</i>
           </a>
 
         </div>
-        <div class="card-content">
-          <p>{{ item.nombre }}
+        <div class="card-content black">
+          <p class="white-text">{{ item.nombre }}
             <br>
             {{ item.publicado|timesince }}
           </p>
@@ -44,11 +44,11 @@
         <div class="card small z-depth-5">
 
             <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator responsive-img" src="{% static 'images/coleccion.jpg' %}" alt="sin imagen">
+                  <img class="activator responsive-img" src="{% static 'images/reciente/coleccion-min.jpg' %}" alt="sin imagen">
             </div>
 
-          <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">Coleccion:&nbsp;{{ coleccion.nombre }}<i class="material-icons right ">more_vert</i></span>
+          <div class="card-content indigo darken-4">
+              <span class="card-title activator white-text">Coleccion:&nbsp;{{ coleccion.nombre }}<i class="material-icons right ">more_vert</i></span>
           </div>
 
           <div class="card-reveal">
@@ -62,7 +62,7 @@
 
           </div>
 
-          <div class="card-action blue-grey darken-3">
+          <div class="card-action black">
             <a href="{% url 'seeker:collection_pk' coleccion.id %}" class="white-text text-white" >Detalles</a>
             <a href="{% url 'seeker:search_collection_items' coleccion.id %}" class="white-text text-white" >Recursos</a>
           </div>
