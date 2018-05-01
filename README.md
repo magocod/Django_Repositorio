@@ -37,6 +37,10 @@ Vuejs -> https://github.com/magocod/Vue_repositorio
 * Datatables 1.10.16
 * Chosen 1.8.3
 
+## Service Worker
+
+* Workbox 3.1.0 --> https://developers.google.com/web/tools/workbox/ 
+
 ## Directorios Estructura
 -------------------
 
