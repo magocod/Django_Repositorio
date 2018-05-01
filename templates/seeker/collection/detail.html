@@ -12,7 +12,6 @@
 
 {% if collection %}
 
-{% include 'seeker/item/autocomplete.html' %}
 
 <!-- Dropdown Trigger -->
 <a class='dropdown-trigger btn black tooltipped' data-position="right" data-tooltip="Recursos" data-target='dropdown1'>
@@ -40,8 +39,25 @@
 
 <ul class="collapsible" data-collapsible="accordion">
     
-    <li>
-      <div class="collapsible-header black white-text"><i class="material-icons">dashboard</i>{{ collection.nombre }}</div>
+    <li class="disabled">
+      <div class="disabled collapsible-header black white-text"><i class="material-icons">dashboard</i>{{ collection.nombre }}</div>
+      <div class="collapsible-body">
+
+        <ul class="collection">
+            <li class="collection-item avatar">
+                <i class="material-icons circle green">event_available</i>
+                  <p class="title text-black black-text">
+                  
+                  <br>
+                  Publicado:&nbsp; {{ collection.publicado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ collection.publicado|timesince }}
+                  <br>
+                  Actualizado:&nbsp; {{ collection.actualizado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ collection.actualizado|timesince }}
+                  </p>
+                  <a class="secondary-content"><i class="material-icons">grade</i></a>
+            </li> 
+        </ul>
+
+      </div>
       
     </li>
 
@@ -91,36 +107,11 @@
 <br>
 <br>
 
-{% block extrajs %}
-
-<script type="text/javascript">
-
-
-$(document).ready(function(){
-  $('input.autocomplete').autocomplete({
-
-    data: {
-
-    {% for item in collection.items_registrados %}
-      "{{item.nombre}}": null,
-    {% endfor %}
-
-    },
-    
-    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
-    onAutocomplete: function(val) {
-      // Callback function when value is autcompleted.
-    },
-    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
-  });
-});
-
-</script>
-
- {% endblock %}
 
 {% else %}
 <p>No se encontro registro</p>
 {% endif %}
 
+
 {% endblock %}
+

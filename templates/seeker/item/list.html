@@ -1,4 +1,3 @@
-{% if object_list %}
 
 <ul class="collapsible popout" data-collapsible="accordion">
 
@@ -21,18 +20,18 @@
             </li>
 
             <li>
-              <div class="collapsible-header"><i class="material-icons">event_available</i>Fechas</div>
+              <div class="collapsible-header"><i class="material-icons">event_available</i>Fecha</div>
               <div class="collapsible-body">
 
                 <ul class="collection">
                   <li class="collection-item avatar">
                     <i class="material-icons circle green">event_available</i>
                       <p class="title text-black black-text">
-                      Fecha:&nbsp; {{ item.fecha }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.fecha|timesince }}
+                      Fecha de elaboracion:&nbsp; {{ item.fecha }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.fecha|timesince }}
                       <br>
                       Publicado:&nbsp; {{ item.publicado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.publicado|timesince }}
                       <br>
-                      Ultima actualizacion:&nbsp; {{ item.actualizado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.actualizado|timesince }}
+                      Actualizado:&nbsp; {{ item.actualizado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ item.actualizado|timesince }}
                       </p>
                     <a class="secondary-content"><i class="material-icons">grade</i></a>
                   </li> 
@@ -42,7 +41,7 @@
             </li>
 
             <li class="collection-item"><i class="material-icons left">add_box</i>
-              <a href="{% url 'seeker:seeker_item' item.id %}" class="black-text text-black" >Detalles
+              <a href="{% url 'seeker:item_pk' item.id %}" class="black-text text-black" >Detalles
               </a>
             </li>
     
@@ -53,6 +52,3 @@
     {% endfor %}
 </ul>
 
-{% else %}
-<p>No hay registros.</p>
-{% endif %}

@@ -20,22 +20,35 @@
         <span class="white-text">
             API -> GET
         </span>
+        &nbsp;&nbsp;
+        {% include 'api/modal.html' %}
 
 <hr>
+
+
 
   <ul class="collapsible">
     <li>
       <div class="collapsible-header black white-text"><i class="material-icons">class</i>Recurso digital</div>
       <div class="collapsible-body white">
         <hr>
-        <a class="black-text">GET /api/detail/item/1 </a>
+        <a class="black-text">item/[id]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          { item por id }
+        </a>
         <hr>
-        <a class="black-text">GET</a>
+        <a class="black-text">items&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          { listado items -> paginado 10}
+        </a>
+        <hr>
+        <a class="black-text">item/[nombre]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          { busqueda por nombre -> paginado 10}
+        </a>
         <hr>
       </div>
     </li>
     
   </ul>
+
 
     
 <hr>

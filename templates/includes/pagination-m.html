@@ -1,4 +1,5 @@
-<!--paginado automatico-->
+{# Paginacion de vista generica #}
+
 {% if is_paginated %}
 <center>
 <ul class="pagination">
@@ -7,12 +8,12 @@
 	   <li class="waves-effect"><a href="?page=1"><i class="material-icons">chevron_left</i></a></li>
        <a class="waves-effect waves-light btn indigo darken-4" href="?page=1">
             <i class="material-icons left">fast_rewind</i>
-            Primero
+            
         </a>
 	{% else %}
        <a class="disabled waves-effect waves-light btn indigo darken-4">
             <i class="material-icons left">fast_rewind</i>
-            Primero
+            
        </a>
     {% endif %}
 
@@ -41,13 +42,13 @@
             
         <a class="waves-effect waves-light btn indigo darken-4" href="?page={{ paginator.num_pages }}">
             <i class="material-icons left">fast_forward</i>
-            Ultimo
+            
         </a>
        
     {% else %}
         <a class="disabled waves-effect waves-light btn indigo darken-4">
             <i class="material-icons left">fast_forward</i>
-            Ultimo
+            
         </a>
     {% endif %}
 
@@ -55,7 +56,9 @@
 
 <a class="btn-floating btn-large waves-effect waves-light red pulse">{{ paginator.count }}</a>
 
-<!--paginado funcion-->
+
+{# Paginacion de funcion paginate #}
+
 {% elif object_list %}
 
 <div class="pagination">

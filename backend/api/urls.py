@@ -8,11 +8,12 @@ from django.contrib.auth.decorators import login_required
 from backend.api.views.links import Api_data, Api_link
 #basico
 from backend.api.views.v1 import Collection_APIv1, Item_APIv1, Item_type_APIv1, Tag_APIv1, Category_APIv1, Theme_APIv1, List_API, Records_API
-#paginado
-from backend.api.views.v2 import Item_APIv2, Theme_APIv2, Category_APIv2, Collection_APIv2, Item_type_APIv2, Tag_APIv2
+
+#paginado y test listview
+#from backend.api.views.v2 import Item_APIv2, Theme_APIv2, Category_APIv2, Collection_APIv2, Item_type_APIv2, Tag_APIv2
 
 #GET
-from backend.api.views.get import Item_id
+from backend.api.views.get import Item_id, Item_list, Item_letters, Categories_list
 
 from rest_framework import routers
 from backend.api.views.viewsets import Collection_viewset, Item_viewset, Item_typeviewset
@@ -35,15 +36,19 @@ urlpatterns = [
 	path('storage/data_tema', Theme_APIv1.as_view(), name='api_data_theme'),
 
 	#repository -JSON -v2
-	path('colecciones', Collection_APIv2.as_view(), name='api_coleccion'),
-	path('items', Item_APIv2.as_view(), name='api_item'),
-	path('item_types', Item_type_APIv2.as_view(), name='api_item_type'),
-	path('tags', Tag_APIv2.as_view(), name='api_tag'),
-	path('categorias', Category_APIv2.as_view(), name='api_category'),
-	path('temas', Theme_APIv2.as_view(), name='api_theme'),
+	#path('colecciones', Collection_APIv2.as_view(), name='api_coleccion'),
+	#path('items', Item_APIv2.as_view(), name='api_item'),
+	#path('item_types', Item_type_APIv2.as_view(), name='api_item_type'),
+	#path('tags', Tag_APIv2.as_view(), name='api_tag'),
+	#path('categorias', Category_APIv2.as_view(), name='api_category'),
+	#path('temas', Theme_APIv2.as_view(), name='api_theme'),
 
 	#repository -JSON -GET
-	path('detail/item/<int:pk>', Item_id, name='api_item_id'),
+	path('item/<int:pk>', Item_id, name='api_item_id'),
+	path('items', Item_list, name='api_category_list'),
+	path('item/<slug:slug>', Item_letters, name='api_item_letters'),
+
+	path('categorias', Categories_list, name='api_category_list'),
 
 	#renderizado
 	path('records', Records_API.as_view(), name='api_records'),

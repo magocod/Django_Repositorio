@@ -6,45 +6,57 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.precaching.precache([
+workbox.precaching.precacheAndRoute([
   {
     url: '/static/icon/gif/unefalogo-min.gif',
-    revision: 'abcde',
+    revision: 'abcde1'
   },
   {
     url: '/static/images/carousel/moodle-min.png',
-    revision: 'abcde',
+    revision: 'abcde2'
   },
   {
     url: '/static/images/404-min.png',
-    revision: 'abcde',
+    revision: 'abcde3'
   },
   {
     url: '/static/materialize/css/materialize.min.css',
-    revision: 'abcde',
+    revision: 'abcde4'
   },
   {
     url: '/static/materialize/css/ghpages.min.css',
-    revision: 'abcde',
+    revision: 'abcde5'
   },
   {
     url: '/static/plugin/datatables/datatables.min.css',
-    revision: 'abcde',
+    revision: 'abcde6'
   },
   {
     url: '/static/materialize/icon/icon-googleapi.min.css',
-    revision: 'abcde',
+    revision: 'abcde7'
   },
   {
     url: '/static/plugin/jquery/jquery-3.2.1.min.js',
-    revision: 'abcde',
+    revision: 'abcde8'
   },
   {
     url: '/static/materialize/js/materialize.min.js',
-    revision: 'abcde',
+    revision: 'abcde9'
   },
   {
     url: '/static/plugin/datatables/datatables.min.js',
-    revision: 'abcde',
+    revision: 'abcde10'
   },
+  {
+    url: '/static/favicon.png',
+    revision: 'abcde11'
+  },
+  {
+    url: 'index.html',
+    revision: 'abcde12'
+  }
+
 ]);
+
+
+

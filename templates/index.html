@@ -3,7 +3,7 @@
 
 {% block async %}
 
-<!-- service worker-->
+<!-- service worker -->
 <script async type="text/javascript">
 
 if ('serviceWorker' in navigator) {
@@ -12,6 +12,8 @@ if ('serviceWorker' in navigator) {
              .then(function() { console.log('Service Worker Registered'); });
 }
 </script>
+
+
 
 {% endblock %}
 
@@ -23,7 +25,7 @@ UNEFA-Repositorio
 
 <header>
 
-<!-- vista parcial notificacion -->
+{# vista parcial notificacion #}
 {% include 'includes/notification-m.html' %}
 
 <nav class="indigo darken-4">
@@ -40,7 +42,7 @@ UNEFA-Repositorio
   </a>
 </div>
 
-<!-- vista parcial menu -->
+{# vista parcial menu #}
 {% include 'includes/menu-m.html' %}
 
 
@@ -117,7 +119,7 @@ UNEFA-Repositorio
 
 
 
-<!-- vista parcial boton -->
+{# vista parcial boton flotante #}
 {% include 'includes/button-m.html' %}
 
 </main>

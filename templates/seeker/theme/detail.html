@@ -36,6 +36,23 @@
     
     <li>
       <div class="collapsible-header black white-text"><i class="material-icons">dashboard</i> {{ theme.nombre }} </div>
+
+      <div class="collapsible-body">
+
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <i class="material-icons circle green">event_available</i>
+              <p class="title text-black black-text">
+
+              Publicado:&nbsp; {{ theme.publicado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ theme.publicado|timesince }}
+              <br>
+              Actualizado:&nbsp; {{ theme.actualizado }} &nbsp;&nbsp;&nbsp;&nbsp; {{ theme.actualizado|timesince }}
+              </p>
+              <a class="secondary-content"><i class="material-icons">grade</i></a>
+          </li> 
+        </ul>
+
+      </div>
       
     </li>
 

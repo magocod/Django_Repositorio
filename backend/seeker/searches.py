@@ -102,6 +102,12 @@ def Search_item_letter(request, slug):
 	#enviar data a la vista
 	return render(request, 'seeker/title/letters.html', {'object_list': items})
 
+#busqueda item -> id
+class Search_item_id(DetailView):
+    #modelo
+    model = Item
+    #template
+    template_name = 'seeker/item/detail.html'
 
 #busqueda de tema -> cadena de caracteres
 def Search_theme_letters(request):
@@ -135,9 +141,15 @@ def Search_theme_exact(request):
 
 	return render(request, 'seeker/theme/detail.html', {'theme': consulta})
 
+#busqueda de tema -> id
+class Search_theme_id(DetailView):
+    #modelo
+    model = Theme
+    #template
+    template_name = 'seeker/theme/detail.html'
 
 #busqueda de items -> autor
-def Search_author(request):
+def Search_author_letters(request):
 	#optener dato del request
 	q = request.GET.get('q', '')
 	#busqueda de items

@@ -10,10 +10,11 @@ from backend.seeker.views import  Title_seeker_base, Category_seeker_base, Autho
 #vistas busquedas por parametros
 from backend.seeker.searches import Search_item_letters, Search_item_letter, Search_item_exacts
 from backend.seeker.searches import Search_category_collections, Search_collection_exact, Search_collection_pk, Search_collection_items
-from backend.seeker.searches import Search_theme_letters, Search_theme_collections, Search_theme_exact, Search_author
+from backend.seeker.searches import Search_theme_letters, Search_theme_collections, Search_theme_exact, Search_author_letters
+from backend.seeker.searches import Search_item_id, Search_theme_id
 
 #vistas busquedas sin parametros
-from backend.seeker.views import Info_seeker, Recent_items, Item_seeker
+from backend.seeker.views import Info_seeker, Recent_items
 from backend.seeker.views import All_seeker, Records_seeker
 
 
@@ -54,18 +55,17 @@ urlpatterns = [
 
 	#autor
 	path('autor', Author_seeker_base.as_view(), name='author_base'),
-	path('autor/items', Author_seeker_base.as_view(), name='seeker_author'),
+	path('autor/items', Search_author_letters, name='author_letters'),
 
 
 	#autocompletado
 	path('recurso/busqueda', Search_item_exacts, name='item_exacts'),
 	path('coleccion/busqueda', Search_collection_exact, name='collection_exact'),
-	path('tematica/busqueda', Search_author, name='search_author'),
-
-	#sin clasificar ##########################################################
+	path('tematica/busqueda', Search_theme_exact, name='theme_exact'),
 
 	#detalles 
-	path('item/detalles/<int:pk>/', Item_seeker.as_view(), name='seeker_item'),
+	path('item/detalles/<int:pk>/', Search_item_id.as_view(), name='item_pk'),
+	path('tematica/detalles/<int:pk>/', Search_theme_id.as_view(), name='theme_pk'),
 	
 
 	

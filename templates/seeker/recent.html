@@ -18,19 +18,22 @@
         <div class="card-image">
           <img src="{% static 'images/reciente/recurso_digital-min.jpg' %}">
           
-          <a href="{% url 'seeker:seeker_item' item.id %}" class="btn-floating halfway-fab waves-effect waves-light red pulse">
+          <a href="{% url 'seeker:item_pk' item.id %}" class="btn-floating halfway-fab waves-effect waves-light red pulse">
             <i class="material-icons">add</i>
           </a>
 
         </div>
         <div class="card-content black">
-          <p class="white-text">{{ item.nombre }}
+          <p class="white-text">Nombre:{{ item.nombre }}
             <br>
+            registrado hace
             {{ item.publicado|timesince }}
           </p>
         </div>
       </div>
     </div>
+
+
 {% endfor %}
 
 </div>

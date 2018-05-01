@@ -51,14 +51,6 @@ class All_seeker(ListView):
     template_name = 'seeker/test/all.html'
 
 
-#detalles item
-class Item_seeker(DetailView):
-    #modelo
-    model = Item
-    #template
-    template_name = 'seeker/item/detail.html'
-
-
 #recientes
 class Recent_items(View):
 
@@ -101,6 +93,7 @@ class Theme_seeker_base(ListView):
     #modelos -> relacionados
     queryset = Theme.objects.order_by('id')
     context_object_name = 'object_list'
+    paginate_by = 20
     #plantilla
     template_name = 'seeker/theme/base.html'
 

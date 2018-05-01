@@ -1,4 +1,4 @@
-<!-- Cargas estilos y javascrit -->
+{# Cargas estilos y javascrit #}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -6,9 +6,14 @@
 <head>
   
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<meta name="description" content="unefa repositorio digital, coordinacion educacion a distancia">
+<meta name="author" content="unefa coordinacion educacion a distancia">
+
+<!-- PWA -->
+<meta name="theme-color" content="#4285f4">
 
 <!-- Bootstrap4 CSS -->
 <link href="{% static 'bootstrap4/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -26,9 +31,27 @@
 <link rel="stylesheet" href="{% static 'plugin/datatables/datatables.bootstrap4.min.css' %}">
 
 <link rel="shortcut icon" href="{%  static 'favicon.png' %}">
-<!-- CSS extras-->
+
+{# extra css #}
 {% block extracss %}
   
+{% endblock %}
+
+
+{# javascript asincronico #}
+{% block async %}
+
+<!-- service worker -->
+
+<script async type="text/javascript">
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+             .register('{% static 's_w_admin.js' %}')
+             .then(function() { console.log('Service Worker Registered'); });
+}
+</script>
+
 {% endblock %}
 
 <!-- titulo pagina -->
@@ -38,7 +61,7 @@
   
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
-<!-- bloques-->
+{# bloques añadir #}
 {% block content %}
   
 {% endblock %}
@@ -47,8 +70,6 @@
 <!-- javascripts -->
 <!-- jquery -->
 <script src="{% static 'plugin/jquery/jquery-3.2.1.min.js' %}"></script>
-<!-- jquery slim-->
-<script src="{% static 'plugin/jquery/jquery-3.2.1.slim.min.js' %}"></script>
 <!-- Popper-->
 <script src="{% static 'plugin/popper/popper.min.js' %}"></script>
 <!-- Bootstrap4 JS -->
@@ -64,9 +85,9 @@
 <script type="text/javascript" charset="utf8" src="{% static 'plugin/datatables/datatables.min.js' %}"></script> 
 <!-- Funciones js -->
 <script src="{% static 'plugin/functions/f-bootstrap.js' %}"></script>
-<script src="{% static 'plugin/functions/f-plugin.js' %}"></script>
 
-<!-- javascripts extras -->
+
+{# Extra javascript #}
 {% block extrajs %}
   
 {% endblock %}

@@ -12,7 +12,7 @@
 
 <nav class="black">
     <div class="nav-wrapper">
-        <form action="{% url 'seeker:search_author' %}" method="GET">
+        <form action="{% url 'seeker:author_letters' %}" method="GET">
             <div class="input-field">
               <input name="q" id="search" placeholder="Nombre" type="search" required>
                   <label class="label-icon" for="search"><i class="material-icons">search</i></label>
@@ -27,7 +27,7 @@
 
 {% if object_list %}
 
-<table class="highlight centered responsive-table">
+<table id="tabla-c" class="highlight centered responsive-table">
     
     <thead>
       <tr>
@@ -49,7 +49,6 @@
 </table>
 
 
-{% include 'includes/pagination-m.html' %}
 
 {% else %}
 <p>No se encontro registro</p>
@@ -57,5 +56,16 @@
 
 <br>
 <br>
+
+{% endblock %}
+
+{% block extrajs %}
+  
+<script type="text/javascript">
+
+$(document).ready( function () {
+    $('#tabla-c').DataTable();
+} );
+</script>
 
 {% endblock %}

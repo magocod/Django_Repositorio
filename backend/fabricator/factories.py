@@ -107,7 +107,7 @@ class Itemfactory(factory.django.DjangoModelFactory):
 	fecha = factory.fuzzy.FuzzyDate(datetime.date(2005, 1, 2), datetime.date(2018, 3, 16))
 	# desde + onahoraria ---> hasta + zonahoraria
 	#actualizado = factory.fuzzy.FuzzyDateTime(datetime.datetime(2018, 5, 12, tzinfo=UTC), datetime.datetime(2020, 2, 9, tzinfo=UTC))
-	actualizado = factory.fuzzy.FuzzyDate(datetime.date(2005, 1, 2), datetime.date(2018, 3, 16))
+	#actualizado = factory.fuzzy.FuzzyDate(datetime.date(2005, 1, 2), datetime.date(2018, 3, 16))
 
 	@factory.post_generation
 	def tags(self, create, extracted, **kwargs):

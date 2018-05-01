@@ -31,10 +31,13 @@ LOGOUT_REDIRECT_URL = reverse_lazy('login')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+#forzar ssl
+#SECURE_SSL_REDIRECT = True
+
 ALLOWED_HOSTS = []
 
 #Django Debug Toolbar - habilitar paneles
-#INTERNAL_IPS = ('127.0.0.1')
+INTERNAL_IPS = ('127.0.0.1')
 
 # Application definition
 
@@ -195,7 +198,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 
         'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 50
+    'PAGE_SIZE': 10
 
 }
 

@@ -33,9 +33,14 @@
           </ul>
           
           <br>
-          <a href="{% url 'seeker:theme_collections' tema.id %}" class="waves-effect waves-light btn black tooltipped" data-position="right" data-delay="50" data-tooltip="Listar">
+          <a href="{% url 'seeker:theme_collections' tema.id %}" class="waves-effect waves-light btn black tooltipped" data-position="right" data-tooltip="Listar">
             <i class="material-icons left">send</i>
               Colecciones
+          </a>
+
+          <a href="{% url 'seeker:theme_pk' tema.id %}" class="waves-effect waves-light btn black tooltipped" data-position="right" data-tooltip="Detalles">
+            <i class="material-icons left">add_box</i>
+              
           </a>
 
         </ul>
