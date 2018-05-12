@@ -77,13 +77,6 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'seeker:author_base' %}" class="waves-effect waves-red">
-                      <i class="material-icons">account_box</i>
-                      Autor
-                    </a>
-                </li>
-
-                <li>
                   <a href="{% url 'seeker:recent_items' %}" class="waves-effect waves-red">
                     <i class="material-icons">next_week</i>
                       Recientes
@@ -108,54 +101,6 @@
   </li>
 
   <li class="no-padding">
-
-      <ul class="collapsible collapsible-accordion">
-
-          <li class="bold">
-
-              <a class="collapsible-header indigo darken-4 waves-effect waves-red white-text text-white">
-                <i class="material-icons left white-text text-white">assignment_ind</i>Admin
-              </a>
-              
-              <div class="collapsible-body">
-                  
-                  <ul>
-                      {% if user.is_authenticated %}
-                      <li>
-                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red">
-                            <i class="material-icons">contact_mail</i>
-                            {{ user.username }}-> Admin v1
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'account:dashboard' %}" class="waves-effect waves-red">
-                            <i class="material-icons">contact_mail</i>
-                            {{ user.username }}-> Admin v2
-                        </a>
-                      </li>
-                      {% else %}
-                      <li>
-                        <a href="{% url 'admin:index' %}" class="waves-effect waves-red tooltipped" data-position="bottom" data-tooltip="Pruebas ingreso de data">
-                          <i class="material-icons">backspace</i>
-                              Version 1
-                        </a>
-                      </li>
-                      <li>
-                        <a href="{% url 'login' %}" class="waves-effect waves-red tooltipped" data-position="bottom" data-tooltip="Version Beta">
-                          <i class="material-icons">dashboard</i>
-                            Version 2
-                        </a>
-                      </li>
-                      {% endif %}
-                  </ul>
-              </div>
-
-          </li>
-      </ul>
-
-   </li>
-
-   <li class="no-padding">
           
         <ul class="collapsible collapsible-accordion">
             
