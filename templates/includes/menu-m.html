@@ -175,12 +175,16 @@
                       Data
                   </a>
               </li>
+              {% if user.is_authenticated %}
               <li>
                   <a href="{% url 'api:api_data_links' %}" class="waves-effect waves-red">
                     <i class="material-icons">dns</i>
                       Links
                   </a>
               </li>
+              {% else %}
+              <!---->
+              {% endif %}
                         
             </ul>
           </div>

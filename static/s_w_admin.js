@@ -65,15 +65,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     url: '/static/plugin/datatables/datatables.min.js',
-    revision: 'abcde111'
+    revision: 'abcde117'
   },
   {
     url: '/static/plugin/functions/f-bootstrap.js',
-    revision: 'abcde122'
+    revision: 'abcde125'
   },
   {
     url: '/static/favicon.png',
-    revision: 'abcde123'
+    revision: 'abcde124'
   }
   
 ]);

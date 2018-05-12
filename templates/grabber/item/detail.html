@@ -23,7 +23,11 @@
   <div class="card-body">
     <h5 class="card-title">{{ item.nombre }}</h5>
     <p class="card-text">{{ item.descripcion }}</p>
-    <a href="{% url 'grabber:item_update' item.id %}" class="btn btn-primary">Modificar</a>
+    <a href="{% url 'grabber:item_update' item.id %}" class="btn btn-primary">Modificar
+    </a>
+    <a href="{% url 'grabber:item_delete' item.id %}" class="btn btn-outline-danger">
+      Eliminar
+    </a>
   </div>
 </div>
 

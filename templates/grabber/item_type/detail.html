@@ -3,7 +3,7 @@
 {% block breadcrumb %}
 
   <li class="breadcrumb-item active">
-    tipo de item
+    tipo de Recurso
   </li>
 
   <li class="breadcrumb-item active">
@@ -23,7 +23,13 @@
   <div class="card-body">
     <h5 class="card-title">{{ item_type.nombre }}</h5>
     <p class="card-text">{{ item_type.descripcion }}</p>
-    <a href="{% url 'grabber:item_type_update' item_type.id %}" class="btn btn-primary">Modificar</a>
+    <a href="{% url 'grabber:item_type_update' item_type.id %}" class="btn btn-primary">
+    Modificar
+    </a>
+    <a href="{% url 'grabber:item_type_delete' item_type.id %}" class="btn btn-outline-danger">
+    Eliminar
+    </a>
+
   </div>
 </div>
 
@@ -31,7 +37,7 @@
 
 <div class="card">
   <div class="card-header">
-    Recursos digitales
+    Registros
   </div>
   <div class="card-body">
     <blockquote class="blockquote mb-0">
