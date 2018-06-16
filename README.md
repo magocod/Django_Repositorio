@@ -1,6 +1,6 @@
-## Repositorio UNEFA
+## UNEFA Repository
 
-> Repositorio digital, proyecto de pasantias UNEFA
+> Digital repository, UNEFA internship project
 
 ## FRONT-END
 
@@ -8,7 +8,7 @@
 * Materialize 1.0.0-beta -> http://materializecss.com/
 
 ```bash
-#Proxima version 
+#Next version
 
 Vuejs -> https://github.com/magocod/Vue_repositorio
 
@@ -21,13 +21,13 @@ Vuejs -> https://github.com/magocod/Vue_repositorio
 * Sqlite3 3.22.0 --> https://www.sqlite.org/index.html
 * Postgresql 10.3 --> https://www.postgresql.org/
 
-## Paquetes - Django
+## Packages - Django
 
 * django-cleanup==2.1.0
 * django-unused-media==0.1.11
 * django-debug-toolbar==1.9.1
 
-## Paquetes - Python
+## Packages - Python
 
 * factory-boy==2.10.0 
 
@@ -41,69 +41,68 @@ Vuejs -> https://github.com/magocod/Vue_repositorio
 
 * Workbox 3.1.0 --> https://developers.google.com/web/tools/workbox/ 
 
-## Directorios Estructura
+## Structure Directory
 -------------------
 
-      backend/             Procesamiento de informacion
-             /account/     Control de usuarios,perfiles,permisos
-             /api/         Intercambiar informacion JSON,XML
-             /fabricator/  Ingresar data de prueba
-             /grabber/     Formularios para ingresar data
-             /seeker/      Busquedas y filtrado
-             /storage/     Modelos y logica de negocio
-      kernel/              Configuracion general
-      static/              Archivos estaticos
-      templates/           Codigo Html
+      backend/             Information processing
+             /account/     User control, profiles, permissions
+             /api/         Exchange JSON, XML information
+             /fabricator/  Enter test data
+             /grabber/     Forms to enter data
+             /seeker/      Search and filtering
+             /storage/     Models and business logic
+      kernel/              General page configuration
+      static/              Static files
+      templates/           HTML code
      
-## instrucciones
+## instructions
 
-instalar entorno virtual python e instalar librerias con pip
+install python virtual environment and install libraries with pip
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Migrar la base de datos
+Migrate the database
 
 ```bash
 python manage.py migrate
 ```
 
-Crear Usuario
+Create User
 
 ```bash
 python manage.py createsuperuser (nombre/email/contraseña)
 ```
 
-Ingresar data de prueba con fabricas de modelos 
+Enter test data with model factories 
 
 ```bash
 python manage.py shell
 ```
 
-importar fabricas de modelos
+Import model factories
 
 ```bash
 from backend.fabricator.seeders import seederv2
 s=seederv2
 ```
 
-ingresar cantidades (parametros numericos) -> backend/fabricator/seeders.py
+Enter quantities (numerical parameters) -> backend / fabricator / seeders.py
 
 ```bash
 s.seed_1(t,ti) t=temas, ti=tipos de items 
 s.seed_2(t,i,cl,ct) t=tags, i=items, cl=colecciones, ct=categorias
 ```
 
-Ejecutar servidor de desarrollo
+Run development server
 
 ```bash
 python manage.py runserver
 ```
 
-Ingresar a la direccion
+Enter the address
 
 ```bash
 http://localhost:8000
 ```
-
