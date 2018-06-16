@@ -72,7 +72,7 @@ python manage.py migrate
 Create User
 
 ```bash
-python manage.py createsuperuser (nombre/email/contraseña)
+python manage.py createsuperuser (name / email / password)
 ```
 
 Enter test data with model factories 
@@ -91,8 +91,8 @@ s=seederv2
 Enter quantities (numerical parameters) -> backend / fabricator / seeders.py
 
 ```bash
-s.seed_1(t,ti) t=temas, ti=tipos de items 
-s.seed_2(t,i,cl,ct) t=tags, i=items, cl=colecciones, ct=categorias
+s.seed_1(t,ti) t=themes, ti=types of items 
+s.seed_2(t,i,cl,ct) t=tags, i=items, cl=collections, ct=categories
 ```
 
 Run development server
