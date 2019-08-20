@@ -10,17 +10,16 @@ from django.db import transaction
 
 # local Django
 from apps.collection.models import Collection
-from apps.collection.serializers import CollectionSerializer, CollectionUpdateSerializer
+from apps.collection.serializers import CollectionSerializer, CollectionUpdateSerializer, CollectionHeavySerializer
 
 class VCollectionList(APIView):
   permission_classes = (IsAdminUser,)
-  serializer = CollectionSerializer
 
   def get(self, request, format=None):
     # consulta
     listr = Collection.objects.all()
     # respuesta
-    response = self.serializer(listr, many=True)
+    response = CollectionHeavySerializer(listr, many=True)
     return Response(response.data, status=status.HTTP_200_OK)
 
   @transaction.atomic
@@ -28,16 +27,19 @@ class VCollectionList(APIView):
     # return Response(request.data, status=status.HTTP_201_CREATED)
     response = CollectionUpdateSerializer(data=request.data)
     if response.is_valid():
-      response.save()
-      return Response(response.data, status=status.HTTP_201_CREATED)
-
+      result = response.save()
+      if type(result) == str:
+        return Response(result, status=status.HTTP_400_BAD_REQUEST)
+      else:
+        res = CollectionHeavySerializer(result)
+        return Response(res.data, status=status.HTTP_201_CREATED)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class VCollectionDetail(APIView):
   permission_classes = (IsAdminUser,)
-  serializer = CollectionSerializer
+  serializer = CollectionHeavySerializer
 
   def get_object(self, pk):
     try:
@@ -46,17 +48,19 @@ class VCollectionDetail(APIView):
       raise Http404
 
   def get(self, request, pk, format=None):
-    collection = self.get_object(pk)
-    response = self.serializer(collection)
+    response = self.serializer(self.get_object(pk))
     return Response(response.data, status=status.HTTP_200_OK)
 
   @transaction.atomic
   def put(self, request, pk, format=None):
-    collection = self.get_object(pk)
-    response = CollectionUpdateSerializer(collection, data=request.data)
+    response = CollectionSerializer(self.get_object(pk), data=request.data)
     if response.is_valid():
-      response.save()
-      return Response(response.data, status=status.HTTP_200_OK)
+      result = response.save()
+      if type(result) == str:
+        return Response(result, status=status.HTTP_400_BAD_REQUEST)
+      else:
+        res = self.serializer(result)
+        return Response(res.data, status=status.HTTP_201_CREATED)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 

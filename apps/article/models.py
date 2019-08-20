@@ -8,23 +8,9 @@ from django.utils import timezone
 # local Django
 from apps.collection.models import Collection
 from apps.tag.models import Tag
-from apps.theme.models import Theme
-
-class Specification(models.Model):
-  name = models.CharField(max_length=100, unique=True)
-  description = models.TextField()
-  platform = models.CharField(max_length=100, null=True, blank=True)
-  installation = models.CharField(max_length=100, null=True, blank=True)
-  extension = models.CharField(max_length=100, null=True, blank=True)
-  meta = models.TextField(null=True)
-  timestamp = models.DateTimeField(auto_now_add=True)
-  updated = models.DateTimeField(default = timezone.now)
-
-  def __str__(self):
-    return self.name
 
 class Article(models.Model):
-  name = models.CharField(max_length=100)
+  name = models.CharField(max_length=100, unique=True)
   description = models.TextField()
   identifier = models.CharField(max_length=255, unique=True)
   author = models.CharField(max_length=100)
@@ -34,8 +20,6 @@ class Article(models.Model):
   timestamp = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(default = timezone.now)
   # relaciones
-  theme = models.ForeignKey(Theme, related_name='theme', on_delete=models.PROTECT)
-  specification = models.ForeignKey(Specification, related_name='specification', on_delete=models.PROTECT)
   tags = models.ManyToManyField(Tag, related_name='tags')
   collections = models.ManyToManyField(Collection, related_name='collections')
 
@@ -54,7 +38,25 @@ class Article(models.Model):
       + str(instance.theme)
       + '/'
       + str(instance.specification)
-      + "/"
+      + '/'
       + str(instance.identifier), filename)
 
   file = models.FileField(upload_to= file_directory, null=True)
+
+class Specification(models.Model):
+  name = models.CharField(max_length=100, unique=True)
+  description = models.TextField()
+  platform = models.CharField(max_length=100, null=True, blank=True)
+  installation = models.CharField(max_length=100, null=True, blank=True)
+  extension = models.CharField(max_length=100, null=True, blank=True)
+  meta = models.TextField(null=True)
+  timestamp = models.DateTimeField(auto_now_add=True)
+  updated = models.DateTimeField(default = timezone.now)
+  article = models.ForeignKey(
+    Article,
+    related_name='article_specification',
+    on_delete=models.PROTECT,
+  )
+
+  def __str__(self):
+    return self.name

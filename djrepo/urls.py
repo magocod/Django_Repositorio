@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 # urls api
+from apps.article.urls import urlpatterns as apiarticle
 from apps.category.urls import urlpatterns as apicategory
 from apps.collection.urls import urlpatterns as apicollection
 from apps.tag.urls import urlpatterns as apitag
@@ -24,7 +25,7 @@ from apps.theme.urls import urlpatterns as apitheme
 from apps.user.urls import urlpatterns as apiuser
 
 # concatenar rutas
-apiurls = apicategory + apicollection + apitheme + apitag + apiuser
+apiurls = apiarticle + apicategory + apicollection + apitheme + apitag + apiuser
 
 urlpatterns = [
 	# web
