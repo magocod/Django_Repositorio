@@ -46,9 +46,4 @@ class ListTest(TestCase):
 
   def test_get_all_authenticated(self):
     response = self.noauthclient.get('/api/tags/')
-    response_data = json.loads(response.content)
-    serializer = TagSerializer(
-      Tag.objects.all(),
-      many= True,
-    )
     self.assertEqual(response.status_code, 401)

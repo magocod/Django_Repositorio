@@ -46,5 +46,4 @@ class ListTest(TestCase):
 
   def test_get_all_authenticated(self):
     response = self.noauthclient.get('/api/categories/')
-    response_data = json.loads(response.content)
     self.assertEqual(response.status_code, 401)
