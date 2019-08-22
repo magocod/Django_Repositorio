@@ -44,6 +44,20 @@ class CRUDTest(TestCase):
     )
     self.assertEqual(response.status_code, 201)
     self.assertEqual(serializer.data, response_data)
+
+  def test_create_error_params(self):
+    data = {
+      'names': 'test create',
+    }
+    response = self.client.post('/api/tags/', data)
+    self.assertEqual(response.status_code, 400)
+
+  def test_create_error_duplicate(self):
+    data = {
+      'name': 'test',
+    }
+    response = self.client.post('/api/tags/', data)
+    self.assertEqual(response.status_code, 400)
   
   def test_get_tag(self):
     # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
