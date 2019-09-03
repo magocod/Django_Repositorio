@@ -5,11 +5,14 @@ from rest_framework import status
 from rest_framework.permissions import IsAdminUser
 
 # Django
+from django.db import transaction
 from django.http import Http404
 
 # local Django
 from apps.article.models import Article
-from apps.article.serializers.article import ArticleSerializer, ArticleHeavySerializer
+from apps.collection.models import Collection
+from apps.tag.models import Tag
+from apps.article.serializers.article import ArticleSerializer, ArticleHeavySerializer, ArticleRelationSerializer
 
 class VArticleList(APIView):
   permission_classes = (IsAdminUser,)
@@ -70,3 +73,50 @@ class VArticleDetail(APIView):
     article = self.get_object(pk)
     article.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+class VArticleRelation(APIView):
+  """
+  edicion relaciones muchos a muchoa
+  """
+  permission_classes = (IsAdminUser,)
+  serializer = ArticleRelationSerializer
+
+  def get_object(self, pk):
+    try:
+      return Article.objects.get(pk=pk)
+    except Article.DoesNotExist:
+      raise Http404
+
+  @transaction.atomic
+  def put(self, request, pk, format=None):
+    response = self.serializer(data=request.data)
+    if response.is_valid():
+      result = response.save()
+      res = ArticleHeavySerializer(
+        self.get_object(pk)
+      )
+      return Response(res.data, status=status.HTTP_201_CREATED)
+    else:
+      return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+
+  @transaction.atomic
+  def delete(self, request, pk, format=None):
+    response = self.serializer(data=request.data)
+    if response.is_valid():
+
+      article = self.get_object(pk)
+
+      for collection_id in response.validated_data['collections']:
+        collection = Collection.objects.get(id= collection_id)
+        article.collections.remove(collection)
+
+      for tag_id in response.validated_data['tags']:
+        tag = Tag.objects.get(id= tag_id)
+        article.tags.remove(tag)
+
+      res = ArticleHeavySerializer(
+        self.get_object(pk)
+      )
+      return Response(res.data, status=status.HTTP_201_CREATED)
+    else:
+      return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)

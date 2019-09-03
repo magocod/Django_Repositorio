@@ -44,7 +44,7 @@ class Article(models.Model):
   file = models.FileField(upload_to= file_directory, null=True)
 
 class Specification(models.Model):
-  name = models.CharField(max_length=100, unique=True)
+  # name = models.CharField(max_length=100, unique=True)
   description = models.TextField()
   platform = models.CharField(max_length=100, null=True, blank=True)
   installation = models.CharField(max_length=100, null=True, blank=True)
@@ -52,10 +52,10 @@ class Specification(models.Model):
   meta = models.TextField(null=True)
   timestamp = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(default = timezone.now)
-  article = models.ForeignKey(
+  article = models.OneToOneField(
     Article,
     related_name='article_specification',
-    on_delete=models.PROTECT,
+    on_delete=models.CASCADE,
   )
 
   def __str__(self):

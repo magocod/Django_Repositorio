@@ -13,6 +13,6 @@ class SpecificationSerializer(serializers.ModelSerializer):
   class Meta:
     model = Specification
     fields = (
-      'id', 'name', 'description', 'timestamp', 'updated',
+      'id', 'description', 'timestamp', 'updated',
       'platform', 'installation', 'extension', 'meta', 'article_id',
     )
