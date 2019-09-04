@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
+from rest_framework.pagination import PageNumberPagination
 
 # Django
 from django.http import Http404
@@ -11,16 +12,17 @@ from django.http import Http404
 from apps.category.models import Category
 from apps.category.serializers import CategorySerializer
 
-class VCategoryList(APIView):
+class VCategoryList(APIView, PageNumberPagination):
   permission_classes = (IsAdminUser,)
   serializer = CategorySerializer
 
   def get(self, request, format=None):
     # consulta
-    listr = Category.objects.all()
+    listr = Category.objects.all().order_by('id')
     # respuesta
-    response = self.serializer(listr, many=True)
-    return Response(response.data, status=status.HTTP_200_OK)
+    results = self.paginate_queryset(listr, request)
+    serializer = self.serializer(results, many=True)
+    return self.get_paginated_response(serializer.data)
 
   def post(self, request, format=None):
     response = self.serializer(data=request.data)

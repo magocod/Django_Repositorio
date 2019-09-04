@@ -18,6 +18,8 @@ from apps.tag.serializers import TagSerializer
 from apps.theme.serializers import ThemeSerializer
 
 class CollectionSerializer(serializers.ModelSerializer):
+  theme_id = serializers.IntegerField(read_only=False),
+
   class Meta:
     model = Collection
     fields = ('id', 'name', 'theme_id', 'description', 'timestamp', 'updated')
@@ -34,11 +36,8 @@ class CollectionHeavySerializer(serializers.ModelSerializer):
       'theme', 'categories', 'tags',
     )
 
-class CollectionUpdateSerializer(serializers.Serializer):
-  name = serializers.CharField(max_length=100)
-  description = serializers.CharField(max_length=255)
-  updated = serializers.DateTimeField()
-  theme = serializers.IntegerField()
+class CollectionRelationSerializer(serializers.Serializer):
+  collection_id = serializers.IntegerField()
   categories = serializers.ListField(
     child=serializers.IntegerField(),
   )
@@ -48,14 +47,8 @@ class CollectionUpdateSerializer(serializers.Serializer):
 
   def create(self, validated_data):
     try:
-      # return validated_data
-      theme = Theme.objects.get(id= validated_data['theme'])
-      collection = Collection.objects.create(
-        name= validated_data['name'],
-        description= validated_data['description'],
-        updated= validated_data['updated'],
-        theme_id= theme.id,
-      )
+
+      collection = Collection.objects.get(id= validated_data['collection_id'])
 
       for category_id in validated_data['categories']:
         category = Category.objects.get(id= category_id)
@@ -68,7 +61,7 @@ class CollectionUpdateSerializer(serializers.Serializer):
       return collection
     except IntegrityError as e:
       return str(e)
-    except Theme.DoesNotExist as e:
+    except Collection.DoesNotExist as e:
       return str(e)
     except Category.DoesNotExist as e:
       return str(e)
