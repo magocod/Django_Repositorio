@@ -21,7 +21,7 @@ class Article(models.Model):
   updated = models.DateTimeField(default = timezone.now)
   # relaciones
   tags = models.ManyToManyField(Tag, related_name='tags')
-  collections = models.ManyToManyField(Collection, related_name='collections')
+  collections = models.ManyToManyField(Collection, related_name='article_collections')
 
   def __str__(self):
     return self.name

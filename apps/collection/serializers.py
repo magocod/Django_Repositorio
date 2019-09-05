@@ -18,7 +18,7 @@ from apps.tag.serializers import TagSerializer
 from apps.theme.serializers import ThemeSerializer
 
 class CollectionSerializer(serializers.ModelSerializer):
-  theme_id = serializers.IntegerField(read_only=False),
+  theme_id = serializers.IntegerField(read_only=False)
 
   class Meta:
     model = Collection
@@ -69,3 +69,21 @@ class CollectionRelationSerializer(serializers.Serializer):
       return str(e)
     except Exception as e:
       return str(e)
+
+class CollectionSlugSerializer(serializers.ModelSerializer):
+  theme = ThemeSerializer()
+  categories = CategorySerializer(many=True)
+  tags = TagSerializer(many=True)
+
+  article_collections = serializers.SlugRelatedField(
+    many=True,
+    read_only=True,
+    slug_field='name'
+  )
+
+  class Meta:
+    model = Collection
+    fields = (
+      'id', 'name', 'description', 'timestamp', 'updated',
+      'theme', 'categories', 'tags', 'article_collections',
+    )

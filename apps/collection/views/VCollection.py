@@ -3,27 +3,30 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
+from rest_framework.pagination import PageNumberPagination
 
 # Django
 from django.http import Http404
 from django.db import transaction
 
 # local Django
+from apps.category.models import Category
 from apps.collection.models import Collection
+from apps.tag.models import Tag
 from apps.collection.serializers import CollectionSerializer, CollectionHeavySerializer, CollectionRelationSerializer
 
-class VCollectionList(APIView):
+class VCollectionList(APIView, PageNumberPagination):
   permission_classes = (IsAdminUser,)
   serializer = CollectionSerializer
 
   def get(self, request, format=None):
     # consulta
-    listr = Collection.objects.all()
+    listr = Collection.objects.all().order_by('id')
     # respuesta
-    response = CollectionHeavySerializer(listr, many=True)
-    return Response(response.data, status=status.HTTP_200_OK)
+    results = self.paginate_queryset(listr, request)
+    serializer = CollectionHeavySerializer(results, many=True)
+    return self.get_paginated_response(serializer.data)
 
-  @transaction.atomic
   def post(self, request, format=None):
     # return Response(request.data, status=status.HTTP_201_CREATED)
     response = self.serializer(data=request.data)
@@ -100,12 +103,12 @@ class VCollectionRelation(APIView):
       collection = self.get_object(pk)
 
       for category_id in response.validated_data['categories']:
-        collection = Collection.objects.get(id= category_id)
-        article.collections.remove(collection)
+        category = Category.objects.get(id= category_id)
+        collection.categories.remove(category)
 
       for tag_id in response.validated_data['tags']:
         tag = Tag.objects.get(id= tag_id)
-        article.tags.remove(tag)
+        collection.tags.remove(tag)
 
       res = CollectionHeavySerializer(
         self.get_object(pk)
