@@ -1,12 +1,16 @@
+# standard library
 import json
 
+# third-party
+from rest_framework.test import APIClient
+from rest_framework.authtoken.models import Token
+
+# Django
 from django.test import Client, TestCase
 from django.urls import resolve, reverse
 from django.contrib.auth.models import User
 
-from rest_framework.test import APIClient
-from rest_framework.authtoken.models import Token
-
+# local Django
 from apps.tag.models import Tag
 # from apps.tag.views import VTag
 from apps.tag.serializers import TagSerializer

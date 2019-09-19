@@ -1,3 +1,6 @@
+# standard library
+import json
+
 # third-party
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -6,7 +9,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.pagination import PageNumberPagination
 
 # Django
-from django.http import Http404
+from django.http import Http404, HttpResponse, JsonResponse
 
 # local Django
 from apps.category.models import Category
@@ -23,3 +26,7 @@ class VCategorySlugList(APIView, PageNumberPagination):
     results = self.paginate_queryset(listr, request)
     serializer = self.serializer(results, many=True)
     return self.get_paginated_response(serializer.data)
+
+  def post(self, request, format=None):
+    listr = Category.objects.all().order_by('id').values_list()
+    return JsonResponse({'foo': 'bar'}, content_type='application/json')

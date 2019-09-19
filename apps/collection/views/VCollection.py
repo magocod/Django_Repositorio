@@ -52,7 +52,6 @@ class VCollectionDetail(APIView):
     response = self.serializer(self.get_object(pk))
     return Response(response.data, status=status.HTTP_200_OK)
 
-  @transaction.atomic
   def put(self, request, pk, format=None):
     response = CollectionSerializer(self.get_object(pk), data=request.data)
     if response.is_valid():
@@ -61,7 +60,7 @@ class VCollectionDetail(APIView):
         return Response(result, status=status.HTTP_400_BAD_REQUEST)
       else:
         res = self.serializer(result)
-        return Response(res.data, status=status.HTTP_201_CREATED)
+        return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -91,7 +90,7 @@ class VCollectionRelation(APIView):
       res = CollectionHeavySerializer(
         self.get_object(pk)
       )
-      return Response(res.data, status=status.HTTP_201_CREATED)
+      return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -113,6 +112,6 @@ class VCollectionRelation(APIView):
       res = CollectionHeavySerializer(
         self.get_object(pk)
       )
-      return Response(res.data, status=status.HTTP_201_CREATED)
+      return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)

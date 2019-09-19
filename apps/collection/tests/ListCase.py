@@ -6,13 +6,13 @@ from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
 
 # Django
-from django.test import Client, TestCase
-from django.urls import resolve, reverse
+from django.test import TestCase
 from django.contrib.auth.models import User
 
 # local Django
-from apps.category.models import Category
-from apps.category.serializers import CategorySerializer
+from apps.collection.models import Collection
+from apps.theme.models import Theme
+from apps.collection.serializers import CollectionHeavySerializer
 
 USERDATA = ('usertest', 'user@test.com', '123')
 
@@ -36,18 +36,24 @@ class ListTest(TestCase):
     self.noauthclient = APIClient()
     self.noauthclient.credentials(HTTP_AUTHORIZATION= 'Token ' + '123')
     # data
-    self.category = Category.objects.create(name= 'test')
+    self.theme = Theme.objects.create(name= 'TEST', description= ' test description')
+    self.collection = Collection.objects.create(
+      name= 'TEST',
+      description= '---',
+      updated= '2019-09-19 10:00:00',
+      theme_id= 1,
+    )
 
   def test_get_all(self):
-    response = self.client.get('/api/categories/')
+    response = self.client.get('/api/collections/')
     response_data = json.loads(response.content)
-    serializer = CategorySerializer(
-      Category.objects.all(),
+    serializer = CollectionHeavySerializer(
+      Collection.objects.all(),
       many= True,
     )
     self.assertEqual(response.status_code, 200)
     # self.assertEqual(serializer.data, response_data)
 
   def test_get_all_authenticated(self):
-    response = self.noauthclient.get('/api/categories/')
+    response = self.noauthclient.get('/api/collections/')
     self.assertEqual(response.status_code, 401)

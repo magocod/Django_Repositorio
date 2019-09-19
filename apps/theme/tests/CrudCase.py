@@ -1,11 +1,15 @@
+# standard library
 import json
 
-from django.test import Client, TestCase
-from django.contrib.auth.models import User
-
+# third-party
 from rest_framework.test import APIClient
 from rest_framework.authtoken.models import Token
 
+# Django
+from django.test import Client, TestCase
+from django.contrib.auth.models import User
+
+# local Django
 from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
 

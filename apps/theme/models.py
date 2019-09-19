@@ -9,4 +9,4 @@ class Theme(models.Model):
   updated = models.DateTimeField(default = timezone.now)
 
   def __str__(self):
-      return self.name
+    return self.name
