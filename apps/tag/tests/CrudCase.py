@@ -3,39 +3,27 @@ import json
 
 # third-party
 from rest_framework.test import APIClient
-from rest_framework.authtoken.models import Token
 
 # Django
-from django.test import Client, TestCase
-from django.urls import resolve, reverse
-from django.contrib.auth.models import User
+from django.test import TestCase
+# from django.urls import resolve, reverse
 
 # local Django
 from apps.tag.models import Tag
-# from apps.tag.views import VTag
 from apps.tag.serializers import TagSerializer
-
-USERDATA = ('usertest', 'user@test.com', '123')
+from apps.tests.auth import create_user
+from apps.tests.db import DBpopulate
 
 class CRUDTest(TestCase):
 
   def setUp(self):
     # user an token
-    user = User.objects.create_user(
-      USERDATA[0],
-      USERDATA[1],
-      USERDATA[2],
-    )
-    # admin
-    user.is_staff = True
-    user.save()             
-    Token.objects.get_or_create(user= user)
-    # auth token 
-    token = Token.objects.get(user__username= USERDATA[0])
+    auth = create_user(True)
     self.client = APIClient()
-    self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + token.key)
+    self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + auth['token'].key)
     # data
-    self.tag = Tag.objects.create(name= 'test')
+    # self.tag = Tag.objects.create(name= 'test')
+    DBpopulate(tag= 1)
 
   def test_create_tag(self):
     data = {
@@ -51,14 +39,14 @@ class CRUDTest(TestCase):
 
   def test_create_error_params(self):
     data = {
-      'names': 'test create',
+      'names': 'NEW_TAG',
     }
     response = self.client.post('/api/tags/', data)
     self.assertEqual(response.status_code, 400)
 
   def test_create_error_duplicate(self):
     data = {
-      'name': 'test',
+      'name': 'TEST_TAG',
     }
     response = self.client.post('/api/tags/', data)
     self.assertEqual(response.status_code, 400)
@@ -66,28 +54,29 @@ class CRUDTest(TestCase):
   def test_get_tag(self):
     # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
     # response = self.client.get(url)
-    response  = self.client.get('/api/tag/' + str(self.tag.pk) + '/')
+    response  = self.client.get('/api/tag/' + str(1) + '/')
     serializer = TagSerializer(
-      Tag.objects.get(id= self.tag.pk)
+      Tag.objects.get(id= 1)
     )
     self.assertEqual(response.status_code, 200)
     self.assertEqual(serializer.data, response.data)
   
   def test_update_tag(self):
-    oldvalues = TagSerializer(self.tag)
+    tag = Tag.objects.get(id= 1)
+    oldvalues = TagSerializer(tag)
     newdata = {
       'name': 'YSON2',
     }
     # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
     newvalues = TagSerializer(
-      Tag.objects.get(id= self.tag.pk)
+      Tag.objects.get(id= 1)
     )
     # response = self.client.put(url, newdata)
-    response = self.client.put('/api/tag/' + str(self.tag.pk) + '/', newdata)
+    response = self.client.put('/api/tag/' + str(1) + '/', newdata)
     self.assertEqual(response.status_code, 200)
 
   def test_delete_tag(self):
     # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
     # response = self.client.delete(url)
-    response = self.client.delete('/api/tag/' + str(self.tag.pk) + '/')
+    response = self.client.delete('/api/tag/' + str(1) + '/')
     self.assertEqual(response.status_code, 204)

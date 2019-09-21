@@ -1,38 +1,31 @@
-from django.test import Client, TestCase
-from django.urls import resolve, reverse
-from django.contrib.auth.models import User
+# standard library
 import json
 
+# third-party
 from rest_framework.test import APIClient
-from rest_framework.authtoken.models import Token
 
+# Django
+from django.test import TestCase
+# from django.urls import resolve, reverse
+
+# local Django
 from apps.tag.models import Tag
-# from apps.tag.views import VTag
 from apps.tag.serializers import TagSerializer
-
-USERDATA = ('usertest', 'user@test.com', '123')
+from apps.tests.auth import create_user
+from apps.tests.db import DBpopulate
 
 class ListTest(TestCase):
 
   def setUp(self):
     # user an token
-    user = User.objects.create_user(
-      USERDATA[0],
-      USERDATA[1],
-      USERDATA[2],
-    )
-    user.is_staff = True
-    user.save()             
-    Token.objects.get_or_create(user= user)
-    # auth token 
-    token = Token.objects.get(user__username= USERDATA[0])
+    auth = create_user(True)
     self.client = APIClient()
-    self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + token.key)
+    self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + auth['token'].key)
     # no authenticated
     self.noauthclient = APIClient()
     self.noauthclient.credentials(HTTP_AUTHORIZATION= 'Token ' + '123')
     # data
-    self.tag = Tag.objects.create(name= 'test')
+    DBpopulate(tag= 1)
 
   def test_get_all(self):
     response = self.client.get('/api/tags/')

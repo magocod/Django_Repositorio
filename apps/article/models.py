@@ -16,7 +16,7 @@ class Article(models.Model):
   author = models.CharField(max_length=100)
   license = models.CharField(max_length=100)
   url = models.URLField(max_length=255, null=True)
-  created = models.DateField() 
+  created = models.DateField()
   timestamp = models.DateTimeField(auto_now_add=True)
   updated = models.DateTimeField(default = timezone.now)
   # relaciones

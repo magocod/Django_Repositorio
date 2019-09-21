@@ -1,20 +1,21 @@
 # standard library
 import json
 
-# standard library
+# third-party
 from rest_framework.test import APIClient
 
 # Django
 from django.test import TestCase
-# from django.urls import resolve, reverse
 
 # local Django
-from apps.theme.models import Theme
-from apps.theme.serializers import ThemeSerializer
+from apps.article.models import Article
+from apps.article.serializers.article import ArticleHeavySerializer
 from apps.tests.auth import create_user
 from apps.tests.db import DBpopulate
 
 class ListTest(TestCase):
+
+  serializer = ArticleHeavySerializer
 
   def setUp(self):
     # user an token
@@ -25,19 +26,18 @@ class ListTest(TestCase):
     self.noauthclient = APIClient()
     self.noauthclient.credentials(HTTP_AUTHORIZATION= 'Token ' + '123')
     # data
-    # self.theme = Theme.objects.create(name= 'test', description= ' test description')
-    DBpopulate(theme= 1)
+    DBpopulate(article= 1)
 
   def test_get_all(self):
-    response = self.client.get('/api/themes/')
+    response = self.client.get('/api/articles/')
     response_data = json.loads(response.content)
-    serializer = ThemeSerializer(
-      Theme.objects.all(),
+    serializer = self.serializer(
+      Article.objects.all(),
       many= True,
     )
     self.assertEqual(response.status_code, 200)
     # self.assertEqual(serializer.data, response_data)
 
   def test_get_all_authenticated(self):
-    response = self.noauthclient.get('/api/tags/')
+    response = self.noauthclient.get('/api/articles/')
     self.assertEqual(response.status_code, 401)

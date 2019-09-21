@@ -54,7 +54,7 @@ class VArticleDetail(APIView):
 
   def get(self, request, pk, format=None):
     article = self.get_object(pk)
-    response = self.serializer(article)
+    response = ArticleHeavySerializer(article)
     return Response(response.data, status=status.HTTP_200_OK)
 
   def put(self, request, pk, format=None):
@@ -63,9 +63,9 @@ class VArticleDetail(APIView):
     if response.is_valid():
       result = response.save()
       res = ArticleHeavySerializer(
-        self.get_object(response.data['id'])
+        self.get_object(pk)
       )
-      return Response(res.data, status=status.HTTP_201_CREATED)
+      return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -95,7 +95,7 @@ class VArticleRelation(APIView):
       res = ArticleHeavySerializer(
         self.get_object(pk)
       )
-      return Response(res.data, status=status.HTTP_201_CREATED)
+      return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -117,6 +117,6 @@ class VArticleRelation(APIView):
       res = ArticleHeavySerializer(
         self.get_object(pk)
       )
-      return Response(res.data, status=status.HTTP_201_CREATED)
+      return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
