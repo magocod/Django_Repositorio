@@ -1,3 +1,7 @@
+"""
+Serializadores
+"""
+
 # third-party
 from rest_framework import serializers
 
@@ -5,6 +9,9 @@ from rest_framework import serializers
 from apps.tag.models import Tag
 
 class TagSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Tag
-    fields = ('id', 'name', 'timestamp', 'updated')
+    """
+    Serializador basico tag
+    """
+    class Meta:
+        model = Tag
+        fields = ('id', 'name', 'timestamp', 'updated')

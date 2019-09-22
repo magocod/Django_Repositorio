@@ -1,3 +1,7 @@
+"""
+Fabrica de modelos TAG
+"""
+
 # third-party
 import factory
 
@@ -5,7 +9,7 @@ import factory
 from apps.tag.models import Tag
 
 class TagFactory(factory.django.DjangoModelFactory):
-	name = factory.Sequence(lambda n: 'tag n:{}'.format(n))
+    name = factory.Sequence(lambda n: 'tag n:{}'.format(n))
 
-  class Meta:
-    model = Tag
+    class Meta:
+        model = Tag

@@ -18,29 +18,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ENV = None
 
-with open(os.path.join(BASE_DIR, 'config.json')) as json_file: 
-  ENV = json.load(json_file)
-
-#####################################################################
-# APP CONFIG
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-#####################################################################
+with open(os.path.join(BASE_DIR, 'config.json')) as json_file:
+    ENV = json.load(json_file)
 
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING keep the secret key used in production secret
 SECRET_KEY = ENV['APP']['SECRET_KEY']
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING don't run with debug turned on in production
 DEBUG = ENV['APP']['DEBUG']
 
 ALLOWED_HOSTS = ENV['APP']['ALLOWED_HOSTS']
 
-#####################################################################
-
-#####################################################################
-# APPLICATION DEFINITION
-#####################################################################
+"""
+APPLICATION DEFINITION
+"""
 
 INSTALLED_APPS = [
     # django
@@ -125,12 +117,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-#####################################################################
-
-#####################################################################
-# API REST CONFIG
-#####################################################################
+"""
+API REST CONFIG
+"""
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
@@ -171,12 +160,10 @@ REST_FRAMEWORK = {
     )
 }
 
-#####################################################################
-
-#####################################################################
-# DATABASE CONFIG
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-#####################################################################
+"""
+DATABASE CONFIG
+https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+"""
 
 DATABASES = {
     'default': {
@@ -185,19 +172,17 @@ DATABASES = {
     },
 }
 
-#####################################################################
-
-#####################################################################
-# MEDIA && STATIC FILES
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-#####################################################################
+"""
+MEDIA && STATIC FILES
+https://docs.djangoproject.com/en/2.2/howto/static-files/
+"""
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-   os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # Media files (JPG, PNG, PDF, ...)
@@ -207,5 +192,3 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 # ruta base directorio de archivos
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
-#####################################################################
