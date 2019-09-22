@@ -1,3 +1,7 @@
+"""
+Fabrica de modelos category
+"""
+
 # third-party
 import factory
 
@@ -5,7 +9,13 @@ import factory
 from apps.category.models import Category
 
 class CategoryFactory(factory.django.DjangoModelFactory):
-	name = factory.Sequence(lambda n: 'category n:{}'.format(n))
+    """
+    Fabrica
+    """
+    name = factory.Sequence(lambda n: 'category n:{}'.format(n))
 
-  class Meta:
-    model = Category
+    class Meta:
+        """
+        Metadatos
+        """
+        model = Category

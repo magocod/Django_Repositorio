@@ -12,7 +12,7 @@ from django.test import TestCase
 from apps.tag.models import Tag
 from apps.tag.serializers import TagSerializer
 from apps.tests.auth import create_user
-from apps.tests.db import DBpopulate
+from apps.tests.db import db_populate
 
 class CRUDTest(TestCase):
 
@@ -23,7 +23,7 @@ class CRUDTest(TestCase):
     self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + auth['token'].key)
     # data
     # self.tag = Tag.objects.create(name= 'test')
-    DBpopulate(tag= 1)
+    db_populate(tag= 1)
 
   def test_create_tag(self):
     data = {
