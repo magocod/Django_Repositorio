@@ -2,17 +2,20 @@
 from django.contrib.auth.models import User, Group
 
 # third-party
+from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAdminUser
-from rest_framework import status
+
+# Django
+from django.http import Http404
 
 # local Django
-from apps.user.serializers import UserSerializer, UserRegisterSerializer
+from apps.user.serializers import UserSerializer, UserRegisterSerializer, UserHeavySerializer
 
 class VUserList(APIView):
   permission_classes = (IsAdminUser,)
-  serializer = UserSerializer
+  serializer = UserHeavySerializer
 
   def serialize_user(self, pk):
     try:
@@ -35,7 +38,6 @@ class VUserList(APIView):
       iduser = response.save()
       res = self.serialize_user(pk= iduser)
       return Response(res, status= status.HTTP_201_CREATED)
-
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -51,20 +53,21 @@ class VUserDetail(APIView):
 
   def get(self, request, pk, format=None):
     user = self.get_object(pk)
-    response = self.serializer(user)
+    response = UserHeavySerializer(user)
     return Response(response.data, status=status.HTTP_200_OK)
 
   def put(self, request, pk, format=None):
     user = self.get_object(pk)
     response = self.serializer(user, data=request.data)
     if response.is_valid():
-      response.save()
-      return Response(response.data, status=status.HTTP_200_OK)
+      result = response.save()
+      res = UserHeavySerializer(result)
+      return Response(res.data, status=status.HTTP_200_OK)
     else:
       return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
   def delete(self, request, pk, format=None):
     user = self.get_object(pk)
-    value = user.id
+    # value = user.id
     user.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)

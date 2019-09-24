@@ -7,8 +7,8 @@ from apps.user.views import VAuthentication, VUser
 urlpatterns = [
 	# auth
   path('token-auth/', VAuthentication.CustomAuthToken.as_view(), name='api_token_auth'),
-  path('email/', VAuthentication.Emailexist, name='api_email_check'),
-  path('user/logout/', VAuthentication.VUserLogout, name='api_users_logout'),
+  path('email/', VAuthentication.VEmail.as_view(), name='api_email_check'),
+  path('user/logout/', VAuthentication.VLogout.as_view(), name='api_users_logout'),
 
   # user
   path('users/', VUser.VUserList.as_view(), name='api_users'),

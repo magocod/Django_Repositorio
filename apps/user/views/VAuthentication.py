@@ -2,17 +2,21 @@
 from django.contrib.auth.models import User, Group
 
 # third-party
+from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view, permission_classes, authentication_classes, parser_classes
-from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from rest_framework import status
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.views import APIView
+
+# Django
+from django.http import Http404
 
 # local Django
-from apps.user.serializers import AuthTokenSerializer
+from apps.user.serializers import AuthTokenSerializer, EmailSerializer
 
 class CustomAuthToken(ObtainAuthToken):
   serializer_class = AuthTokenSerializer
@@ -35,28 +39,31 @@ class CustomAuthToken(ObtainAuthToken):
       'username': user.username,
       'date_joined': user.date_joined,
       'id': user.id,
-    }, status=status.HTTP_201_CREATED)
+    }, status=status.HTTP_200_OK)
 
+class VEmail(APIView):
+  permission_classes = (AllowAny,)
+  serializer = EmailSerializer
 
-@api_view(['POST'])
-@parser_classes((JSONParser,))
-@permission_classes((AllowAny,))
-def Emailexist(request, format=None):
-  try:
-    userdata = User.objects.get(email__exact= request.data['email'])
-    return Response(status=status.HTTP_200_OK)
-    # return Response({'received data': request.data['email']}, status=status.HTTP_200_OK)
-  except:
-    return Response(status=status.HTTP_404_NOT_FOUND)
+  def get_object(self, user_email: str):
+    try:
+      return User.objects.get(email= user_email)
+    except User.DoesNotExist:
+      raise Http404
+    except:
+      raise Http404
 
-@api_view(['POST'])
-@parser_classes((JSONParser,))
-@authentication_classes([TokenAuthentication,])
-@permission_classes([IsAuthenticated,])
-def VUserLogout(request, format=None):
-  try:
-    # res = { 'token': request.auth.key }
+  def post(self, request, format=None):
+    response = self.serializer(data=request.data)
+    if response.is_valid():
+      self.get_object(response.validated_data['email'])
+      return Response(status=status.HTTP_200_OK)
+    else:
+      return Response(status=status.HTTP_404_NOT_FOUND)
+
+class VLogout(APIView):
+  permission_classes = (IsAuthenticated,)
+
+  def post(self, request, format=None):
     Token.objects.get(key= request.auth.key).delete()
-    return Response(status=status.HTTP_200_OK)
-  except Token.DoesNotExist as e:
     return Response(status=status.HTTP_200_OK)
