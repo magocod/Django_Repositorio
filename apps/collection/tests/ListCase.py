@@ -1,3 +1,7 @@
+"""
+Pruebas Listar Collection
+"""
+
 # standard library
 import json
 
@@ -11,9 +15,13 @@ from django.test import TestCase
 from apps.collection.models import Collection
 from apps.collection.serializers import CollectionHeavySerializer
 from apps.tests.auth import create_user
-from apps.tests.db import DBpopulate
+from apps.tests.db import db_populate
 
 class ListTest(TestCase):
+  """
+  ...
+  """
+  serializer = CollectionHeavySerializer
 
   def setUp(self):
     # user an token
@@ -24,12 +32,12 @@ class ListTest(TestCase):
     self.noauthclient = APIClient()
     self.noauthclient.credentials(HTTP_AUTHORIZATION= 'Token ' + '123')
     # data
-    DBpopulate(theme= 1, category= 1, collection= 1)
+    db_populate(theme=1, category=1, collection=1)
 
   def test_get_all(self):
     response = self.client.get('/api/collections/')
     response_data = json.loads(response.content)
-    serializer = CollectionHeavySerializer(
+    serializer = self.serializer(
       Collection.objects.all(),
       many= True,
     )

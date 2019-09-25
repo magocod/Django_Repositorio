@@ -11,10 +11,12 @@ from django.test import TestCase
 from apps.article.models import Article
 from apps.article.serializers.article import ArticleHeavySerializer
 from apps.tests.auth import create_user
-from apps.tests.db import DBpopulate
+from apps.tests.db import db_populate
 
 class ListTest(TestCase):
-
+  """
+  ...
+  """
   serializer = ArticleHeavySerializer
 
   def setUp(self):
@@ -26,7 +28,7 @@ class ListTest(TestCase):
     self.noauthclient = APIClient()
     self.noauthclient.credentials(HTTP_AUTHORIZATION= 'Token ' + '123')
     # data
-    DBpopulate(article= 1)
+    db_populate(article=1)
 
   def test_get_all(self):
     response = self.client.get('/api/articles/')

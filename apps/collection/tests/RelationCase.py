@@ -11,9 +11,13 @@ from django.test import TestCase
 from apps.collection.models import Collection
 from apps.collection.serializers import CollectionHeavySerializer
 from apps.tests.auth import create_user
-from apps.tests.db import DBpopulate
+from apps.tests.db import db_populate
 
 class CRUDTest(TestCase):
+  """
+  ...
+  """
+  serializer = CollectionHeavySerializer
 
   def setUp(self):
     # user an token
@@ -21,10 +25,10 @@ class CRUDTest(TestCase):
     self.client = APIClient()
     self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + auth['token'].key)
     # data
-    DBpopulate(tag= 1, category= 1, collection= 1)
+    db_populate(tag=1, category=1, collection=1)
 
   def test_collection_add_relations(self):
-    oldvalues = CollectionHeavySerializer(
+    oldvalues = self.serializer(
       Collection.objects.get(id= 1)
     )
     relationdata = {
@@ -34,7 +38,7 @@ class CRUDTest(TestCase):
     }
     response = self.client.put('/api/collection/relations/' + str(1) + '/', relationdata)
     # print(response.data)
-    newvalues = CollectionHeavySerializer(
+    newvalues = self.serializer(
       Collection.objects.get(id= 1)
     )
     self.assertEqual(response.status_code, 200)
@@ -49,12 +53,12 @@ class CRUDTest(TestCase):
       'tags': [1],
     }
     response = self.client.put('/api/collection/relations/' + str(1) + '/', relationdata)
-    oldvalues = CollectionHeavySerializer(
+    oldvalues = self.serializer(
       Collection.objects.get(id= 1)
     )
     response = self.client.delete('/api/collection/relations/' + str(1) + '/', relationdata)
     # print(response.data)
-    newvalues = CollectionHeavySerializer(
+    newvalues = self.serializer(
       Collection.objects.get(id= 1)
     )
     self.assertEqual(response.status_code, 200)
