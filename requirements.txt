@@ -1,6 +1,6 @@
 astroid==2.2.5
 colorama==0.4.1
-Django==2.2.3
+Django==2.2.4
 django-unused-media==0.1.13
 djangorestframework==3.10.1
 factory-boy==2.12.0
