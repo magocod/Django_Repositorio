@@ -1,32 +1,43 @@
+"""
+Vista listado publico
+"""
+
 # standard library
-import json
+# import json
 
 # third-party
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.permissions import AllowAny
+# from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
+# from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # Django
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 # local Django
 from apps.category.models import Category
 from apps.category.serializers import CategorySlugSerializer
 
 class VCategorySlugList(APIView, PageNumberPagination):
-  permission_classes = (AllowAny,)
-  serializer = CategorySlugSerializer
+    """
+    ...
+    """
+    permission_classes = (AllowAny,)
+    serializer = CategorySlugSerializer
 
-  def get(self, request, format=None):
-    # consulta
-    listr = Category.objects.all().order_by('id')
-    # respuesta
-    results = self.paginate_queryset(listr, request)
-    serializer = self.serializer(results, many=True)
-    return self.get_paginated_response(serializer.data)
+    def get(self, request, format=None):
+        """
+        ...
+        """
+        listr = Category.objects.all().order_by('id')
+        results = self.paginate_queryset(listr, request)
+        serializer = self.serializer(results, many=True)
+        return self.get_paginated_response(serializer.data)
 
-  def post(self, request, format=None):
-    listr = Category.objects.all().order_by('id').values_list()
-    return JsonResponse({'foo': 'bar'}, content_type='application/json')
+    def post(self, request, format=None):
+        """
+        ...
+        """
+        # listr = Category.objects.all().order_by('id').values_list()
+        return JsonResponse({'foo': 'bar'})

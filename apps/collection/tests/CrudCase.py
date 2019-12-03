@@ -1,3 +1,7 @@
+"""
+Pruebas edicion Collection
+"""
+
 # standard library
 # import json
 
@@ -11,9 +15,13 @@ from django.test import TestCase
 from apps.collection.models import Collection
 from apps.collection.serializers import CollectionHeavySerializer
 from apps.tests.auth import create_user
-from apps.tests.db import DBpopulate
+from apps.tests.db import db_populate
 
 class CRUDTest(TestCase):
+  """
+  ...
+  """
+  serializer = CollectionHeavySerializer
 
   def setUp(self):
     # user an token
@@ -21,7 +29,7 @@ class CRUDTest(TestCase):
     self.client = APIClient()
     self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + auth['token'].key)
     # data
-    DBpopulate(theme= 1, category= 1, collection= 1)
+    db_populate(theme=1, category=1, collection=1)
 
   def test_create_collection(self):
     data = {
@@ -32,8 +40,8 @@ class CRUDTest(TestCase):
     }
     response = self.client.post('/api/collections/', data)
     # print(response)
-    serializer = CollectionHeavySerializer(
-      Collection.objects.get(id = response.data['id']),
+    serializer = self.serializer(
+      Collection.objects.get(id=response.data['id']),
     )
     self.assertEqual(response.status_code, 201)
     self.assertEqual(serializer.data, response.data)
@@ -58,7 +66,7 @@ class CRUDTest(TestCase):
   
   def test_get_collection(self):
     response  = self.client.get('/api/collection/' + str(1) + '/')
-    serializer = CollectionHeavySerializer(
+    serializer = self.serializer(
       Collection.objects.get(id= response.data['id'])
     )
     self.assertEqual(response.status_code, 200)
@@ -66,7 +74,7 @@ class CRUDTest(TestCase):
   
   def test_update_collection(self):
     collection = Collection.objects.get(id= 1)
-    oldvalues = CollectionHeavySerializer(collection)
+    oldvalues = self.serializer(collection)
     newdata = {
       'name': 'YSON2',
       'description': 'updated',
@@ -74,7 +82,7 @@ class CRUDTest(TestCase):
     }
     response = self.client.put('/api/collection/' + str(1) + '/', newdata)
     # print(response.data)
-    newvalues = CollectionHeavySerializer(
+    newvalues = self.serializer(
       Collection.objects.get(id= 1)
     )
     self.assertEqual(response.status_code, 200)

@@ -29,7 +29,6 @@ def create_user(staff: bool = False) -> Dict[str, Any]:
     # admin
     user.is_staff = staff
     user.save()
-    Token.objects.get_or_create(user=user)
     # auth token
-    token = Token.objects.get(user__username=user.username)
-    return {'user': user, 'token': token}
+    tokentuple = Token.objects.get_or_create(user=user)
+    return {'user': user, 'token': tokentuple[0]}

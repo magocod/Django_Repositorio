@@ -11,10 +11,12 @@ from django.test import TestCase
 from apps.article.models import Article
 from apps.article.serializers.article import ArticleHeavySerializer
 from apps.tests.auth import create_user
-from apps.tests.db import DBpopulate
+from apps.tests.db import db_populate
 
 class CRUDTest(TestCase):
-
+  """
+  ...
+  """
   serializer = ArticleHeavySerializer
 
   def setUp(self):
@@ -23,7 +25,7 @@ class CRUDTest(TestCase):
     self.client = APIClient()
     self.client.credentials(HTTP_AUTHORIZATION= 'Token ' + auth['token'].key)
     # data
-    DBpopulate(article= 1)
+    db_populate(article=1)
 
   def test_create_article(self):
     data = {
