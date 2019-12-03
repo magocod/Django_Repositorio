@@ -16,6 +16,11 @@
 * Django-rest-framework 3.7.7-> http://www.django-rest-framework.org/
 * django-unused-media==0.1.11
 
+## Tests
+
+* Python unittest -> https://docs.python.org/3/library/unittest.html
+* Django tests -> https://docs.djangoproject.com/en/2.2/topics/testing/
+
 ## instructions
 
 install python virtual environment and install libraries with pip
@@ -28,12 +33,6 @@ Migrate the database
 
 ```bash
 python manage.py migrate
-```
-
-Create Users
-
-```bash
-python manage.py USeeders
 ```
 
 Run development server
