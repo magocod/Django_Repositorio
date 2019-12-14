@@ -4,22 +4,22 @@
 
 ## Framework
 
-* Django 2.2.2 -> https://www.djangoproject.com/
+* Django 3.0.0 -> https://www.djangoproject.com/
 
 ## Database
 
-* Sqlite3 3.22.0 --> https://www.sqlite.org/index.html
-* Postgresql 10.3 --> https://www.postgresql.org/
+* Sqlite3 --> https://www.sqlite.org/index.html
+* Postgresql --> https://www.postgresql.org/
 
-## Packages - Django
+## Third Packages
 
-* Django-rest-framework 3.7.7-> http://www.django-rest-framework.org/
-* django-unused-media==0.1.11
+* Django-rest-framework 3.11.0 --> http://www.django-rest-framework.org/
+* django-unused-media --> 0.1.11
 
 ## Tests
 
 * Python unittest -> https://docs.python.org/3/library/unittest.html
-* Django tests -> https://docs.djangoproject.com/en/2.2/topics/testing/
+* Django tests -> https://docs.djangoproject.com/en/3.0/topics/testing/
 
 ## instructions
 
