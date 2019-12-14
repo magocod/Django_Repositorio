@@ -35,7 +35,7 @@ def db_populate(**kwargs: Dict[str, int]) -> None:
             if Theme.objects.count() > 0:
                 pass
             else:
-                print('generate theme -> set -> collection')
+                # print('generate theme -> set -> collection')
                 Theme.objects.create(name='TEST_THEME_RELATION', description='test description')
 
             Collection.objects.create(
