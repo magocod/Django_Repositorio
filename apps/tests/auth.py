@@ -3,13 +3,13 @@ Authenticacion pruebas
 """
 
 # standard library
-from typing import Dict, Any
-
-# third-party
-from rest_framework.authtoken.models import Token
+from typing import Any, Dict
 
 # Django
 from django.contrib.auth.models import User
+# third-party
+from rest_framework.authtoken.models import Token
+
 
 def create_user(staff: bool = False) -> Dict[str, Any]:
     """

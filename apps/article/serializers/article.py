@@ -1,17 +1,16 @@
 # third-party
-from rest_framework import serializers
-
 # Django
 from django.db import IntegrityError
+from rest_framework import serializers
 
 # local Django
 from apps.article.models import Article
-from apps.collection.models import Collection
-from apps.tag.models import Tag
-
-from apps.tag.serializers import TagSerializer
-from apps.collection.serializers import CollectionSerializer
 from apps.article.serializers.specification import SpecificationSerializer
+from apps.collection.models import Collection
+from apps.collection.serializers import CollectionSerializer
+from apps.tag.models import Tag
+from apps.tag.serializers import TagSerializer
+
 
 class ArticleSerializer(serializers.ModelSerializer):
   class Meta:

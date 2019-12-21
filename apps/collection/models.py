@@ -7,6 +7,7 @@ from apps.category.models import Category
 from apps.tag.models import Tag
 from apps.theme.models import Theme
 
+
 class Collection(models.Model):
   name = models.CharField(max_length=100, unique=True)
   description = models.TextField()

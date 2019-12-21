@@ -8,6 +8,7 @@ import factory
 # local Django
 from apps.category.models import Category
 
+
 class CategoryFactory(factory.django.DjangoModelFactory):
     """
     Fabrica

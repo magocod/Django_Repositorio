@@ -6,14 +6,14 @@ Inicializar credenciales para pruebas
 # import json
 from typing import Dict
 
+# Django
+from django.test import TestCase
 # third-party
 from rest_framework.test import APIClient
 
-# Django
-from django.test import TestCase
-
 # local Django
 from apps.tests.auth import create_user
+
 
 class AuthConfigTestCase(TestCase):
     """

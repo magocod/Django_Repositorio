@@ -15,6 +15,7 @@ from apps.collection.models import Collection
 from apps.tag.models import Tag
 from apps.theme.models import Theme
 
+
 def db_populate(**kwargs: Dict[str, int]) -> None:
     """[summary]
     creacion basica en bd (1 un elemento)

@@ -11,6 +11,7 @@ from rest_framework import serializers
 # Django
 from apps.tag.models import Tag
 
+
 class TagSerializer(serializers.ModelSerializer):
     """
     Serializador basico tag

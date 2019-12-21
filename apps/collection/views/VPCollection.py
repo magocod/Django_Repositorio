@@ -1,16 +1,16 @@
 # third-party
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.permissions import AllowAny
-from rest_framework.pagination import PageNumberPagination
-
 # Django
 from django.http import Http404
+from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # local Django
 from apps.collection.models import Collection
 from apps.collection.serializers import CollectionSlugSerializer
+
 
 class VCollectionSlugList(APIView, PageNumberPagination):
   permission_classes = (AllowAny,)

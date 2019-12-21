@@ -5,17 +5,17 @@ Pruebas Listar Collection
 # standard library
 import json
 
-# third-party
-from rest_framework.test import APIClient
-
 # Django
 from django.test import TestCase
+# third-party
+from rest_framework.test import APIClient
 
 # local Django
 from apps.collection.models import Collection
 from apps.collection.serializers import CollectionHeavySerializer
 from apps.tests.auth import create_user
 from apps.tests.db import db_populate
+
 
 class CollectionListTest(TestCase):
   """

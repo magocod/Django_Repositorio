@@ -4,19 +4,19 @@ Prueba creacion de usuarios
 
 # standard library
 import json
-from typing import Dict, Any
-
-# third-party
-from rest_framework.test import APIClient
-
-# Django
-# from django.test import TestCase
-from apps.tests.fixtures import AuthConfigTestCase
+from typing import Any, Dict
 
 # local Django
 from django.contrib.auth.models import User
-from apps.user.serializers import UserHeavySerializer
+# third-party
+from rest_framework.test import APIClient
+
 from apps.tests.auth import create_user
+# Django
+# from django.test import TestCase
+from apps.tests.fixtures import AuthConfigTestCase
+from apps.user.serializers import UserHeavySerializer
+
 
 class UserCrudTest(AuthConfigTestCase):
     """

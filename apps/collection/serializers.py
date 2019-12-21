@@ -1,21 +1,20 @@
 # standard library
 import json
 
+# Django
+from django.db import IntegrityError
 # third-party
 from rest_framework import serializers
 
-# Django
-from django.db import IntegrityError
-
+from apps.category.models import Category
+from apps.category.serializers import CategorySerializer
 # local Django
 from apps.collection.models import Collection
-from apps.theme.models import Theme
-from apps.category.models import Category
 from apps.tag.models import Tag
-
-from apps.category.serializers import CategorySerializer
 from apps.tag.serializers import TagSerializer
+from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
+
 
 class CollectionSerializer(serializers.ModelSerializer):
   theme_id = serializers.IntegerField(read_only=False)

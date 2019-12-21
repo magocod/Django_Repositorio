@@ -10,6 +10,7 @@ from apps.collection.models import Collection
 # from apps.tag.models import Tag
 from apps.theme.models import Theme
 
+
 class CollectionFactory(factory.django.DjangoModelFactory):
     """
     Fabrica

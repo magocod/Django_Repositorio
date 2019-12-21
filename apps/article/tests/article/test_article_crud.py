@@ -1,17 +1,17 @@
 # standard library
 # import json
 
-# third-party
-from rest_framework.test import APIClient
-
 # Django
 from django.test import TestCase
+# third-party
+from rest_framework.test import APIClient
 
 # local Django
 from apps.article.models import Article
 from apps.article.serializers.article import ArticleHeavySerializer
 from apps.tests.auth import create_user
 from apps.tests.db import db_populate
+
 
 class ArticleCrudTest(TestCase):
   """

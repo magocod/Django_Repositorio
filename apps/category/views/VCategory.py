@@ -5,6 +5,8 @@ Vistas edicion categorias
 # standard library
 from typing import Union
 
+# Django
+from django.http import Http404
 # third-party
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -12,12 +14,10 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# Django
-from django.http import Http404
-
 # local Django
 from apps.category.models import Category
 from apps.category.serializers import CategorySerializer
+
 
 class VCategoryList(APIView, PageNumberPagination):
     """

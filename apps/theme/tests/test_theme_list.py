@@ -5,18 +5,19 @@ Listar Theme
 # standard library
 # import json
 
+# Django
+from django.test import TestCase
 # standard library
 from rest_framework.test import APIClient
 
-# Django
-from django.test import TestCase
-# from django.urls import resolve, reverse
-
+from apps.tests.auth import create_user
+from apps.tests.db import db_populate
 # local Django
 # from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
+
+# from django.urls import resolve, reverse
+
 
 class ThemeListTest(TestCase):
     """

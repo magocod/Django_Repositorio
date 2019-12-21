@@ -8,6 +8,7 @@ import factory
 # local Django
 from apps.tag.models import Tag
 
+
 class TagFactory(factory.django.DjangoModelFactory):
 	"""
 	Fabrica

@@ -9,6 +9,7 @@ from django.utils import timezone
 from apps.collection.models import Collection
 from apps.tag.models import Tag
 
+
 class Article(models.Model):
   name = models.CharField(max_length=100, unique=True)
   description = models.TextField()

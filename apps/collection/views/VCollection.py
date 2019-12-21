@@ -1,19 +1,21 @@
 # third-party
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.permissions import IsAdminUser
-from rest_framework.pagination import PageNumberPagination
-
+from django.db import transaction
 # Django
 from django.http import Http404
-from django.db import transaction
+from rest_framework import status
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 # local Django
 from apps.category.models import Category
 from apps.collection.models import Collection
+from apps.collection.serializers import (CollectionHeavySerializer,
+                                         CollectionRelationSerializer,
+                                         CollectionSerializer)
 from apps.tag.models import Tag
-from apps.collection.serializers import CollectionSerializer, CollectionHeavySerializer, CollectionRelationSerializer
+
 
 class VCollectionList(APIView, PageNumberPagination):
   permission_classes = (IsAdminUser,)

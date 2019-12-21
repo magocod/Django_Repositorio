@@ -5,18 +5,18 @@ Vistas edicion tag
 # standard library
 from typing import Union
 
+# Django
+from django.http import Http404
+from rest_framework import status
+from rest_framework.permissions import IsAdminUser
 # third-party
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.permissions import IsAdminUser
-
-# Django
-from django.http import Http404
 
 # local Django
 from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
+
 
 class VThemeList(APIView):
     """

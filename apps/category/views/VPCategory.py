@@ -5,6 +5,8 @@ Vista listado publico
 # standard library
 # import json
 
+# Django
+from django.http import JsonResponse
 # third-party
 # from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -12,12 +14,10 @@ from rest_framework.permissions import AllowAny
 # from rest_framework.response import Response
 from rest_framework.views import APIView
 
-# Django
-from django.http import JsonResponse
-
 # local Django
 from apps.category.models import Category
 from apps.category.serializers import CategorySlugSerializer
+
 
 class VCategorySlugList(APIView, PageNumberPagination):
     """

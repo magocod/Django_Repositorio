@@ -6,6 +6,7 @@ Modelos
 from django.db import models
 from django.utils import timezone
 
+
 class Tag(models.Model):
     """
     Palabras clave ubicar colecciones y articulos

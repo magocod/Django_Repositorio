@@ -7,6 +7,7 @@ import factory
 
 # local Django
 from apps.article.models import Article
+
 # from apps.collection.models import Collection
 # from apps.tag.models import Tag
 

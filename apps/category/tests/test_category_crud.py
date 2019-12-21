@@ -4,19 +4,19 @@ Pruebas edicion Category
 
 # standard library
 import json
-from typing import Dict, Any
-
-# third-party
-from rest_framework.test import APIClient
+from typing import Any, Dict
 
 # Django
 from django.test import TestCase
+# third-party
+from rest_framework.test import APIClient
 
 # local Django
 from apps.category.models import Category
 from apps.category.serializers import CategorySerializer
 from apps.tests.auth import create_user
 from apps.tests.db import db_populate
+
 
 class CategoryCrudTest(TestCase):
     """

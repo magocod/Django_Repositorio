@@ -4,19 +4,19 @@ Prueba edicion Theme
 
 # standard library
 import json
-from typing import Dict, Any
-
-# third-party
-from rest_framework.test import APIClient
+from typing import Any, Dict
 
 # Django
 from django.test import TestCase
+# third-party
+from rest_framework.test import APIClient
 
+from apps.tests.auth import create_user
+from apps.tests.db import db_populate
 # local Django
 from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
+
 
 class ThemeCrudTest(TestCase):
     """

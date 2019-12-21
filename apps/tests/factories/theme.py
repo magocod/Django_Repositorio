@@ -8,6 +8,7 @@ import factory
 # local Django
 from apps.theme.models import Theme
 
+
 class ThemeFactory(factory.django.DjangoModelFactory):
 	"""
 	Fabrica

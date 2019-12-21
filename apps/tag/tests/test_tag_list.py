@@ -5,18 +5,19 @@ Pruebas listar tags
 # standard library
 # import json
 
-# third-party
-from rest_framework.test import APIClient
-
 # Django
 from django.test import TestCase
-# from django.urls import resolve, reverse
+# third-party
+from rest_framework.test import APIClient
 
 # local Django
 # from apps.tag.models import Tag
 # from apps.tag.serializers import TagSerializer
 from apps.tests.auth import create_user
 from apps.tests.db import db_populate
+
+# from django.urls import resolve, reverse
+
 
 class TagListTest(TestCase):
     """
