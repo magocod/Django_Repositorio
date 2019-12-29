@@ -5,7 +5,9 @@
 
 ## Tox env
 
+* Python 3.7
 * Python 3.8
+* Python lint flake8 (py3.8)
 
 ## Framework
 
