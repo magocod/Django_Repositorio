@@ -41,7 +41,10 @@ class VUserList(APIView):
         """
         ...
         """
-        response = self.serializer(User.objects.all().order_by('id'), many=True)
+        response = self.serializer(
+            User.objects.all().order_by('id'),
+            many=True,
+        )
         return Response(response.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
@@ -53,8 +56,9 @@ class VUserList(APIView):
             iduser: int = response.save()
             res = self.serialize_user(pk=iduser)
             return Response(res, status=status.HTTP_201_CREATED)
-        else:
-            return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class VUserDetail(APIView):
     """
@@ -90,8 +94,8 @@ class VUserDetail(APIView):
             result = response.save()
             res = UserHeavySerializer(result)
             return Response(res.data, status=status.HTTP_200_OK)
-        else:
-            return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk: Union[int, str], format=None):
         """

@@ -31,7 +31,9 @@ class CategoryCrudTest(TestCase):
         # user an token
         auth = create_user(True)
         self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + auth['token'].key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Token ' + auth['token'].key
+        )
         # data
         db_populate(category=1)
 
@@ -41,7 +43,7 @@ class CategoryCrudTest(TestCase):
         """
         data: Dict[str, Any] = {
             'name': 'test create',
-            'description' : 'test create description'
+            'description': 'test create description'
         }
         response = self.client.post('/api/categories/', data)
         response_data = json.loads(response.content)

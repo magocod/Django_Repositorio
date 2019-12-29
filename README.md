@@ -3,6 +3,10 @@
 > Python 3.8
 > Digital repository, UNEFA internship project
 
+## Tox env
+
+* Python 3.8
+
 ## Framework
 
 * Django 3.0.0 -> https://www.djangoproject.com/

@@ -10,14 +10,14 @@ from apps.theme.models import Theme
 
 
 class ThemeFactory(factory.django.DjangoModelFactory):
-	"""
-	Fabrica
-	"""
-	name = factory.Sequence(lambda n: 'theme n:{}'.format(n))
-	description = '---'
+    """
+    Fabrica
+    """
+    name = factory.Sequence(lambda n: 'theme n:{}'.format(n))
+    description = '---'
 
-	class Meta:
-		"""
-		Metadatos
-		"""
-	    model = Theme
+    class Meta:
+        """
+        Metadatos
+        """
+        model = Theme

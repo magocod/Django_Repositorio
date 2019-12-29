@@ -19,7 +19,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields: Tuple[str] = ['id', 'name', 'meta', 'timestamp', 'updated']
+        fields: Tuple[str] = [
+            'id', 'name', 'meta', 'timestamp', 'updated'
+        ]
+
 
 class CategorySlugSerializer(serializers.ModelSerializer):
     """
@@ -33,4 +36,7 @@ class CategorySlugSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields: Tuple[str] = ['id', 'name', 'meta', 'timestamp', 'updated', 'collection_categories']
+        fields: Tuple[str] = [
+            'id', 'name', 'meta', 'timestamp',
+            'updated', 'collection_categories'
+        ]

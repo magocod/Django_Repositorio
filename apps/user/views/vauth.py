@@ -46,6 +46,7 @@ class CustomAuthToken(ObtainAuthToken):
             'id': user.id,
         }, status=status.HTTP_200_OK)
 
+
 class VEmail(APIView):
     """
     ...
@@ -61,8 +62,6 @@ class VEmail(APIView):
             return User.objects.get(email=user_email)
         except User.DoesNotExist:
             raise Http404
-        except:
-            raise Http404
 
     def post(self, request, format=None):
         """
@@ -72,8 +71,9 @@ class VEmail(APIView):
         if response.is_valid():
             self.get_object(response.validated_data['email'])
             return Response(status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
 
 class VLogout(APIView):
     """

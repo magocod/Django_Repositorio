@@ -19,7 +19,8 @@ from apps.theme.models import Theme
 def db_populate(**kwargs: Dict[str, int]) -> None:
     """[summary]
     creacion basica en bd (1 un elemento)
-    Nota: colocar en ultimo lugar objetos relacionados (...., collection, article)
+    Nota: colocar en ultimo lugar objetos
+    relacionados (...., collection, article)
 
     Arguments:
       **kwargs {[type]} -- [description]
@@ -28,7 +29,10 @@ def db_populate(**kwargs: Dict[str, int]) -> None:
         if key == 'tag' and value > 0:
             Tag.objects.create(name='TEST_TAG')
         elif key == 'theme' and value > 0:
-            Theme.objects.create(name='TEST_THEME', description='test description')
+            Theme.objects.create(
+                name='TEST_THEME',
+                description='test description'
+            )
         elif key == 'category' and value > 0:
             Category.objects.create(name='TEST_CATEGORY')
         elif key == 'collection' and value > 0:
@@ -37,7 +41,10 @@ def db_populate(**kwargs: Dict[str, int]) -> None:
                 pass
             else:
                 # print('generate theme -> set -> collection')
-                Theme.objects.create(name='TEST_THEME_RELATION', description='test description')
+                Theme.objects.create(
+                    name='TEST_THEME_RELATION',
+                    description='test description'
+                )
 
             Collection.objects.create(
                 name='TEST_COLLECTION',

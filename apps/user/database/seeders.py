@@ -23,6 +23,7 @@ USERS: Tuple[Dict[str, Any]] = (
     },
 )
 
+
 def user_list():
     """
     migrar en db usuarios con un token

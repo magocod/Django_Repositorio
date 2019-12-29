@@ -41,8 +41,8 @@ class VThemeList(APIView):
         if response.is_valid():
             response.save()
             return Response(response.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class VThemeDetail(APIView):
@@ -78,8 +78,8 @@ class VThemeDetail(APIView):
         if response.is_valid():
             response.save()
             return Response(response.data, status=status.HTTP_200_OK)
-        else:
-            return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk: Union[str, int], format=None):
         """

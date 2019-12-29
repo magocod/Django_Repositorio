@@ -31,10 +31,14 @@ class TagListTest(TestCase):
         # user an token
         auth = create_user(True)
         self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + auth['token'].key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Token ' + auth['token'].key
+        )
         # no authenticated
         self.noauthclient = APIClient()
-        self.noauthclient.credentials(HTTP_AUTHORIZATION='Token ' + '123')
+        self.noauthclient.credentials(
+            HTTP_AUTHORIZATION='Token ' + '123'
+        )
         # data
         db_populate(tag=1)
 

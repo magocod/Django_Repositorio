@@ -19,14 +19,46 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Collection',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
                 ('name', models.CharField(max_length=100, unique=True)),
                 ('description', models.TextField()),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(default=django.utils.timezone.now)),
-                ('categories', models.ManyToManyField(related_name='collection_categories', to='category.Category')),
-                ('tags', models.ManyToManyField(related_name='collection_tags', to='tag.Tag')),
-                ('theme', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, related_name='collection_theme', to='theme.Theme')),
+                (
+                    'updated',
+                    models.DateTimeField(
+                        default=django.utils.timezone.now
+                    )
+                ),
+                (
+                    'categories',
+                    models.ManyToManyField(
+                        related_name='collection_categories',
+                        to='category.Category'
+                    )
+                ),
+                (
+                    'tags',
+                    models.ManyToManyField(
+                        related_name='collection_tags',
+                        to='tag.Tag'
+                    )
+                ),
+                (
+                    'theme',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        related_name='collection_theme',
+                        to='theme.Theme'
+                    )
+                ),
             ],
         ),
     ]

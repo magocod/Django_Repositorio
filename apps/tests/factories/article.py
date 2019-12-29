@@ -11,6 +11,7 @@ from apps.article.models import Article
 # from apps.collection.models import Collection
 # from apps.tag.models import Tag
 
+
 class ArticleFactory(factory.django.DjangoModelFactory):
     """
     Fabrica
@@ -28,12 +29,3 @@ class ArticleFactory(factory.django.DjangoModelFactory):
         Metadatos
         """
         model = Article
-
-    # @factory.post_generation
-    # def relations(self, create, extracted, **kwargs):
-    #     if not create:
-    #         return
-        # else:
-            # collection.collections.add(category)
-            # collection.tags.add(category)
-            # pass

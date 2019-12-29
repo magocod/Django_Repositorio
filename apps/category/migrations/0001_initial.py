@@ -15,11 +15,24 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID'
+                    )
+                ),
                 ('name', models.CharField(max_length=40, unique=True)),
                 ('meta', models.TextField(null=True)),
                 ('timestamp', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    'updated',
+                    models.DateTimeField(
+                        default=django.utils.timezone.now
+                    )
+                ),
             ],
         ),
     ]

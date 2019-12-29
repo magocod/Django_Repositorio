@@ -9,7 +9,11 @@ from django.urls import path
 from apps.collection.views import vcollection, vpcollection
 
 urlpatterns = [
-    path('collections/', vcollection.VCollectionList.as_view(), name='api_collections'),
+    path(
+        'collections/',
+        vcollection.VCollectionList.as_view(),
+        name='api_collections'
+    ),
     path(
         'collection/<int:pk>/',
         vcollection.VCollectionDetail.as_view(),

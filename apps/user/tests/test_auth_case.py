@@ -7,10 +7,10 @@ Prueba creacion de tag
 from typing import Dict
 
 # third-party
-from rest_framework.test import APIClient
+# from rest_framework.test import APIClient
 
 # local Django
-from apps.tests.auth import create_user
+# from apps.tests.auth import create_user
 # Django
 # from django.test import TestCase
 from apps.tests.fixtures import AuthConfigTestCase

@@ -31,9 +31,10 @@ class ThemeCrudTest(TestCase):
         # user an token
         auth = create_user(True)
         self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + auth['token'].key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Token ' + auth['token'].key,
+        )
         # data
-        # self.theme = Theme.objects.create(name= 'test', description= ' test description')
         db_populate(theme=1)
 
     def test_create_theme(self):
@@ -42,7 +43,7 @@ class ThemeCrudTest(TestCase):
         """
         data: Dict[str, Any] = {
             'name': 'test create',
-            'description' : 'test create description'
+            'description': 'test create description'
         }
         response = self.client.post('/api/themes/', data)
         response_data = json.loads(response.content)
@@ -68,7 +69,7 @@ class ThemeCrudTest(TestCase):
         """
         data: Dict[str, Any] = {
             'name': 'TEST_THEME',
-            'description' : 'test create duplicate'
+            'description': 'test create duplicate'
         }
         response = self.client.post('/api/themes/', data)
         self.assertEqual(response.status_code, 400)
@@ -91,7 +92,7 @@ class ThemeCrudTest(TestCase):
         oldvalues = self.serializer(Theme.objects.get(id=1))
         newdata: Dict[str, Any] = {
             'name': 'test update',
-            'description' : 'test update description'
+            'description': 'test update description'
         }
         response = self.client.put('/api/theme/' + str(1) + '/', newdata)
         self.assertEqual(response.status_code, 200)

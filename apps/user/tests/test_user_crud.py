@@ -31,7 +31,9 @@ class UserCrudTest(AuthConfigTestCase):
         # user an token
         auth = create_user(True)
         self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + auth['token'].key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Token ' + auth['token'].key,
+        )
         # data
 
     def test_create_user(self) -> None:

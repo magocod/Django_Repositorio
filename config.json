@@ -8,16 +8,16 @@
 		],
 		"CORS_ORIGIN_WHITELIST": [
 			"localhost",
-	    "localhost:8000",
-	    "localhost:8080"
+	    	"localhost:8000",
+	    	"localhost:8080"
 		]
 	},
 	"DB": {
 		"ENGINE": "django.db.backends.mysql",
-    "NAME": "vueshop",
-    "USER": "root",
-    "PASSWORD": "12345",
-    "HOST": "127.0.0.1",
-    "PORT": "5432"
+    	"NAME": "vueshop",
+    	"USER": "root",
+    	"PASSWORD": "12345",
+    	"HOST": "127.0.0.1",
+    	"PORT": "5432"
 	}
 }

@@ -4,7 +4,7 @@ Inicializar credenciales para pruebas
 
 # standard library
 # import json
-from typing import Dict
+# from typing import Dict
 
 # Django
 from django.test import TestCase
@@ -28,4 +28,6 @@ class AuthConfigTestCase(TestCase):
         auth = create_user(True)
         self.public_client = APIClient()
         self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + auth['token'].key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Token ' + auth['token'].key
+        )

@@ -25,7 +25,8 @@ from apps.theme.urls import urlpatterns as apitheme
 from apps.user.urls import urlpatterns as apiuser
 
 # concatenar rutas
-API_URLS = apiarticle + apicategory + apicollection + apitheme + apitag + apiuser
+API_URLS = apiarticle + apicategory + apicollection
++ apitheme + apitag + apiuser
 
 urlpatterns = [
     # web

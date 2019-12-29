@@ -32,12 +32,15 @@ class ThemeListTest(TestCase):
         # user an token
         auth = create_user(True)
         self.client = APIClient()
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + auth['token'].key)
+        self.client.credentials(
+            HTTP_AUTHORIZATION='Token ' + auth['token'].key,
+        )
         # no authenticated
         self.noauthclient = APIClient()
-        self.noauthclient.credentials(HTTP_AUTHORIZATION='Token ' + '123')
+        self.noauthclient.credentials(
+            HTTP_AUTHORIZATION='Token ' + '123',
+        )
         # data
-        # self.theme = Theme.objects.create(name= 'test', description= ' test description')
         db_populate(theme=1)
 
     def test_get_all(self):
