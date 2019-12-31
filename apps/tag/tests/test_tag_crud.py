@@ -1,43 +1,21 @@
 """
-Prueba creacion de tag
+...
 """
 
 # standard library
 import json
 from typing import Any, Dict
 
-# Django
-from django.test import TestCase
-# third-party
-from rest_framework.test import APIClient
-
 # local Django
 from apps.tag.models import Tag
 from apps.tag.serializers import TagSerializer
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
-
-# from django.urls import resolve, reverse
+from apps.tests.fixtures import RepositoryTestCase
 
 
-class TagCrudTest(TestCase):
+class TagCrudTest(RepositoryTestCase):
     """
-    edicion de tag
+    ...
     """
-
-    def setUp(self) -> None:
-        """
-        ...
-        """
-        # user an token
-        auth = create_user(True)
-        self.client = APIClient()
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Token ' + auth['token'].key
-        )
-        # data
-        # self.tag = Tag.objects.create(name= 'test')
-        db_populate(tag=1)
 
     def test_create_tag(self) -> None:
         """
@@ -46,7 +24,7 @@ class TagCrudTest(TestCase):
         data: Dict[str, Any] = {
             'name': 'YSON',
         }
-        response = self.client.post('/api/tags/', data)
+        response = self.admin_client.post('/api/tags/', data)
         response_data = json.loads(response.content)
         serializer = TagSerializer(
             Tag.objects.get(id=response_data['id']),
@@ -61,7 +39,7 @@ class TagCrudTest(TestCase):
         data: Dict[str, Any] = {
             'names': 'NEW_TAG',
         }
-        response = self.client.post('/api/tags/', data)
+        response = self.admin_client.post('/api/tags/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self):
@@ -69,18 +47,16 @@ class TagCrudTest(TestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'TEST_TAG',
+            'name': 'TEST_TAG_1',
         }
-        response = self.client.post('/api/tags/', data)
+        response = self.admin_client.post('/api/tags/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_tag(self):
         """
         ...
         """
-        # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
-        # response = self.client.get(url)
-        response = self.client.get('/api/tag/' + str(1) + '/')
+        response = self.admin_client.get(f'/api/tag/{1}/')
         serializer = TagSerializer(
             Tag.objects.get(id=1)
         )
@@ -96,9 +72,7 @@ class TagCrudTest(TestCase):
         newdata: Dict[str, Any] = {
             'name': 'YSON2',
         }
-        # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
-        # response = self.client.put(url, newdata)
-        response = self.client.put('/api/tag/' + str(1) + '/', newdata)
+        response = self.admin_client.put(f'/api/tag/{1}/', newdata)
         newvalues = TagSerializer(
             Tag.objects.get(id=1)
         )
@@ -110,7 +84,5 @@ class TagCrudTest(TestCase):
         """
         ...
         """
-        # url = reverse('api_tag_detail', kwargs={'pk': self.tag.pk})
-        # response = self.client.delete(url)
-        response = self.client.delete('/api/tag/' + str(1) + '/')
+        response = self.admin_client.delete(f'/api/tag/{1}/')
         self.assertEqual(response.status_code, 204)
