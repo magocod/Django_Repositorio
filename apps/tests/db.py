@@ -1,9 +1,10 @@
 """
-Poblacion base de dato pruebas
+populate database
 """
 
 # standard library
-from typing import Dict
+import random
+from typing import List
 
 # Django
 from django.utils import timezone
@@ -16,51 +17,41 @@ from apps.tag.models import Tag
 from apps.theme.models import Theme
 
 
-def db_populate(**kwargs: Dict[str, int]) -> None:
-    """[summary]
-    creacion basica en bd (1 un elemento)
-    Nota: colocar en ultimo lugar objetos
-    relacionados (...., collection, article)
-
-    Arguments:
-      **kwargs {[type]} -- [description]
+def db_populate(tag=0, theme=0, category=0, collection=0, article=0):
     """
-    for key, value in kwargs.items():
-        if key == 'tag' and value > 0:
-            Tag.objects.create(name='TEST_TAG')
-        elif key == 'theme' and value > 0:
+    ...
+    """
+    themes_id: List[int] = []
+
+    for n in range(tag):
+        Tag.objects.create(name=f'TEST_TAG_{n}')
+
+    for n in range(theme):
+        themes_id.append(
             Theme.objects.create(
-                name='TEST_THEME',
+                name=f'TEST_THEME_{n}',
                 description='test description'
-            )
-        elif key == 'category' and value > 0:
-            Category.objects.create(name='TEST_CATEGORY')
-        elif key == 'collection' and value > 0:
+            ).id
+        )
 
-            if Theme.objects.count() > 0:
-                pass
-            else:
-                # print('generate theme -> set -> collection')
-                Theme.objects.create(
-                    name='TEST_THEME_RELATION',
-                    description='test description'
-                )
+    for n in range(category):
+        Category.objects.create(name=f'TEST_CATEGORY_{n}')
 
-            Collection.objects.create(
-                name='TEST_COLLECTION',
-                description='test description',
-                updated=timezone.now(),
-                theme_id=1,
-            )
-        elif key == 'article' and value > 0:
-            Article.objects.create(
-                name='TEST_ARTICLE',
-                description='test description',
-                identifier='123',
-                author='YSON',
-                license='FREE',
-                url='https://www.google.com/',
-                created='2019-09-21',
-            )
-        else:
-            print('model no exist')
+    for n in range(collection):
+        Collection.objects.create(
+            name=f'TEST_COLLECTION_{n}',
+            description='test description',
+            updated=timezone.now(),
+            theme_id=random.choice(themes_id),
+        )
+
+    for n in range(article):
+        Article.objects.create(
+            name=f'TEST_ARTICLE_{n}',
+            description='test description',
+            identifier=f'123{n}',
+            author='YSON',
+            license='FREE',
+            url='https://www.google.com/',
+            created='2019-09-21',
+        )

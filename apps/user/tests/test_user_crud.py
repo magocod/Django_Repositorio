@@ -1,5 +1,5 @@
 """
-Prueba creacion de usuarios
+...
 """
 
 # standard library
@@ -8,35 +8,19 @@ from typing import Any, Dict
 
 # local Django
 from django.contrib.auth.models import User
-# third-party
-from rest_framework.test import APIClient
 
-from apps.tests.auth import create_user
 # Django
-# from django.test import TestCase
 from apps.tests.fixtures import AuthConfigTestCase
 from apps.user.serializers import UserHeavySerializer
 
 
 class UserCrudTest(AuthConfigTestCase):
     """
-    edicion de usuarios
+    user crud test
     """
     serializer = UserHeavySerializer
 
-    def setUp(self) -> None:
-        """
-        ...
-        """
-        # user an token
-        auth = create_user(True)
-        self.client = APIClient()
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Token ' + auth['token'].key,
-        )
-        # data
-
-    def test_create_user(self) -> None:
+    def test_create_user(self):
         """
         ...
         """
@@ -48,7 +32,7 @@ class UserCrudTest(AuthConfigTestCase):
             'last_name': 'name2',
             'is_staff': False,
         }
-        response = self.client.post('/api/users/', data)
+        response = self.admin_client.post('/api/users/', data)
         response_data = json.loads(response.content)
         serializer = self.serializer(
             User.objects.get(id=response_data['id']),
@@ -63,13 +47,18 @@ class UserCrudTest(AuthConfigTestCase):
         data: Dict[str, Any] = {
             'names': 'NEW_USER',
         }
-        response = self.client.post('/api/users/', data)
+        response = self.admin_client.post('/api/users/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self):
         """
         ...
         """
+        User.objects.create_user(
+            'NEW',
+            'newemail@gmail.com',
+            '123',
+        )
         data: Dict[str, Any] = {
             'username': 'NEW',
             'email': 'newemail@gmail.com',
@@ -78,15 +67,14 @@ class UserCrudTest(AuthConfigTestCase):
             'last_name': 'name2',
             'is_staff': False,
         }
-        self.client.post('/api/users/', data)
-        response = self.client.post('/api/users/', data)
+        response = self.admin_client.post('/api/users/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_user(self):
         """
         ...
         """
-        response = self.client.get('/api/user/' + str(1) + '/')
+        response = self.admin_client.get(f'/api/user/{1}/')
         serializer = self.serializer(
             User.objects.get(id=1)
         )
@@ -103,7 +91,10 @@ class UserCrudTest(AuthConfigTestCase):
             'first_name': 'new name',
             'last_name': 'new name2',
         }
-        response = self.client.put('/api/user/' + str(1) + '/', newdata)
+        response = self.admin_client.put(
+            '/api/user/' + str(1) + '/',
+            newdata
+        )
         newvalues = self.serializer(User.objects.get(id=1))
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(newvalues.data, oldvalues.data)
@@ -113,5 +104,40 @@ class UserCrudTest(AuthConfigTestCase):
         """
         ...
         """
-        response = self.client.delete('/api/user/' + str(1) + '/')
+        response = self.admin_client.delete(f'/api/user/{2}/')
+        self.assertEqual(response.status_code, 204)
+
+    def test_not_allowed_to_delete_user(self):
+        """
+        ...
+        """
+        response = self.user_client.delete(f'/api/user/{4}/')
+        self.assertEqual(response.status_code, 403)
+        response = self.public_client.delete(f'/api/user/{4}/')
+        self.assertEqual(response.status_code, 401)
+
+    def test_user_does_not_delete_himself(self):
+        """
+        ...
+        """
+        response = self.admin_client.delete(f'/api/user/{1}/')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, "can't delete himself")
+
+    def test_not_delete_superuser(self):
+        """
+        ...
+        """
+        response = self.admin_client.delete(f'/api/user/{3}/')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, 'super users cannot be deleted')
+
+    def test_delete_admin_user(self):
+        """
+        ...
+        """
+        response = self.staff_client.delete(f'/api/user/{5}/')
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, 'user cannot delete administrators')
+        response = self.admin_client.delete(f'/api/user/{5}/')
         self.assertEqual(response.status_code, 204)

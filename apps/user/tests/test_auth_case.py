@@ -1,24 +1,18 @@
 """
-Prueba creacion de tag
+...
 """
 
 # standard library
 # import json
 from typing import Dict
 
-# third-party
-# from rest_framework.test import APIClient
-
-# local Django
-# from apps.tests.auth import create_user
 # Django
-# from django.test import TestCase
 from apps.tests.fixtures import AuthConfigTestCase
 
 
 class UserAuthTest(AuthConfigTestCase):
     """
-    edicion de tag
+    ...
     """
 
     def test_search_email(self) -> None:
@@ -26,7 +20,7 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'email': 'user@test.com',
+            'email': 'admin@django.com',
         }
         response = self.public_client.post('/api/email/', data)
         # print(response.data)
@@ -48,7 +42,7 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'email': 'user@test.com',
+            'email': 'admin@django.com',
             'password': '123',
         }
         response = self.public_client.post('/api/token-auth/', data)
@@ -59,13 +53,13 @@ class UserAuthTest(AuthConfigTestCase):
         """
         ...
         """
-        response = self.client.post('/api/user/logout/')
+        response = self.admin_client.post('/api/user/logout/')
         self.assertEqual(response.status_code, 200)
 
     def test_repeat_logout(self) -> None:
         """
         ...
         """
-        self.client.post('/api/user/logout/')
-        response = self.client.post('/api/user/logout/')
+        self.admin_client.post('/api/user/logout/')
+        response = self.admin_client.post('/api/user/logout/')
         self.assertEqual(response.status_code, 401)
