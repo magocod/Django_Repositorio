@@ -1,33 +1,19 @@
 # standard library
 # import json
 
-# Django
-from django.test import TestCase
-# third-party
-from rest_framework.test import APIClient
-
 # local Django
 from apps.article.models import Article
 from apps.article.serializers.article import ArticleHeavySerializer
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
+from apps.collection.models import Collection
+from apps.tag.models import Tag
+from apps.tests.fixtures import RepositoryTestCase
 
 
-class ArticleRelationTest(TestCase):
+class ArticleRelationTest(RepositoryTestCase):
     """
     ...
     """
     serializer = ArticleHeavySerializer
-
-    def setUp(self):
-        # user an token
-        auth = create_user(True)
-        self.client = APIClient()
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Token ' + auth['token'].key,
-        )
-        # data
-        db_populate(tag=1, theme=1, collection=1, article=1)
 
     def test_add_relations(self):
         # oldvalues = self.serializer(
@@ -38,7 +24,7 @@ class ArticleRelationTest(TestCase):
             'collections': [1],
             'tags': [1],
         }
-        response = self.client.put(
+        response = self.admin_client.put(
             '/api/article/relations/' + str(1) + '/',
             relationdata,
         )
@@ -50,19 +36,34 @@ class ArticleRelationTest(TestCase):
         self.assertEqual(newvalues.data, response.data)
 
     def test_remove_relations(self):
+        """
+        ...
+        """
         relationdata = {
             'article_id': 1,
-            'collections': [1],
-            'tags': [1],
+            'collections': [1, 2, 3],
+            'tags': [1, 3],
         }
-        response = self.client.put(
-            '/api/article/relations/' + str(1) + '/', relationdata,
+
+        article = Article.objects.get(pk=relationdata['article_id'])
+
+        for collection_id in relationdata['collections']:
+            collection = Collection.objects.get(pk=collection_id)
+            article.collections.add(collection)
+
+        for tag_id in relationdata['tags']:
+            tag = Tag.objects.get(pk=tag_id)
+            article.tags.add(tag)
+
+        response = self.admin_client.put(
+            f'/api/article/relations/{1}/',
+            relationdata,
         )
         # oldvalues = self.serializer(
         #     Article.objects.get(id=1),
         # )
-        response = self.client.delete(
-            '/api/article/relations/' + str(1) + '/',
+        response = self.admin_client.delete(
+            f'/api/article/relations/{1}/',
             relationdata
         )
         # print(response.data)

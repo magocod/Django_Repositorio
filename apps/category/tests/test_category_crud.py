@@ -6,36 +6,17 @@ Pruebas edicion Category
 import json
 from typing import Any, Dict
 
-# Django
-from django.test import TestCase
-# third-party
-from rest_framework.test import APIClient
-
 # local Django
 from apps.category.models import Category
 from apps.category.serializers import CategorySerializer
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
+from apps.tests.fixtures import RepositoryTestCase
 
 
-class CategoryCrudTest(TestCase):
+class CategoryCrudTest(RepositoryTestCase):
     """
     ...
     """
     serializer = CategorySerializer
-
-    def setUp(self) -> None:
-        """
-        ...
-        """
-        # user an token
-        auth = create_user(True)
-        self.client = APIClient()
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Token ' + auth['token'].key
-        )
-        # data
-        db_populate(category=1)
 
     def test_create_category(self) -> None:
         """
@@ -45,7 +26,7 @@ class CategoryCrudTest(TestCase):
             'name': 'test create',
             'description': 'test create description'
         }
-        response = self.client.post('/api/categories/', data)
+        response = self.admin_client.post('/api/categories/', data)
         response_data = json.loads(response.content)
         serializer = self.serializer(
             Category.objects.get(id=response_data['id']),
@@ -60,7 +41,7 @@ class CategoryCrudTest(TestCase):
         data: Dict[str, Any] = {
             'names': 'test create',
         }
-        response = self.client.post('/api/categories/', data)
+        response = self.admin_client.post('/api/categories/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self) -> None:
@@ -68,16 +49,16 @@ class CategoryCrudTest(TestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'TEST_CATEGORY',
+            'name': 'TEST_CATEGORY_1',
         }
-        response = self.client.post('/api/categories/', data)
+        response = self.admin_client.post('/api/categories/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_category(self) -> None:
         """
         ...
         """
-        response = self.client.get('/api/category/' + str(1) + '/')
+        response = self.admin_client.get(f'/api/category/{1}/')
         serializer = self.serializer(
             Category.objects.get(id=1)
         )
@@ -93,7 +74,7 @@ class CategoryCrudTest(TestCase):
         newdata: Dict[str, Any] = {
             'name': 'test update',
         }
-        response = self.client.put('/api/category/' + str(1) + '/', newdata)
+        response = self.admin_client.put(f'/api/category/{1}/', newdata)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(oldvalues.data, response.data)
 
@@ -101,5 +82,5 @@ class CategoryCrudTest(TestCase):
         """
         ...
         """
-        response = self.client.delete('/api/category/' + str(1) + '/')
+        response = self.admin_client.delete(f'/api/category/{1}/')
         self.assertEqual(response.status_code, 204)

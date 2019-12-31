@@ -1,38 +1,24 @@
 # standard library
 # import json
 
-# Django
-from django.test import TestCase
-# third-party
-from rest_framework.test import APIClient
-
 # local Django
 from apps.article.models import Article
 from apps.article.serializers.article import ArticleHeavySerializer
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
+from apps.tests.fixtures import RepositoryTestCase
 
 
-class SpecificationCrudTest(TestCase):
-
+class SpecificationCrudTest(RepositoryTestCase):
+    """
+    ...
+    """
     serializer = ArticleHeavySerializer
-
-    def setUp(self):
-        # user an token
-        auth = create_user(True)
-        self.client = APIClient()
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Token ' + auth['token'].key
-        )
-        # data
-        db_populate(article=1)
 
     def test_create_specification(self):
         data = {
             'description': 'create',
             'article_id': 1,
         }
-        response = self.client.post(
+        response = self.admin_client.post(
             '/api/articles/specification/',
             data
         )
@@ -50,7 +36,7 @@ class SpecificationCrudTest(TestCase):
             'description': '---',
             'updated': '2019-09-19',
         }
-        response = self.client.post(
+        response = self.admin_client.post(
             '/api/articles/specification/',
             data
         )
@@ -61,7 +47,10 @@ class SpecificationCrudTest(TestCase):
             'description': '---',
             'article': 1,
         }
-        response = self.client.post('/api/articles/specification/', data)
+        response = self.admin_client.post(
+            '/api/articles/specification/',
+            data
+        )
         self.assertEqual(response.status_code, 400)
 
     def test_update_specification(self):
@@ -69,15 +58,15 @@ class SpecificationCrudTest(TestCase):
             'description': 'create',
             'article_id': 1,
         }
-        self.client.post('/api/articles/specification/', data)
+        self.admin_client.post('/api/articles/specification/', data)
         # article = Article.objects.get(id=1)
         # oldvalues = self.serializer(article)
         newdata = {
             'description': 'UPDATED',
             'article_id': 1,
         }
-        response = self.client.put(
-            '/api/article/specification/' + str(1) + '/',
+        response = self.admin_client.put(
+            f'/api/article/specification/{1}/',
             newdata
         )
         # print(response.data)
@@ -93,8 +82,8 @@ class SpecificationCrudTest(TestCase):
             'description': 'create',
             'article_id': 1,
         }
-        self.client.post('/api/articles/specification/', data)
-        response = self.client.delete(
-            '/api/article/specification/' + str(1) + '/'
+        self.admin_client.post('/api/articles/specification/', data)
+        response = self.admin_client.delete(
+            f'/api/article/specification/{1}/'
         )
         self.assertEqual(response.status_code, 204)
