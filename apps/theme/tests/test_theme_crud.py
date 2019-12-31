@@ -6,36 +6,17 @@ Prueba edicion Theme
 import json
 from typing import Any, Dict
 
-# Django
-from django.test import TestCase
-# third-party
-from rest_framework.test import APIClient
-
-from apps.tests.auth import create_user
-from apps.tests.db import db_populate
 # local Django
 from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
+from apps.tests.fixtures import RepositoryTestCase
 
 
-class ThemeCrudTest(TestCase):
+class ThemeCrudTest(RepositoryTestCase):
     """
     ...
     """
     serializer = ThemeSerializer
-
-    def setUp(self):
-        """
-        ...
-        """
-        # user an token
-        auth = create_user(True)
-        self.client = APIClient()
-        self.client.credentials(
-            HTTP_AUTHORIZATION='Token ' + auth['token'].key,
-        )
-        # data
-        db_populate(theme=1)
 
     def test_create_theme(self):
         """
@@ -45,7 +26,7 @@ class ThemeCrudTest(TestCase):
             'name': 'test create',
             'description': 'test create description'
         }
-        response = self.client.post('/api/themes/', data)
+        response = self.admin_client.post('/api/themes/', data)
         response_data = json.loads(response.content)
         serializer = self.serializer(
             Theme.objects.get(id=response_data['id']),
@@ -60,7 +41,7 @@ class ThemeCrudTest(TestCase):
         data: Dict[str, Any] = {
             'name': 'test create',
         }
-        response = self.client.post('/api/themes/', data)
+        response = self.admin_client.post('/api/themes/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self):
@@ -68,17 +49,17 @@ class ThemeCrudTest(TestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'TEST_THEME',
+            'name': 'TEST_THEME_1',
             'description': 'test create duplicate'
         }
-        response = self.client.post('/api/themes/', data)
+        response = self.admin_client.post('/api/themes/', data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_theme(self):
         """
         ...
         """
-        response = self.client.get('/api/theme/' + str(1) + '/')
+        response = self.admin_client.get(f'/api/theme/{1}/')
         serializer = self.serializer(
             Theme.objects.get(id=1)
         )
@@ -94,7 +75,7 @@ class ThemeCrudTest(TestCase):
             'name': 'test update',
             'description': 'test update description'
         }
-        response = self.client.put('/api/theme/' + str(1) + '/', newdata)
+        response = self.admin_client.put(f'/api/theme/{1}/', newdata)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(oldvalues.data, response.data)
 
@@ -102,5 +83,6 @@ class ThemeCrudTest(TestCase):
         """
         ...
         """
-        response = self.client.delete('/api/theme/' + str(1) + '/')
+        theme_id: int = Theme.objects.create(name='Hello').id
+        response = self.admin_client.delete(f'/api/theme/{theme_id}/')
         self.assertEqual(response.status_code, 204)
