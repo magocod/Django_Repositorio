@@ -2,7 +2,7 @@ APScheduler==3.6.1
 asgiref==3.2.3
 astroid==2.2.5
 colorama==0.4.1
-Django==3.0
+Django==3.0.2
 django-unused-media==0.1.13
 djangorestframework==3.11.0
 factory-boy==2.12.0
