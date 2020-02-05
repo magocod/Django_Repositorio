@@ -1,7 +1,6 @@
 ## UNEFA Repository
 
-> Python 3.8
-> Digital repository, UNEFA internship project
+* Digital repository, UNEFA internship project
 
 ## Tox env
 
