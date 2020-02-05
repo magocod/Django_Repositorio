@@ -1,1 +1,1 @@
-web: gunicorn dj_chat.wsgi:application
+web: gunicorn djrepo.wsgi:application
