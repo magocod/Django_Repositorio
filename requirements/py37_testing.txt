@@ -8,7 +8,6 @@ django-cors-headers==3.2.1
 django-heroku==0.3.1
 django-unused-media==0.1.13
 djangorestframework==3.11.0
-djrepo==2.0
 factory-boy==2.12.0
 Faker==2.0.2
 isort==4.3.21
