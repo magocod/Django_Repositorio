@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import json
 import os
 
+# heroku
+import django_heroku
+import dj_database_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -183,8 +187,15 @@ https://docs.djangoproject.com/en/2.2/howto/static-files/
 """
 
 # Static files (CSS, JavaScript, Images)
+# STATIC_URL = '/static/'
+# # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -197,3 +208,12 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 # ruta base directorio de archivos
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+IS_CI = os.environ.get('IS_CI', False)
+if not IS_CI:
+    django_heroku.settings(locals())
+    if not DEBUG:
+        DATABASES['default'] = dj_database_url.config(
+            conn_max_age=600,
+            ssl_require=True
+        )
