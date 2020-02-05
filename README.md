@@ -1,6 +1,7 @@
 ## UNEFA Repository
 
 * Digital repository, UNEFA internship project
+* Demo url: https://djrepo.herokuapp.com/
 
 ## Tox env
 
