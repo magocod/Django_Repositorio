@@ -11,7 +11,7 @@
 
 ## Framework
 
-* Django 3.0.0 -> https://www.djangoproject.com/
+* Django -> https://www.djangoproject.com/
 
 ## Database
 
@@ -20,8 +20,8 @@
 
 ## Third Packages
 
-* Django-rest-framework 3.11.0 --> http://www.django-rest-framework.org/
-* django-unused-media --> 0.1.11
+* Django-rest-framework --> http://www.django-rest-framework.org/
+* django-unused-media
 
 ## Tests
 
