@@ -1,1 +1,1 @@
-web: gunicorn dj_chat.wsgi:application --port $PORT --bind 0.0.0.0
+web: gunicorn dj_chat.wsgi:application
