@@ -23,23 +23,39 @@
 * Django-rest-framework --> http://www.django-rest-framework.org/
 * django-unused-media
 
-## Tests
+## Tests (88% coverage)
 
 * Python unittest -> https://docs.python.org/3/library/unittest.html
 * Django tests -> https://docs.djangoproject.com/en/3.0/topics/testing/
 
 ## instructions
 
-install python virtual environment and install libraries with pip
+Create a virtual python environment and install libraries with pip
 
 ```bash
 pip install -r requirements.txt
+```
+
+Create all virtual environments (using tox)
+```bash
+tox
 ```
 
 Migrate the database
 
 ```bash
 python manage.py migrate
+```
+
+run tests (verify successful installation)
+```bash
+python manage.py test
+```
+
+run tests (verify coverage)
+```bash
+coverage run --source='.' manage.py test
+coverage report
 ```
 
 Run development server
