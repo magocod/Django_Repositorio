@@ -63,24 +63,14 @@ class ArticleRelationSerializer(serializers.Serializer):
         """
         ...
         """
-        try:
-            # return validated_data
-            article = Article.objects.get(pk=validated_data['article_id'])
+        article = Article.objects.get(pk=validated_data['article_id'])
 
-            for collection_id in validated_data['collections']:
-                collection = Collection.objects.get(pk=collection_id)
-                article.collections.add(collection)
+        for collection_id in validated_data['collections']:
+            collection = Collection.objects.get(pk=collection_id)
+            article.collections.add(collection)
 
-            for tag_id in validated_data['tags']:
-                tag = Tag.objects.get(pk=tag_id)
-                article.tags.add(tag)
+        for tag_id in validated_data['tags']:
+            tag = Tag.objects.get(pk=tag_id)
+            article.tags.add(tag)
 
-            return article
-        # except IntegrityError as e:
-        #     return str(e)
-        # except Collection.DoesNotExist as e:
-        #     return str(e)
-        # except Tag.DoesNotExist as e:
-        #     return str(e)
-        except Exception as e:
-            return str(e)
+        return article

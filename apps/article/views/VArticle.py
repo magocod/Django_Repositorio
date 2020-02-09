@@ -88,41 +88,56 @@ class VArticleRelation(APIView):
     serializer = ArticleRelationSerializer
 
     def get_object(self, pk):
-        try:
-            return Article.objects.get(pk=pk)
-        except Article.DoesNotExist:
-            raise Http404
+        return Article.objects.get(pk=pk)
 
     @transaction.atomic
     def put(self, request, pk, format=None):
-        response = self.serializer(data=request.data)
-        if response.is_valid():
-            response.save()
-            res = ArticleHeavySerializer(
-                self.get_object(pk)
-            )
-            return Response(res.data, status=status.HTTP_200_OK)
+        try:
+            with transaction.atomic():
+                response = self.serializer(data=request.data)
+                if response.is_valid():
+                    response.save()
+                    res = ArticleHeavySerializer(
+                        self.get_object(pk)
+                    )
+                    return Response(res.data, status=status.HTTP_200_OK)
 
-        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    response.errors,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except Article.DoesNotExist:
+            raise Http404
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
     @transaction.atomic
     def delete(self, request, pk, format=None):
-        response = self.serializer(data=request.data)
-        if response.is_valid():
+        try:
+            with transaction.atomic():
+                response = self.serializer(data=request.data)
+                if response.is_valid():
 
-            article = self.get_object(pk)
+                    article = self.get_object(pk)
 
-            for collection_id in response.validated_data['collections']:
-                collection = Collection.objects.get(id=collection_id)
-                article.collections.remove(collection)
+                    for col_id in response.validated_data['collections']:
+                        collection = Collection.objects.get(id=col_id)
+                        article.collections.remove(collection)
 
-            for tag_id in response.validated_data['tags']:
-                tag = Tag.objects.get(id=tag_id)
-                article.tags.remove(tag)
+                    for tag_id in response.validated_data['tags']:
+                        tag = Tag.objects.get(id=tag_id)
+                        article.tags.remove(tag)
 
-            res = ArticleHeavySerializer(
-                self.get_object(pk)
-            )
-            return Response(res.data, status=status.HTTP_200_OK)
+                    res = ArticleHeavySerializer(
+                        self.get_object(pk)
+                    )
+                    return Response(res.data, status=status.HTTP_200_OK)
 
-        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    response.errors,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except Article.DoesNotExist:
+            raise Http404
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)

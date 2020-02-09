@@ -85,7 +85,7 @@ class VCollectionRelation(APIView):
 
     def get_object(self, pk):
         return Collection.objects.get(pk=pk)
-        
+
     @transaction.atomic
     def put(self, request, pk, format=None):
         try:

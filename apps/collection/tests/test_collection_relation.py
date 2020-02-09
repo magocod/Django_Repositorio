@@ -32,7 +32,6 @@ class CollectionRelationTest(RepositoryTestCase):
         self.assertEqual(response_add.status_code, 404)
         self.assertEqual(response_remove.status_code, 404)
 
-
     def test_collection_add_relations(self):
         # oldvalues = self.serializer(
         #     Collection.objects.get(id=1)
