@@ -1,2 +1,4 @@
 [run]
-omit = *.tox*
+omit = 
+	*.tox*
+	*apps.py*

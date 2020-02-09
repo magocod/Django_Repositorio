@@ -23,7 +23,7 @@
 * Django-rest-framework --> http://www.django-rest-framework.org/
 * django-unused-media
 
-## Tests (88% coverage)
+## Tests (90% coverage)
 
 * Python unittest -> https://docs.python.org/3/library/unittest.html
 * Django tests -> https://docs.djangoproject.com/en/3.0/topics/testing/

@@ -30,12 +30,6 @@ class Article(models.Model):
         related_name='article_collections',
     )
 
-    def __str__(self):
-        """
-        ...
-        """
-        return self.name
-
     def file_directory(instance, filename):
         """[summary]
         metodo guardar en disco
@@ -71,9 +65,3 @@ class Specification(models.Model):
      related_name='article_specification',
      on_delete=models.CASCADE,
     )
-
-    def __str__(self):
-        """
-        ...
-        """
-        return self.name

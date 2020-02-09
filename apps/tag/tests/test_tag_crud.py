@@ -17,7 +17,7 @@ class TagCrudTest(RepositoryTestCase):
     ...
     """
 
-    def test_create_tag(self) -> None:
+    def test_create_tag(self):
         """
         ...
         """
@@ -63,6 +63,13 @@ class TagCrudTest(RepositoryTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
+    def test_get_tag_not_found(self):
+        """
+        ...
+        """
+        response = self.admin_client.get(f'/api/tag/{10000}/')
+        self.assertEqual(response.status_code, 404)
+
     def test_update_tag(self):
         """
         ...
@@ -79,6 +86,13 @@ class TagCrudTest(RepositoryTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(newvalues.data, oldvalues.data)
         self.assertEqual(newvalues.data, response.data)
+
+    def test_error_params_update_tag(self):
+        newdata: Dict[str, Any] = {
+            'namess': 'YSON2',
+        }
+        response = self.admin_client.put(f'/api/tag/{1}/', newdata)
+        self.assertEqual(response.status_code, 400)
 
     def test_delete_tag(self):
         """

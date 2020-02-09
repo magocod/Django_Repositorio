@@ -65,6 +65,13 @@ class CategoryCrudTest(RepositoryTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
+    def test_get_category_not_found(self) -> None:
+        """
+        ...
+        """
+        response = self.admin_client.get(f'/api/category/{12000}/')
+        self.assertEqual(response.status_code, 404)
+
     def test_update_category(self) -> None:
         """
         ...
@@ -77,6 +84,16 @@ class CategoryCrudTest(RepositoryTestCase):
         response = self.admin_client.put(f'/api/category/{1}/', newdata)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(oldvalues.data, response.data)
+
+    def test_error_params_update_category(self) -> None:
+        """
+        ...
+        """
+        newdata: Dict[str, Any] = {
+            'newname': 'test update',
+        }
+        response = self.admin_client.put(f'/api/category/{1}/', newdata)
+        self.assertEqual(response.status_code, 400)
 
     def test_delete_category(self) -> None:
         """

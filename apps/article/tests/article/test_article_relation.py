@@ -72,3 +72,15 @@ class ArticleRelationTest(RepositoryTestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertEqual(newvalues.data, response.data)
+
+    def test_add_relation_in_the_article_that_does_not_exist(self):
+        relationdata = {
+            'article_id': 1,
+            'collections': [1],
+            'tags': [1],
+        }
+        response = self.admin_client.put(
+            '/api/article/relations/' + str(1000) + '/',
+            relationdata,
+        )
+        self.assertEqual(response.status_code, 404)

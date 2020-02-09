@@ -27,6 +27,3 @@ class Collection(models.Model):
         Tag,
         related_name='collection_tags'
     )
-
-    def __str__(self):
-        return self.name
