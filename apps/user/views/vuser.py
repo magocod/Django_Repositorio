@@ -34,7 +34,7 @@ class VUserList(APIView):
             user = User.objects.get(pk=pk)
             res = self.serializer(user)
             return res.data
-        except User.DoesNotExist:
+        except User.DoesNotExist:  # pragma: no cover
             raise Http404
 
     def get(self, request, format=None):

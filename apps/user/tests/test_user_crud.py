@@ -81,6 +81,13 @@ class UserCrudTest(AuthConfigTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
+    def test_get_user_not_found(self):
+        """
+        ...
+        """
+        response = self.admin_client.get(f'/api/user/{1900}/')
+        self.assertEqual(response.status_code, 404)
+
     def test_update_user(self):
         """
         ...
@@ -99,6 +106,19 @@ class UserCrudTest(AuthConfigTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(newvalues.data, oldvalues.data)
         self.assertEqual(newvalues.data, response.data)
+
+    def test_error_params_update_user(self):
+        """
+        ...
+        """
+        newdata: Dict[str, Any] = {
+            'invalid': 'NEW',
+        }
+        response = self.admin_client.put(
+            '/api/user/' + str(1) + '/',
+            newdata
+        )
+        self.assertEqual(response.status_code, 400)
 
     def test_delete_user(self):
         """

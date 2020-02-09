@@ -212,7 +212,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 IS_CI = os.environ.get('IS_CI', False)
 if not IS_CI:
     django_heroku.settings(locals())
-    if not DEBUG:
+    if not DEBUG:  # pragma: no cover
         DATABASES['default'] = dj_database_url.config(
             conn_max_age=600,
             ssl_require=True

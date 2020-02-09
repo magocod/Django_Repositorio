@@ -50,7 +50,7 @@ class ArticleCrudTest(RepositoryTestCase):
         response = self.admin_client.post('/api/articles/', data)
         self.assertEqual(response.status_code, 400)
 
-    def test_get_collection(self):
+    def test_get_article(self):
         response = self.admin_client.get(f'/api/article/{1}/')
         # print(response.data)
         serializer = self.serializer(
@@ -59,9 +59,14 @@ class ArticleCrudTest(RepositoryTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
-    def test_update_collection(self):
-        collection = Article.objects.get(id=1)
-        oldvalues = self.serializer(collection)
+    def test_get_article_not_found(self):
+        response = self.admin_client.get(f'/api/article/{1000}/')
+        self.assertEqual(response.status_code, 404)
+
+    def test_update_article(self):
+        oldvalues = self.serializer(
+            Article.objects.get(id=1)
+        )
         newdata = {
             'name': 'UPDATED',
             'description': '---',
@@ -80,6 +85,20 @@ class ArticleCrudTest(RepositoryTestCase):
         self.assertNotEqual(newvalues.data, oldvalues.data)
         self.assertEqual(newvalues.data, response.data)
 
-    def test_delete_collection(self):
+    def test_error_params_update_article(self):
+        oldvalues = self.serializer(
+            Article.objects.get(id=1)
+        )
+        newdata = {
+            'names': 'UPDATED',
+        }
+        response = self.admin_client.put(f'/api/article/{1}/', newdata)
+        values = self.serializer(
+            Article.objects.get(id=1)
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(values.data, oldvalues.data)
+
+    def test_delete_article(self):
         response = self.admin_client.delete(f'/api/article/{1}/')
         self.assertEqual(response.status_code, 204)

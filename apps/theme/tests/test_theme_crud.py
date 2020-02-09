@@ -66,6 +66,13 @@ class ThemeCrudTest(RepositoryTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
+    def test_get_theme_not_found(self):
+        """
+        ...
+        """
+        response = self.admin_client.get(f'/api/theme/{1000}/')
+        self.assertEqual(response.status_code, 404)
+
     def test_update_theme(self):
         """
         ...
@@ -78,6 +85,20 @@ class ThemeCrudTest(RepositoryTestCase):
         response = self.admin_client.put(f'/api/theme/{1}/', newdata)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(oldvalues.data, response.data)
+
+    def test_error_params_update_theme(self):
+        """
+        ...
+        """
+        oldvalues = self.serializer(Theme.objects.get(id=1))
+        newdata: Dict[str, Any] = {
+            'name_error': 'test update',
+            'invalid_description': 'test update description'
+        }
+        response = self.admin_client.put(f'/api/theme/{1}/', newdata)
+        values = self.serializer(Theme.objects.get(id=1))
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(oldvalues.data, values.data)
 
     def test_delete_theme(self):
         """

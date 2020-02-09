@@ -59,22 +59,42 @@ class CollectionCrudTest(RepositoryTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
+    def test_get_collection_not_found(self):
+        response = self.admin_client.get(f'/api/collection/{1000}/')
+        self.assertEqual(response.status_code, 404)
+
     def test_update_collection(self):
-        collection = Collection.objects.get(id=1)
-        oldvalues = self.serializer(collection)
+        oldvalues = self.serializer(
+            Collection.objects.get(id=1)
+        )
         newdata = {
             'name': 'YSON2',
             'description': 'updated',
             'theme_id': 1,
         }
         response = self.admin_client.put(f'/api/collection/{1}/', newdata)
-        # print(response.data)
         newvalues = self.serializer(
             Collection.objects.get(id=1)
         )
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(newvalues.data, oldvalues.data)
         self.assertEqual(newvalues.data, response.data)
+
+    def test_error_parameters_update_collection(self):
+        oldvalues = self.serializer(
+            Collection.objects.get(id=1)
+        )
+        newdata = {
+            'names': 'YSON2',
+            'descriptions': 'updated',
+            'theme': 1,
+        }
+        response = self.admin_client.put(f'/api/collection/{1}/', newdata)
+        values = self.serializer(
+            Collection.objects.get(id=1)
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(values.data, oldvalues.data)
 
     def test_delete_collection(self):
         response = self.admin_client.delete(f'/api/collection/{1}/')

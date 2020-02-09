@@ -132,7 +132,7 @@ class AuthTokenSerializer(serializers.Serializer):
                         msg,
                         code='authorization',
                     )
-        else:
+        else:  # pragma: no cover
             msg = ('Must include "email" and "password".')
             # raise APIException(msg)
             raise serializers.ValidationError(msg, code='authorization')

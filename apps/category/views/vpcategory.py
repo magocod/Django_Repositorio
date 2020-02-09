@@ -6,7 +6,8 @@ Vista listado publico
 # import json
 
 # Django
-from django.http import JsonResponse
+# from django.http import JsonResponse
+
 # third-party
 # from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -35,9 +36,9 @@ class VCategorySlugList(APIView, PageNumberPagination):
         serializer = self.serializer(results, many=True)
         return self.get_paginated_response(serializer.data)
 
-    def post(self, request, format=None):
-        """
-        ...
-        """
-        # listr = Category.objects.all().order_by('id').values_list()
-        return JsonResponse({'foo': 'bar'})
+    # def post(self, request, format=None):
+    #     """
+    #     ...
+    #     """
+    #     # listr = Category.objects.all().order_by('id').values_list()
+    #     return JsonResponse({'foo': 'bar'})

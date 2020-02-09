@@ -12,8 +12,8 @@ from rest_framework.authtoken.models import Token
 
 USERS: Tuple[Dict[str, Any]] = (
     {
-        'username': 'GENERIC',
-        'email': 'generic@django.com',
+        'username': 'admin',
+        'email': 'admin@django.com',
         'password': '123',
         'first_name': 'Generic',
         'last_name': 'Generic',
@@ -21,7 +21,35 @@ USERS: Tuple[Dict[str, Any]] = (
         'super': True,
         'token': '20fd382ed9407b31e1d5f928b5574bb4bffe6120',
     },
+    {
+        'username': 'staff',
+        'email': 'staff@django.com',
+        'password': '123',
+        'first_name': 'Generic',
+        'last_name': 'Generic',
+        'staff': True,
+        'super': False,
+        'token': '30fd382ed9407b31e1d5f928b5574bb4bffe6120',
+    },
+    {
+        'username': 'user',
+        'email': 'user@django.com',
+        'password': '123',
+        'first_name': 'Generic',
+        'last_name': 'Generic',
+        'staff': False,
+        'super': False,
+        'token': '40fd382ed9407b31e1d5f928b5574bb4bffe6120',
+    },
 )
+
+
+DEFAULT_USERS: Dict[str, int] = {
+    'total': 3,
+    'super': 1,
+    'staff': 1,
+    'basic': 1
+}
 
 
 def user_list():

@@ -72,7 +72,7 @@ class VEmail(APIView):
             self.get_object(response.validated_data['email'])
             return Response(status=status.HTTP_200_OK)
 
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class VLogout(APIView):

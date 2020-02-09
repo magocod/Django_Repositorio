@@ -1,6 +1,6 @@
 # third-party
 # Django
-from django.db import IntegrityError
+# from django.db import IntegrityError
 from rest_framework import serializers
 
 # local Django
@@ -76,11 +76,11 @@ class ArticleRelationSerializer(serializers.Serializer):
                 article.tags.add(tag)
 
             return article
-        except IntegrityError as e:
-            return str(e)
-        except Collection.DoesNotExist as e:
-            return str(e)
-        except Tag.DoesNotExist as e:
-            return str(e)
+        # except IntegrityError as e:
+        #     return str(e)
+        # except Collection.DoesNotExist as e:
+        #     return str(e)
+        # except Tag.DoesNotExist as e:
+        #     return str(e)
         except Exception as e:
             return str(e)

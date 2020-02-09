@@ -62,11 +62,10 @@ class VCollectionDetail(APIView):
             data=request.data
         )
         if response.is_valid():
-            result = response.save()
-            if type(result) == str:
-                return Response(result, status=status.HTTP_400_BAD_REQUEST)
-
-            res = self.serializer(result)
+            response.save()
+            res = self.serializer(
+                self.get_object(pk)
+            )
             return Response(res.data, status=status.HTTP_200_OK)
 
         return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -85,41 +84,56 @@ class VCollectionRelation(APIView):
     serializer = CollectionRelationSerializer
 
     def get_object(self, pk):
-        try:
-            return Collection.objects.get(pk=pk)
-        except Collection.DoesNotExist:
-            raise Http404
-
+        return Collection.objects.get(pk=pk)
+        
     @transaction.atomic
     def put(self, request, pk, format=None):
-        response = self.serializer(data=request.data)
-        if response.is_valid():
-            response.save()
-            res = CollectionHeavySerializer(
-                self.get_object(pk)
-            )
-            return Response(res.data, status=status.HTTP_200_OK)
+        try:
+            with transaction.atomic():
+                response = self.serializer(data=request.data)
+                if response.is_valid():
+                    response.save()
+                    res = CollectionHeavySerializer(
+                        self.get_object(pk)
+                    )
+                    return Response(res.data, status=status.HTTP_200_OK)
 
-        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    response.errors,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except Collection.DoesNotExist:
+            raise Http404
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
     @transaction.atomic
     def delete(self, request, pk, format=None):
-        response = self.serializer(data=request.data)
-        if response.is_valid():
+        try:
+            with transaction.atomic():
+                response = self.serializer(data=request.data)
+                if response.is_valid():
 
-            collection = self.get_object(pk)
+                    collection = self.get_object(pk)
 
-            for category_id in response.validated_data['categories']:
-                category = Category.objects.get(id=category_id)
-                collection.categories.remove(category)
+                    for category_id in response.validated_data['categories']:
+                        category = Category.objects.get(id=category_id)
+                        collection.categories.remove(category)
 
-            for tag_id in response.validated_data['tags']:
-                tag = Tag.objects.get(id=tag_id)
-                collection.tags.remove(tag)
+                    for tag_id in response.validated_data['tags']:
+                        tag = Tag.objects.get(id=tag_id)
+                        collection.tags.remove(tag)
 
-            res = CollectionHeavySerializer(
-                self.get_object(pk)
-            )
-            return Response(res.data, status=status.HTTP_200_OK)
+                    res = CollectionHeavySerializer(
+                        self.get_object(pk)
+                    )
+                    return Response(res.data, status=status.HTTP_200_OK)
 
-        return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(
+                    response.errors,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        except Collection.DoesNotExist:
+            raise Http404
+        except Exception as e:
+            return Response(str(e), status=status.HTTP_400_BAD_REQUEST)

@@ -2,7 +2,7 @@
 # import json
 
 # Django
-from django.db import IntegrityError
+# from django.db import IntegrityError
 # third-party
 from rest_framework import serializers
 
@@ -50,31 +50,22 @@ class CollectionRelationSerializer(serializers.Serializer):
     )
 
     def create(self, validated_data):
-        try:
+        """
+        ...
+        """
+        collection = Collection.objects.get(
+            id=validated_data['collection_id']
+        )
 
-            collection = Collection.objects.get(
-                id=validated_data['collection_id']
-            )
+        for category_id in validated_data['categories']:
+            category = Category.objects.get(id=category_id)
+            collection.categories.add(category)
 
-            for category_id in validated_data['categories']:
-                category = Category.objects.get(id=category_id)
-                collection.categories.add(category)
+        for tag_id in validated_data['tags']:
+            tag = Tag.objects.get(id=tag_id)
+            collection.tags.add(tag)
 
-            for tag_id in validated_data['tags']:
-                tag = Tag.objects.get(id=tag_id)
-                collection.tags.add(tag)
-
-            return collection
-        except IntegrityError as e:
-            return str(e)
-        except Collection.DoesNotExist as e:
-            return str(e)
-        except Category.DoesNotExist as e:
-            return str(e)
-        except Tag.DoesNotExist as e:
-            return str(e)
-        except Exception as e:
-            return str(e)
+        return collection
 
 
 class CollectionSlugSerializer(serializers.ModelSerializer):
