@@ -11,111 +11,76 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('tag', '0001_initial'),
-        ('collection', '0001_initial'),
+        ("tag", "0001_initial"),
+        ("collection", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name="Article",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.AutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name='ID'
-                    )
+                        verbose_name="ID",
+                    ),
                 ),
-                ('name', models.CharField(max_length=100, unique=True)),
-                ('description', models.TextField()),
-                ('identifier', models.CharField(max_length=255, unique=True)),
-                ('author', models.CharField(max_length=100)),
-                ('license', models.CharField(max_length=100)),
-                ('url', models.URLField(max_length=255, null=True)),
-                ('created', models.DateField()),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
+                ("name", models.CharField(max_length=100, unique=True)),
+                ("description", models.TextField()),
+                ("identifier", models.CharField(max_length=255, unique=True)),
+                ("author", models.CharField(max_length=100)),
+                ("license", models.CharField(max_length=100)),
+                ("url", models.URLField(max_length=255, null=True)),
+                ("created", models.DateField()),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 (
-                    'updated',
-                    models.DateTimeField(
-                        default=django.utils.timezone.now
-                    )
-                ),
-                (
-                    'file',
+                    "file",
                     models.FileField(
-                        null=True,
-                        upload_to=apps.article.models.Article.file_directory
-                    )
+                        null=True, upload_to=apps.article.models.Article.file_directory
+                    ),
                 ),
                 (
-                    'collections',
+                    "collections",
                     models.ManyToManyField(
-                        related_name='article_collections',
-                        to='collection.Collection'
-                    )
+                        related_name="article_collections", to="collection.Collection"
+                    ),
                 ),
-                (
-                    'tags',
-                    models.ManyToManyField(
-                        related_name='tags',
-                        to='tag.Tag'
-                    )
-                ),
+                ("tags", models.ManyToManyField(related_name="tags", to="tag.Tag")),
             ],
         ),
         migrations.CreateModel(
-            name='Specification',
+            name="Specification",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.AutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name='ID'
-                    )
+                        verbose_name="ID",
+                    ),
                 ),
-                ('description', models.TextField()),
+                ("description", models.TextField()),
+                ("platform", models.CharField(blank=True, max_length=100, null=True)),
                 (
-                    'platform',
-                    models.CharField(
-                        blank=True,
-                        max_length=100,
-                        null=True
-                    )
+                    "installation",
+                    models.CharField(blank=True, max_length=100, null=True),
                 ),
+                ("extension", models.CharField(blank=True, max_length=100, null=True)),
+                ("meta", models.TextField(null=True)),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 (
-                    'installation',
-                    models.CharField(
-                        blank=True,
-                        max_length=100,
-                        null=True
-                    )
-                ),
-                (
-                    'extension',
-                    models.CharField(
-                        blank=True,
-                        max_length=100,
-                        null=True
-                    )
-                ),
-                ('meta', models.TextField(null=True)),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
-                (
-                    'updated',
-                    models.DateTimeField(
-                        default=django.utils.timezone.now
-                    )
-                ),
-                (
-                    'article',
+                    "article",
                     models.OneToOneField(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name='article_specification',
-                        to='article.Article')
+                        related_name="article_specification",
+                        to="article.Article",
+                    ),
                 ),
             ],
         ),

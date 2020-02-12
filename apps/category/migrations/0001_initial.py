@@ -8,31 +8,25 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.AutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name='ID'
-                    )
+                        verbose_name="ID",
+                    ),
                 ),
-                ('name', models.CharField(max_length=40, unique=True)),
-                ('meta', models.TextField(null=True)),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
-                (
-                    'updated',
-                    models.DateTimeField(
-                        default=django.utils.timezone.now
-                    )
-                ),
+                ("name", models.CharField(max_length=40, unique=True)),
+                ("meta", models.TextField(null=True)),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
     ]

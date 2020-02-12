@@ -16,9 +16,14 @@ class ThemeSerializer(serializers.ModelSerializer):
     """
     ...
     """
+
     class Meta:
         model = Theme
         fields: Tuple[str] = (
-            'id', 'name', 'description',
-            'meta', 'timestamp', 'updated',
+            "id",
+            "name",
+            "description",
+            "meta",
+            "timestamp",
+            "updated",
         )

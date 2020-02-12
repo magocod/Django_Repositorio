@@ -23,9 +23,9 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'email': 'admin@django.com',
+            "email": "admin@django.com",
         }
-        response = self.public_client.post('/api/email/', data)
+        response = self.public_client.post("/api/email/", data)
         # print(response.data)
         self.assertEqual(response.status_code, 200)
 
@@ -34,9 +34,9 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'email': 'user10@test.com',
+            "email": "user10@test.com",
         }
-        response = self.public_client.post('/api/email/', data)
+        response = self.public_client.post("/api/email/", data)
         # print(response.data)
         self.assertEqual(response.status_code, 404)
 
@@ -45,9 +45,9 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'emails': 'novalid@django.com',
+            "emails": "novalid@django.com",
         }
-        response = self.public_client.post('/api/email/', data)
+        response = self.public_client.post("/api/email/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_success_request_token(self):
@@ -55,10 +55,10 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'email': 'admin@django.com',
-            'password': '123',
+            "email": "admin@django.com",
+            "password": "123",
         }
-        response = self.public_client.post('/api/token-auth/', data)
+        response = self.public_client.post("/api/token-auth/", data)
         self.assertEqual(response.status_code, 200)
 
     def test_error_credentials(self):
@@ -66,10 +66,10 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'e': 'notexist@django.com',
-            'pass': '123',
+            "e": "notexist@django.com",
+            "pass": "123",
         }
-        response = self.public_client.post('/api/token-auth/', data)
+        response = self.public_client.post("/api/token-auth/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_error_user_account_is_disabled(self):
@@ -78,16 +78,13 @@ class UserAuthTest(AuthConfigTestCase):
         """
         User.objects.filter(id=1).update(is_active=False)
         data: Dict[str, str] = {
-            'email': 'admin@django.com',
-            'password': '123',
+            "email": "admin@django.com",
+            "password": "123",
         }
-        response = self.public_client.post('/api/token-auth/', data)
+        response = self.public_client.post("/api/token-auth/", data)
         self.assertEqual(response.status_code, 400)
         self.assertEqual(
-            response.data[
-                'non_field_errors'
-            ][0],
-            'User account is disabled.'
+            response.data["non_field_errors"][0], "User account is disabled."
         )
 
     def test_error_user_not_exist(self):
@@ -95,46 +92,40 @@ class UserAuthTest(AuthConfigTestCase):
         ...
         """
         data: Dict[str, str] = {
-            'email': 'notexist@django.com',
-            'password': '123',
+            "email": "notexist@django.com",
+            "password": "123",
         }
-        response = self.public_client.post('/api/token-auth/', data)
+        response = self.public_client.post("/api/token-auth/", data)
         self.assertEqual(response.status_code, 400)
-        self.assertEqual(
-            response.data[
-                'non_field_errors'
-            ][0], 'User no exist.'
-        )
+        self.assertEqual(response.data["non_field_errors"][0], "User no exist.")
 
     def test_error_invalid_password(self):
         """
         ...
         """
         data: Dict[str, str] = {
-            'email': 'admin@django.com',
-            'password': 'novalid',
+            "email": "admin@django.com",
+            "password": "novalid",
         }
-        response = self.public_client.post('/api/token-auth/', data)
+        response = self.public_client.post("/api/token-auth/", data)
         self.assertEqual(response.status_code, 400)
         # print(response.data)
         self.assertEqual(
-            response.data[
-                'non_field_errors'
-            ][0],
-            'Unable to log in with provided credentials.'
+            response.data["non_field_errors"][0],
+            "Unable to log in with provided credentials.",
         )
 
     def test_logout(self):
         """
         ...
         """
-        response = self.admin_client.post('/api/user/logout/')
+        response = self.admin_client.post("/api/user/logout/")
         self.assertEqual(response.status_code, 200)
 
     def test_repeat_logout(self):
         """
         ...
         """
-        self.admin_client.post('/api/user/logout/')
-        response = self.admin_client.post('/api/user/logout/')
+        self.admin_client.post("/api/user/logout/")
+        response = self.admin_client.post("/api/user/logout/")
         self.assertEqual(response.status_code, 401)

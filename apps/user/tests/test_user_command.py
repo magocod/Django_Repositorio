@@ -26,27 +26,18 @@ class AuthConfigTestCase(TestCase):
         """
         ...
         """
-        call_command('default_users')
+        call_command("default_users")
 
-        self.assertEqual(User.objects.count(), DEFAULT_USERS['total'])
+        self.assertEqual(User.objects.count(), DEFAULT_USERS["total"])
         self.assertEqual(
-            User.objects.filter(
-                is_superuser=True,
-                is_staff=True
-            ).count(),
-            DEFAULT_USERS['super']
+            User.objects.filter(is_superuser=True, is_staff=True).count(),
+            DEFAULT_USERS["super"],
         )
         self.assertEqual(
-            User.objects.filter(
-                is_superuser=False,
-                is_staff=True
-            ).count(),
-            DEFAULT_USERS['staff']
+            User.objects.filter(is_superuser=False, is_staff=True).count(),
+            DEFAULT_USERS["staff"],
         )
         self.assertEqual(
-            User.objects.filter(
-                is_superuser=False,
-                is_staff=False
-            ).count(),
-            DEFAULT_USERS['basic']
+            User.objects.filter(is_superuser=False, is_staff=False).count(),
+            DEFAULT_USERS["basic"],
         )

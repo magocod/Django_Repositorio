@@ -13,10 +13,12 @@ class TagFactory(factory.django.DjangoModelFactory):
     """
     Fabrica
     """
-    name = factory.Sequence(lambda n: 'tag n:{}'.format(n))
+
+    name = factory.Sequence(lambda n: "tag n:{}".format(n))
 
     class Meta:
         """
         Metadatos
         """
+
         model = Tag

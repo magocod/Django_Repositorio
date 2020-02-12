@@ -6,8 +6,10 @@ Edicion de usuarios
 from typing import Union
 
 from django.contrib.auth.models import User
+
 # Django
 from django.http import Http404
+
 # third-party
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
@@ -16,13 +18,17 @@ from rest_framework.views import APIView
 
 # local Django
 from apps.user.serializers import (
-    UserHeavySerializer, UserRegisterSerializer, UserSerializer)
+    UserHeavySerializer,
+    UserRegisterSerializer,
+    UserSerializer,
+)
 
 
 class VUserList(APIView):
     """
     ...
     """
+
     permission_classes = (IsAdminUser,)
     serializer = UserHeavySerializer
 
@@ -41,10 +47,7 @@ class VUserList(APIView):
         """
         ...
         """
-        response = self.serializer(
-            User.objects.all().order_by('id'),
-            many=True,
-        )
+        response = self.serializer(User.objects.all().order_by("id"), many=True,)
         return Response(response.data, status=status.HTTP_200_OK)
 
     def post(self, request, format=None):
@@ -64,6 +67,7 @@ class VUserDetail(APIView):
     """
     ...
     """
+
     permission_classes = (IsAdminUser,)
     serializer = UserSerializer
 
@@ -104,21 +108,17 @@ class VUserDetail(APIView):
         user = self.get_object(pk)
 
         if user.id == request.user.id:
-            return Response(
-                "can't delete himself",
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            return Response("can't delete himself", status=status.HTTP_400_BAD_REQUEST,)
 
         if user.is_superuser:
             return Response(
-                'super users cannot be deleted',
-                status=status.HTTP_400_BAD_REQUEST,
+                "super users cannot be deleted", status=status.HTTP_400_BAD_REQUEST,
             )
 
         if user.is_staff:
             if not request.user.is_superuser:
                 return Response(
-                    'user cannot delete administrators',
+                    "user cannot delete administrators",
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 

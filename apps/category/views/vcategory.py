@@ -7,6 +7,7 @@ from typing import Union
 
 # Django
 from django.http import Http404
+
 # third-party
 from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
@@ -23,6 +24,7 @@ class VCategoryList(APIView, PageNumberPagination):
     """
     ...
     """
+
     permission_classes = (IsAdminUser,)
     serializer = CategorySerializer
 
@@ -30,7 +32,7 @@ class VCategoryList(APIView, PageNumberPagination):
         """
         ...
         """
-        listr = Category.objects.all().order_by('id')
+        listr = Category.objects.all().order_by("id")
         results = self.paginate_queryset(listr, request)
         serializer = self.serializer(results, many=True)
         return self.get_paginated_response(serializer.data)
@@ -51,6 +53,7 @@ class VCategoryDetail(APIView):
     """
     ...
     """
+
     permission_classes = (IsAdminUser,)
     serializer = CategorySerializer
 

@@ -16,16 +16,18 @@ class ArticleFactory(factory.django.DjangoModelFactory):
     """
     Fabrica
     """
-    name = factory.Sequence(lambda n: 'article n:{}'.format(n))
-    description = '---'
-    identifier = factory.Sequence(lambda n: '1234{}'.format(n))
-    author = '---'
-    license = '---'
-    url = factory.Sequence(lambda n: 'https://www.google.com/{}'.format(n))
-    created = '2019-10-10'
+
+    name = factory.Sequence(lambda n: "article n:{}".format(n))
+    description = "---"
+    identifier = factory.Sequence(lambda n: "1234{}".format(n))
+    author = "---"
+    license = "---"
+    url = factory.Sequence(lambda n: "https://www.google.com/{}".format(n))
+    created = "2019-10-10"
 
     class Meta:
         """
         Metadatos
         """
+
         model = Article

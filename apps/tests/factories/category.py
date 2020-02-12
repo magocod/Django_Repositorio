@@ -13,10 +13,12 @@ class CategoryFactory(factory.django.DjangoModelFactory):
     """
     Fabrica
     """
-    name = factory.Sequence(lambda n: 'category n:{}'.format(n))
+
+    name = factory.Sequence(lambda n: "category n:{}".format(n))
 
     class Meta:
         """
         Metadatos
         """
+
         model = Category

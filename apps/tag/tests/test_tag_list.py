@@ -20,7 +20,7 @@ class TagListTest(RepositoryTestCase):
         """
         ...
         """
-        response = self.admin_client.get('/api/tags/')
+        response = self.admin_client.get("/api/tags/")
         # response_data = json.loads(response.content)
         # serializer = TagSerializer(
         #     Tag.objects.all(),
@@ -33,5 +33,5 @@ class TagListTest(RepositoryTestCase):
         """
         ...
         """
-        response = self.public_client.get('/api/tags/')
+        response = self.public_client.get("/api/tags/")
         self.assertEqual(response.status_code, 401)

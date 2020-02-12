@@ -28,14 +28,11 @@ class VSpecificationList(APIView):
             if response.is_valid():
                 response.save()
                 res = ArticleHeavySerializer(
-                    self.get_article(response.data['article_id'])
+                    self.get_article(response.data["article_id"])
                 )
                 return Response(res.data, status=status.HTTP_201_CREATED)
 
-            return Response(
-                response.errors,
-                status=status.HTTP_400_BAD_REQUEST
-            )
+            return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response(str(e), status=status.HTTP_400_BAD_REQUEST)
 
@@ -61,9 +58,7 @@ class VSpecificationDetail(APIView):
         response = self.serializer(specification, data=request.data)
         if response.is_valid():
             response.save()
-            res = ArticleHeavySerializer(
-                self.get_article(response.data['article_id'])
-            )
+            res = ArticleHeavySerializer(self.get_article(response.data["article_id"]))
             return Response(res.data, status=status.HTTP_200_OK)
 
         return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -9,6 +9,7 @@ from typing import Union
 from django.http import Http404
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
+
 # third-party
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -22,6 +23,7 @@ class VThemeList(APIView):
     """
     ...
     """
+
     permission_classes = (IsAdminUser,)
     serializer = ThemeSerializer
 
@@ -49,6 +51,7 @@ class VThemeDetail(APIView):
     """
     ...
     """
+
     permission_classes = (IsAdminUser,)
     serializer = ThemeSerializer
 

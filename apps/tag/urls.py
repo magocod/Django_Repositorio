@@ -9,6 +9,6 @@ from django.urls import path
 from apps.tag.views import vtag
 
 urlpatterns = [
-    path('tags/', vtag.VTagList.as_view(), name='api_tags'),
-    path('tag/<int:pk>/', vtag.VTagDetail.as_view(), name='api_tag_detail'),
+    path("tags/", vtag.VTagList.as_view(), name="api_tags"),
+    path("tag/<int:pk>/", vtag.VTagDetail.as_view(), name="api_tag_detail"),
 ]

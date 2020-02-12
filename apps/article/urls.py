@@ -5,29 +5,25 @@ from django.urls import path
 from apps.article.views import VArticle, VSpecification
 
 urlpatterns = [
+    path("articles/", VArticle.VArticleList.as_view(), name="api_articles",),
     path(
-        'articles/',
-        VArticle.VArticleList.as_view(),
-        name='api_articles',
-    ),
-    path(
-        'article/<int:pk>/',
+        "article/<int:pk>/",
         VArticle.VArticleDetail.as_view(),
-        name='api_article_detail',
+        name="api_article_detail",
     ),
     path(
-        'article/relations/<int:pk>/',
+        "article/relations/<int:pk>/",
         VArticle.VArticleRelation.as_view(),
-        name='api_article_relation',
+        name="api_article_relation",
     ),
     path(
-        'articles/specification/',
+        "articles/specification/",
         VSpecification.VSpecificationList.as_view(),
-        name='api_specifications',
+        name="api_specifications",
     ),
     path(
-        'article/specification/<int:pk>/',
+        "article/specification/<int:pk>/",
         VSpecification.VSpecificationDetail.as_view(),
-        name='api_specification_detail',
+        name="api_specification_detail",
     ),
 ]

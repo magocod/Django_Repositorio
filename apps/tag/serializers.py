@@ -16,6 +16,7 @@ class TagSerializer(serializers.ModelSerializer):
     """
     Serializador basico tag
     """
+
     class Meta:
         model = Tag
-        fields: Tuple[str] = ('id', 'name', 'timestamp', 'updated')
+        fields: Tuple[str] = ("id", "name", "timestamp", "updated")

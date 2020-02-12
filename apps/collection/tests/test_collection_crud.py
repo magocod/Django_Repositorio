@@ -15,87 +15,76 @@ class CollectionCrudTest(RepositoryTestCase):
     """
     ...
     """
+
     serializer = CollectionHeavySerializer
 
     def test_create_collection(self):
         data = {
-            'name': 'YSON',
-            'description': '---',
-            'updated': '2019-09-19 10:00:00',
-            'theme_id': 1,
+            "name": "YSON",
+            "description": "---",
+            "updated": "2019-09-19 10:00:00",
+            "theme_id": 1,
         }
-        response = self.admin_client.post('/api/collections/', data)
+        response = self.admin_client.post("/api/collections/", data)
         # print(response)
-        serializer = self.serializer(
-            Collection.objects.get(id=response.data['id']),
-        )
+        serializer = self.serializer(Collection.objects.get(id=response.data["id"]),)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(serializer.data, response.data)
 
     def test_create_error_params(self):
         data = {
-            'name': 'YSON',
-            'description': '---',
-            'updated': '2019-09-19',
+            "name": "YSON",
+            "description": "---",
+            "updated": "2019-09-19",
         }
-        response = self.admin_client.post('/api/collections/', data)
+        response = self.admin_client.post("/api/collections/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self):
         data = {
-            'name': 'TEST_COLLECTION_1',
-            'description': '---',
-            'updated': '2019-09-19 10:00:00',
-            'theme_id': 1,
+            "name": "TEST_COLLECTION_1",
+            "description": "---",
+            "updated": "2019-09-19 10:00:00",
+            "theme_id": 1,
         }
-        response = self.admin_client.post('/api/collections/', data)
+        response = self.admin_client.post("/api/collections/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_collection(self):
-        response = self.admin_client.get(f'/api/collection/{1}/')
-        serializer = self.serializer(
-            Collection.objects.get(id=response.data['id'])
-        )
+        response = self.admin_client.get(f"/api/collection/{1}/")
+        serializer = self.serializer(Collection.objects.get(id=response.data["id"]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
     def test_get_collection_not_found(self):
-        response = self.admin_client.get(f'/api/collection/{1000}/')
+        response = self.admin_client.get(f"/api/collection/{1000}/")
         self.assertEqual(response.status_code, 404)
 
     def test_update_collection(self):
-        oldvalues = self.serializer(
-            Collection.objects.get(id=1)
-        )
+        oldvalues = self.serializer(Collection.objects.get(id=1))
         newdata = {
-            'name': 'YSON2',
-            'description': 'updated',
-            'theme_id': 1,
+            "name": "YSON2",
+            "description": "updated",
+            "theme_id": 1,
         }
-        response = self.admin_client.put(f'/api/collection/{1}/', newdata)
-        newvalues = self.serializer(
-            Collection.objects.get(id=1)
-        )
+        response = self.admin_client.put(f"/api/collection/{1}/", newdata)
+        newvalues = self.serializer(Collection.objects.get(id=1))
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(newvalues.data, oldvalues.data)
         self.assertEqual(newvalues.data, response.data)
 
     def test_error_parameters_update_collection(self):
-        oldvalues = self.serializer(
-            Collection.objects.get(id=1)
-        )
+        oldvalues = self.serializer(Collection.objects.get(id=1))
         newdata = {
-            'names': 'YSON2',
-            'descriptions': 'updated',
-            'theme': 1,
+            "names": "YSON2",
+            "descriptions": "updated",
+            "theme": 1,
         }
-        response = self.admin_client.put(f'/api/collection/{1}/', newdata)
-        values = self.serializer(
-            Collection.objects.get(id=1)
-        )
+        response = self.admin_client.put(f"/api/collection/{1}/", newdata)
+        values = self.serializer(Collection.objects.get(id=1))
         self.assertEqual(response.status_code, 400)
         self.assertEqual(values.data, oldvalues.data)
 
     def test_delete_collection(self):
-        response = self.admin_client.delete(f'/api/collection/{1}/')
+        response = self.admin_client.delete(f"/api/collection/{1}/")
         self.assertEqual(response.status_code, 204)

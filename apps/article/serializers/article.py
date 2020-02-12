@@ -16,14 +16,24 @@ class ArticleSerializer(serializers.ModelSerializer):
     """
     ...
     """
+
     class Meta:
         """
         ...
         """
+
         model = Article
         fields = (
-            'id', 'name', 'description', 'timestamp', 'updated',
-            'identifier', 'author', 'license', 'url', 'created',
+            "id",
+            "name",
+            "description",
+            "timestamp",
+            "updated",
+            "identifier",
+            "author",
+            "license",
+            "url",
+            "created",
         )
 
 
@@ -31,6 +41,7 @@ class ArticleHeavySerializer(serializers.ModelSerializer):
     """
     ...
     """
+
     article_specification = SpecificationSerializer()
     collections = CollectionSerializer(many=True)
     tags = TagSerializer(many=True)
@@ -39,11 +50,22 @@ class ArticleHeavySerializer(serializers.ModelSerializer):
         """
         ...
         """
+
         model = Article
         fields = (
-            'id', 'name', 'description', 'timestamp', 'updated',
-            'identifier', 'author', 'license', 'url', 'created',
-            'tags', 'collections', 'article_specification',
+            "id",
+            "name",
+            "description",
+            "timestamp",
+            "updated",
+            "identifier",
+            "author",
+            "license",
+            "url",
+            "created",
+            "tags",
+            "collections",
+            "article_specification",
         )
 
 
@@ -51,25 +73,22 @@ class ArticleRelationSerializer(serializers.Serializer):
     """
     ...
     """
+
     article_id = serializers.IntegerField()
-    collections = serializers.ListField(
-        child=serializers.IntegerField(),
-    )
-    tags = serializers.ListField(
-        child=serializers.IntegerField(),
-    )
+    collections = serializers.ListField(child=serializers.IntegerField(),)
+    tags = serializers.ListField(child=serializers.IntegerField(),)
 
     def create(self, validated_data):
         """
         ...
         """
-        article = Article.objects.get(pk=validated_data['article_id'])
+        article = Article.objects.get(pk=validated_data["article_id"])
 
-        for collection_id in validated_data['collections']:
+        for collection_id in validated_data["collections"]:
             collection = Collection.objects.get(pk=collection_id)
             article.collections.add(collection)
 
-        for tag_id in validated_data['tags']:
+        for tag_id in validated_data["tags"]:
             tag = Tag.objects.get(pk=tag_id)
             article.tags.add(tag)
 

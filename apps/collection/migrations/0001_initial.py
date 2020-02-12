@@ -10,54 +10,47 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('category', '0001_initial'),
-        ('tag', '0001_initial'),
-        ('theme', '0001_initial'),
+        ("category", "0001_initial"),
+        ("tag", "0001_initial"),
+        ("theme", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Collection',
+            name="Collection",
             fields=[
                 (
-                    'id',
+                    "id",
                     models.AutoField(
                         auto_created=True,
                         primary_key=True,
                         serialize=False,
-                        verbose_name='ID'
-                    )
+                        verbose_name="ID",
+                    ),
                 ),
-                ('name', models.CharField(max_length=100, unique=True)),
-                ('description', models.TextField()),
-                ('timestamp', models.DateTimeField(auto_now_add=True)),
+                ("name", models.CharField(max_length=100, unique=True)),
+                ("description", models.TextField()),
+                ("timestamp", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(default=django.utils.timezone.now)),
                 (
-                    'updated',
-                    models.DateTimeField(
-                        default=django.utils.timezone.now
-                    )
-                ),
-                (
-                    'categories',
+                    "categories",
                     models.ManyToManyField(
-                        related_name='collection_categories',
-                        to='category.Category'
-                    )
+                        related_name="collection_categories", to="category.Category"
+                    ),
                 ),
                 (
-                    'tags',
+                    "tags",
                     models.ManyToManyField(
-                        related_name='collection_tags',
-                        to='tag.Tag'
-                    )
+                        related_name="collection_tags", to="tag.Tag"
+                    ),
                 ),
                 (
-                    'theme',
+                    "theme",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
-                        related_name='collection_theme',
-                        to='theme.Theme'
-                    )
+                        related_name="collection_theme",
+                        to="theme.Theme",
+                    ),
                 ),
             ],
         ),

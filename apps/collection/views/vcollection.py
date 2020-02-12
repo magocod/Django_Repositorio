@@ -1,5 +1,6 @@
 # third-party
 from django.db import transaction
+
 # Django
 from django.http import Http404
 from rest_framework import status
@@ -14,7 +15,7 @@ from apps.collection.models import Collection
 from apps.collection.serializers import (
     CollectionHeavySerializer,
     CollectionRelationSerializer,
-    CollectionSerializer
+    CollectionSerializer,
 )
 from apps.tag.models import Tag
 
@@ -25,7 +26,7 @@ class VCollectionList(APIView, PageNumberPagination):
 
     def get(self, request, format=None):
         # consulta
-        listr = Collection.objects.all().order_by('id')
+        listr = Collection.objects.all().order_by("id")
         # respuesta
         results = self.paginate_queryset(listr, request)
         serializer = CollectionHeavySerializer(results, many=True)
@@ -57,15 +58,10 @@ class VCollectionDetail(APIView):
         return Response(response.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk, format=None):
-        response = CollectionSerializer(
-            self.get_object(pk),
-            data=request.data
-        )
+        response = CollectionSerializer(self.get_object(pk), data=request.data)
         if response.is_valid():
             response.save()
-            res = self.serializer(
-                self.get_object(pk)
-            )
+            res = self.serializer(self.get_object(pk))
             return Response(res.data, status=status.HTTP_200_OK)
 
         return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -80,6 +76,7 @@ class VCollectionRelation(APIView):
     """
     edicion relaciones muchos a muchos
     """
+
     permission_classes = (IsAdminUser,)
     serializer = CollectionRelationSerializer
 
@@ -93,15 +90,10 @@ class VCollectionRelation(APIView):
                 response = self.serializer(data=request.data)
                 if response.is_valid():
                     response.save()
-                    res = CollectionHeavySerializer(
-                        self.get_object(pk)
-                    )
+                    res = CollectionHeavySerializer(self.get_object(pk))
                     return Response(res.data, status=status.HTTP_200_OK)
 
-                return Response(
-                    response.errors,
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+                return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
         except Collection.DoesNotExist:
             raise Http404
         except Exception as e:
@@ -116,23 +108,18 @@ class VCollectionRelation(APIView):
 
                     collection = self.get_object(pk)
 
-                    for category_id in response.validated_data['categories']:
+                    for category_id in response.validated_data["categories"]:
                         category = Category.objects.get(id=category_id)
                         collection.categories.remove(category)
 
-                    for tag_id in response.validated_data['tags']:
+                    for tag_id in response.validated_data["tags"]:
                         tag = Tag.objects.get(id=tag_id)
                         collection.tags.remove(tag)
 
-                    res = CollectionHeavySerializer(
-                        self.get_object(pk)
-                    )
+                    res = CollectionHeavySerializer(self.get_object(pk))
                     return Response(res.data, status=status.HTTP_200_OK)
 
-                return Response(
-                    response.errors,
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+                return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
         except Collection.DoesNotExist:
             raise Http404
         except Exception as e:

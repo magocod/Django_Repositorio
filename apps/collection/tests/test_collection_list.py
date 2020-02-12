@@ -15,10 +15,11 @@ class CollectionListTest(RepositoryTestCase):
     """
     ...
     """
+
     serializer = CollectionHeavySerializer
 
     def test_get_all(self):
-        response = self.admin_client.get('/api/collections/')
+        response = self.admin_client.get("/api/collections/")
         # response_data = json.loads(response.content)
         # serializer = self.serializer(
         #     Collection.objects.all(),
@@ -28,5 +29,5 @@ class CollectionListTest(RepositoryTestCase):
         # self.assertEqual(serializer.data, response_data)
 
     def test_get_all_authenticated(self):
-        response = self.public_client.get('/api/collections/')
+        response = self.public_client.get("/api/collections/")
         self.assertEqual(response.status_code, 401)

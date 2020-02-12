@@ -39,9 +39,7 @@ class VArticleList(APIView):
         response = self.serializer(data=request.data)
         if response.is_valid():
             response.save()
-            res = ArticleHeavySerializer(
-                self.get_object(response.data['id'])
-            )
+            res = ArticleHeavySerializer(self.get_object(response.data["id"]))
             return Response(res.data, status=status.HTTP_201_CREATED)
 
         return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -67,9 +65,7 @@ class VArticleDetail(APIView):
         response = self.serializer(article, data=request.data)
         if response.is_valid():
             response.save()
-            res = ArticleHeavySerializer(
-                self.get_object(pk)
-            )
+            res = ArticleHeavySerializer(self.get_object(pk))
             return Response(res.data, status=status.HTTP_200_OK)
 
         return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -84,6 +80,7 @@ class VArticleRelation(APIView):
     """
     edicion relaciones muchos a muchoa
     """
+
     permission_classes = (IsAdminUser,)
     serializer = ArticleRelationSerializer
 
@@ -97,15 +94,10 @@ class VArticleRelation(APIView):
                 response = self.serializer(data=request.data)
                 if response.is_valid():
                     response.save()
-                    res = ArticleHeavySerializer(
-                        self.get_object(pk)
-                    )
+                    res = ArticleHeavySerializer(self.get_object(pk))
                     return Response(res.data, status=status.HTTP_200_OK)
 
-                return Response(
-                    response.errors,
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+                return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
         except Article.DoesNotExist:
             raise Http404
         except Exception as e:
@@ -120,23 +112,18 @@ class VArticleRelation(APIView):
 
                     article = self.get_object(pk)
 
-                    for col_id in response.validated_data['collections']:
+                    for col_id in response.validated_data["collections"]:
                         collection = Collection.objects.get(id=col_id)
                         article.collections.remove(collection)
 
-                    for tag_id in response.validated_data['tags']:
+                    for tag_id in response.validated_data["tags"]:
                         tag = Tag.objects.get(id=tag_id)
                         article.tags.remove(tag)
 
-                    res = ArticleHeavySerializer(
-                        self.get_object(pk)
-                    )
+                    res = ArticleHeavySerializer(self.get_object(pk))
                     return Response(res.data, status=status.HTTP_200_OK)
 
-                return Response(
-                    response.errors,
-                    status=status.HTTP_400_BAD_REQUEST
-                )
+                return Response(response.errors, status=status.HTTP_400_BAD_REQUEST)
         except Article.DoesNotExist:
             raise Http404
         except Exception as e:

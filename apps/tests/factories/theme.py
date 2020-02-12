@@ -13,11 +13,13 @@ class ThemeFactory(factory.django.DjangoModelFactory):
     """
     Fabrica
     """
-    name = factory.Sequence(lambda n: 'theme n:{}'.format(n))
-    description = '---'
+
+    name = factory.Sequence(lambda n: "theme n:{}".format(n))
+    description = "---"
 
     class Meta:
         """
         Metadatos
         """
+
         model = Theme

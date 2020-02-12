@@ -22,13 +22,11 @@ class TagCrudTest(RepositoryTestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'YSON',
+            "name": "YSON",
         }
-        response = self.admin_client.post('/api/tags/', data)
+        response = self.admin_client.post("/api/tags/", data)
         response_data = json.loads(response.content)
-        serializer = TagSerializer(
-            Tag.objects.get(id=response_data['id']),
-        )
+        serializer = TagSerializer(Tag.objects.get(id=response_data["id"]),)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(serializer.data, response_data)
 
@@ -37,9 +35,9 @@ class TagCrudTest(RepositoryTestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'names': 'NEW_TAG',
+            "names": "NEW_TAG",
         }
-        response = self.admin_client.post('/api/tags/', data)
+        response = self.admin_client.post("/api/tags/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self):
@@ -47,19 +45,17 @@ class TagCrudTest(RepositoryTestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'TEST_TAG_1',
+            "name": "TEST_TAG_1",
         }
-        response = self.admin_client.post('/api/tags/', data)
+        response = self.admin_client.post("/api/tags/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_tag(self):
         """
         ...
         """
-        response = self.admin_client.get(f'/api/tag/{1}/')
-        serializer = TagSerializer(
-            Tag.objects.get(id=1)
-        )
+        response = self.admin_client.get(f"/api/tag/{1}/")
+        serializer = TagSerializer(Tag.objects.get(id=1))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
@@ -67,7 +63,7 @@ class TagCrudTest(RepositoryTestCase):
         """
         ...
         """
-        response = self.admin_client.get(f'/api/tag/{10000}/')
+        response = self.admin_client.get(f"/api/tag/{10000}/")
         self.assertEqual(response.status_code, 404)
 
     def test_update_tag(self):
@@ -77,26 +73,24 @@ class TagCrudTest(RepositoryTestCase):
         tag = Tag.objects.get(id=1)
         oldvalues = TagSerializer(tag)
         newdata: Dict[str, Any] = {
-            'name': 'YSON2',
+            "name": "YSON2",
         }
-        response = self.admin_client.put(f'/api/tag/{1}/', newdata)
-        newvalues = TagSerializer(
-            Tag.objects.get(id=1)
-        )
+        response = self.admin_client.put(f"/api/tag/{1}/", newdata)
+        newvalues = TagSerializer(Tag.objects.get(id=1))
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(newvalues.data, oldvalues.data)
         self.assertEqual(newvalues.data, response.data)
 
     def test_error_params_update_tag(self):
         newdata: Dict[str, Any] = {
-            'namess': 'YSON2',
+            "namess": "YSON2",
         }
-        response = self.admin_client.put(f'/api/tag/{1}/', newdata)
+        response = self.admin_client.put(f"/api/tag/{1}/", newdata)
         self.assertEqual(response.status_code, 400)
 
     def test_delete_tag(self):
         """
         ...
         """
-        response = self.admin_client.delete(f'/api/tag/{1}/')
+        response = self.admin_client.delete(f"/api/tag/{1}/")
         self.assertEqual(response.status_code, 204)

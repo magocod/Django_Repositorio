@@ -22,17 +22,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ENV = None
 
-with open(os.path.join(BASE_DIR, 'django.config.json')) as json_file:
+with open(os.path.join(BASE_DIR, "django.config.json")) as json_file:
     ENV = json.load(json_file)
 
 
 # SECURITY WARNING keep the secret key used in production secret
-SECRET_KEY = ENV['APP']['SECRET_KEY']
+SECRET_KEY = ENV["APP"]["SECRET_KEY"]
 
 # SECURITY WARNING don't run with debug turned on in production
-DEBUG = ENV['APP']['DEBUG']
+DEBUG = ENV["APP"]["DEBUG"]
 
-ALLOWED_HOSTS = ENV['APP']['ALLOWED_HOSTS']
+ALLOWED_HOSTS = ENV["APP"]["ALLOWED_HOSTS"]
 
 """
 APPLICATION DEFINITION
@@ -40,84 +40,75 @@ APPLICATION DEFINITION
 
 INSTALLED_APPS = [
     # django
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     # third-party
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django_unused_media',
+    "rest_framework",
+    "rest_framework.authtoken",
+    "django_unused_media",
     # local Django
-    'apps.article',
-    'apps.category',
-    'apps.collection',
-    'apps.tag',
-    'apps.theme',
-    'apps.user',
+    "apps.article",
+    "apps.category",
+    "apps.collection",
+    "apps.tag",
+    "apps.theme",
+    "apps.user",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'djrepo.urls'
+ROOT_URLCONF = "djrepo.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'djrepo.wsgi.application'
+WSGI_APPLICATION = "djrepo.wsgi.application"
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation' +
-        '.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation"
+        + ".UserAttributeSimilarityValidator",
     },
-    {
-        'NAME': 'django.contrib.auth.password_validation' +
-        '.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation' +
-        '.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation' +
-        '.NumericPasswordValidator',
-    },
+    {"NAME": "django.contrib.auth.password_validation" + ".MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation" + ".CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation" + ".NumericPasswordValidator",},
 ]
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -132,41 +123,38 @@ API REST CONFIG
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = ENV['APP']['CORS_ORIGIN_WHITELIST']
+CORS_ORIGIN_WHITELIST = ENV["APP"]["CORS_ORIGIN_WHITELIST"]
 
 CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 )
 
 CORS_ALLOW_HEADERS = (
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'Access-Control-Allow-Origin'
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "Access-Control-Allow-Origin",
 )
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.'
-    + 'PageNumberPagination',
-    'PAGE_SIZE': 2,
-    'DEFAULT_METADATA_CLASS': 'rest_framework.metadata.SimpleMetadata',
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination." + "PageNumberPagination",
+    "PAGE_SIZE": 2,
+    "DEFAULT_METADATA_CLASS": "rest_framework.metadata.SimpleMetadata",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
 }
 
 """
@@ -175,9 +163,9 @@ https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 """
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     },
 }
 
@@ -194,26 +182,23 @@ https://docs.djangoproject.com/en/2.2/howto/static-files/
 #     os.path.join(BASE_DIR, 'static'),
 # )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # Media files (JPG, PNG, PDF, ...)
 # ...
 
 # ruta
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 # ruta base directorio de archivos
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
-IS_CI = os.environ.get('IS_CI', False)
+IS_CI = os.environ.get("IS_CI", False)
 if not IS_CI:
     django_heroku.settings(locals())
     if not DEBUG:  # pragma: no cover
-        DATABASES['default'] = dj_database_url.config(
-            conn_max_age=600,
-            ssl_require=True
+        DATABASES["default"] = dj_database_url.config(
+            conn_max_age=600, ssl_require=True
         )

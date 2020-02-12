@@ -14,6 +14,7 @@ class Article(models.Model):
     """
     ...
     """
+
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     identifier = models.CharField(max_length=255, unique=True)
@@ -24,10 +25,9 @@ class Article(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=timezone.now)
     # relaciones
-    tags = models.ManyToManyField(Tag, related_name='tags')
+    tags = models.ManyToManyField(Tag, related_name="tags")
     collections = models.ManyToManyField(
-        Collection,
-        related_name='article_collections',
+        Collection, related_name="article_collections",
     )
 
     def file_directory(instance, filename):
@@ -38,12 +38,14 @@ class Article(models.Model):
         filename {[type]} -- [description]
         """
         return os.path.join(
-            'repository/'
+            "repository/"
             + str(instance.theme)
-            + '/'
+            + "/"
             + str(instance.specification)
-            + '/'
-            + str(instance.identifier), filename)
+            + "/"
+            + str(instance.identifier),
+            filename,
+        )
 
     file = models.FileField(upload_to=file_directory, null=True)
 
@@ -52,6 +54,7 @@ class Specification(models.Model):
     """
     ...
     """
+
     # name = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     platform = models.CharField(max_length=100, null=True, blank=True)
@@ -61,7 +64,5 @@ class Specification(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=timezone.now)
     article = models.OneToOneField(
-     Article,
-     related_name='article_specification',
-     on_delete=models.CASCADE,
+        Article, related_name="article_specification", on_delete=models.CASCADE,
     )

@@ -4,6 +4,7 @@
 # from rest_framework import status
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
+
 # from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -18,7 +19,7 @@ class VCollectionSlugList(APIView, PageNumberPagination):
 
     def get(self, request, format=None):
         # consulta
-        listr = Collection.objects.all().order_by('id')
+        listr = Collection.objects.all().order_by("id")
         # respuesta
         results = self.paginate_queryset(listr, request)
         serializer = self.serializer(results, many=True)

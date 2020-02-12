@@ -16,6 +16,7 @@ class ThemeCrudTest(RepositoryTestCase):
     """
     ...
     """
+
     serializer = ThemeSerializer
 
     def test_create_theme(self):
@@ -23,14 +24,12 @@ class ThemeCrudTest(RepositoryTestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'test create',
-            'description': 'test create description'
+            "name": "test create",
+            "description": "test create description",
         }
-        response = self.admin_client.post('/api/themes/', data)
+        response = self.admin_client.post("/api/themes/", data)
         response_data = json.loads(response.content)
-        serializer = self.serializer(
-            Theme.objects.get(id=response_data['id']),
-        )
+        serializer = self.serializer(Theme.objects.get(id=response_data["id"]),)
         self.assertEqual(response.status_code, 201)
         self.assertEqual(serializer.data, response_data)
 
@@ -39,9 +38,9 @@ class ThemeCrudTest(RepositoryTestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'test create',
+            "name": "test create",
         }
-        response = self.admin_client.post('/api/themes/', data)
+        response = self.admin_client.post("/api/themes/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_create_error_duplicate(self):
@@ -49,20 +48,18 @@ class ThemeCrudTest(RepositoryTestCase):
         ...
         """
         data: Dict[str, Any] = {
-            'name': 'TEST_THEME_1',
-            'description': 'test create duplicate'
+            "name": "TEST_THEME_1",
+            "description": "test create duplicate",
         }
-        response = self.admin_client.post('/api/themes/', data)
+        response = self.admin_client.post("/api/themes/", data)
         self.assertEqual(response.status_code, 400)
 
     def test_get_theme(self):
         """
         ...
         """
-        response = self.admin_client.get(f'/api/theme/{1}/')
-        serializer = self.serializer(
-            Theme.objects.get(id=1)
-        )
+        response = self.admin_client.get(f"/api/theme/{1}/")
+        serializer = self.serializer(Theme.objects.get(id=1))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(serializer.data, response.data)
 
@@ -70,7 +67,7 @@ class ThemeCrudTest(RepositoryTestCase):
         """
         ...
         """
-        response = self.admin_client.get(f'/api/theme/{1000}/')
+        response = self.admin_client.get(f"/api/theme/{1000}/")
         self.assertEqual(response.status_code, 404)
 
     def test_update_theme(self):
@@ -79,10 +76,10 @@ class ThemeCrudTest(RepositoryTestCase):
         """
         oldvalues = self.serializer(Theme.objects.get(id=1))
         newdata: Dict[str, Any] = {
-            'name': 'test update',
-            'description': 'test update description'
+            "name": "test update",
+            "description": "test update description",
         }
-        response = self.admin_client.put(f'/api/theme/{1}/', newdata)
+        response = self.admin_client.put(f"/api/theme/{1}/", newdata)
         self.assertEqual(response.status_code, 200)
         self.assertNotEqual(oldvalues.data, response.data)
 
@@ -92,10 +89,10 @@ class ThemeCrudTest(RepositoryTestCase):
         """
         oldvalues = self.serializer(Theme.objects.get(id=1))
         newdata: Dict[str, Any] = {
-            'name_error': 'test update',
-            'invalid_description': 'test update description'
+            "name_error": "test update",
+            "invalid_description": "test update description",
         }
-        response = self.admin_client.put(f'/api/theme/{1}/', newdata)
+        response = self.admin_client.put(f"/api/theme/{1}/", newdata)
         values = self.serializer(Theme.objects.get(id=1))
         self.assertEqual(response.status_code, 400)
         self.assertEqual(oldvalues.data, values.data)
@@ -104,6 +101,6 @@ class ThemeCrudTest(RepositoryTestCase):
         """
         ...
         """
-        theme_id: int = Theme.objects.create(name='Hello').id
-        response = self.admin_client.delete(f'/api/theme/{theme_id}/')
+        theme_id: int = Theme.objects.create(name="Hello").id
+        response = self.admin_client.delete(f"/api/theme/{theme_id}/")
         self.assertEqual(response.status_code, 204)

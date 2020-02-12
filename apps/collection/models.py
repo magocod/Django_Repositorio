@@ -15,15 +15,7 @@ class Collection(models.Model):
     updated = models.DateTimeField(default=timezone.now)
     # relaciones
     theme = models.ForeignKey(
-        Theme,
-        related_name='collection_theme',
-        on_delete=models.PROTECT
+        Theme, related_name="collection_theme", on_delete=models.PROTECT
     )
-    categories = models.ManyToManyField(
-        Category,
-        related_name='collection_categories'
-    )
-    tags = models.ManyToManyField(
-        Tag,
-        related_name='collection_tags'
-    )
+    categories = models.ManyToManyField(Category, related_name="collection_categories")
+    tags = models.ManyToManyField(Tag, related_name="collection_tags")
