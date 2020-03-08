@@ -15,18 +15,21 @@
 
 ## Database
 
-* Sqlite3 --> https://www.sqlite.org/index.html
-* Postgresql --> https://www.postgresql.org/
+* Sqlite3 -> https://www.sqlite.org/index.html
+* Postgresql -> https://www.postgresql.org/
 
 ## Third Packages
 
-* Django-rest-framework --> http://www.django-rest-framework.org/
+* Django-rest-framework -> http://www.django-rest-framework.org/
+* black -> https://black.readthedocs.io/en/stable/
+* isort -> https://timothycrosley.github.io/isort/
 * django-unused-media
 
 ## Tests (99% coverage)
 
 * Python unittest -> https://docs.python.org/3/library/unittest.html
 * Django tests -> https://docs.djangoproject.com/en/3.0/topics/testing/
+* coverage -> https://coverage.readthedocs.io/en/coverage-5.0.3/
 
 ## instructions
 
