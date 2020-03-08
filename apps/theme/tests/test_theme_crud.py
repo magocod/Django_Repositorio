@@ -6,10 +6,11 @@ Prueba edicion Theme
 import json
 from typing import Any, Dict
 
+from apps.tests.fixtures import RepositoryTestCase
+
 # local Django
 from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
-from apps.tests.fixtures import RepositoryTestCase
 
 
 class ThemeCrudTest(RepositoryTestCase):

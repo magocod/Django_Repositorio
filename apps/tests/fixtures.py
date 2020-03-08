@@ -13,7 +13,7 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 
 # local Django
-from apps.tests.auth import user_list, TOKENS
+from apps.tests.auth import TOKENS, user_list
 from apps.tests.db import db_populate
 
 

@@ -5,10 +5,11 @@ Listar Theme
 # standard library
 # import json
 
+from apps.tests.fixtures import RepositoryTestCase
+
 # local Django
 # from apps.theme.models import Theme
 from apps.theme.serializers import ThemeSerializer
-from apps.tests.fixtures import RepositoryTestCase
 
 
 class ThemeListTest(RepositoryTestCase):
