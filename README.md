@@ -1,6 +1,9 @@
-## UNEFA Repository
+UNEFA Repository
+================
+![Alt text](https://firebasestorage.googleapis.com/v0/b/django-237201.appspot.com/o/repo_tags%2Fcode_style_black.svg?alt=media&token=c4090132-fde3-4fb3-9e96-4e13d19bc1fb "code_style")
 
-* Digital repository, UNEFA internship project
+Digital repository, UNEFA internship project
+
 * Demo url: https://djrepo.herokuapp.com/
 
 ## Tox env
