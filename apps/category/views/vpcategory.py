@@ -21,7 +21,7 @@ from apps.category.models import Category
 from apps.category.serializers import CategorySlugSerializer
 
 
-class VCategorySlugList(APIView, PageNumberPagination):
+class CategoryPublicListView(APIView, PageNumberPagination):
     """
     ...
     """
@@ -37,10 +37,3 @@ class VCategorySlugList(APIView, PageNumberPagination):
         results = self.paginate_queryset(listr, request)
         serializer = self.serializer(results, many=True)
         return self.get_paginated_response(serializer.data)
-
-    # def post(self, request, format=None):
-    #     """
-    #     ...
-    #     """
-    #     # listr = Category.objects.all().order_by('id').values_list()
-    #     return JsonResponse({'foo': 'bar'})

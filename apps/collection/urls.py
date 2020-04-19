@@ -23,7 +23,7 @@ urlpatterns = [
     # public
     path(
         "collections/slug_articles/",
-        vpcollection.VCollectionSlugList.as_view(),
+        vpcollection.CollectionPublicListView.as_view(),
         name="api_collections_articles",
     ),
 ]

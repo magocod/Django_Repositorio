@@ -54,3 +54,16 @@ def db_populate(tag=0, theme=0, category=0, collection=0, article=0):
             url="https://www.google.com/",
             created="2019-09-21",
         )
+
+    # relations
+    quantity_relations = (0, 1, 2, 3)
+    
+    for collection in Collection.objects.all():
+
+        quantity: int = random.choice(quantity_relations)
+
+        for category in Category.objects.all()[:quantity]:
+            collection.categories.add(category)
+
+        for tag in Tag.objects.all()[:quantity]:
+            collection.tags.add(tag)

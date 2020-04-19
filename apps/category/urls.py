@@ -17,7 +17,7 @@ urlpatterns = [
     ),
     path(
         "categories/collections/",
-        vpcategory.VCategorySlugList.as_view(),
+        vpcategory.CategoryPublicListView.as_view(),
         name="api_categories_collections",
     ),
 ]
