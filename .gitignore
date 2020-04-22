@@ -4,4 +4,5 @@
 *.idea
 .coverage
 htmlcov
+docs/site
 db.sqlite3

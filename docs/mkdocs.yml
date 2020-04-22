@@ -1,0 +1,6 @@
+site_name: djrepo
+repo_url: https://github.com/magocod/djrepo
+nav:
+  - Home: index.md
+  - Intro_quick_start: intro_quick_start.md
+theme: readthedocs
