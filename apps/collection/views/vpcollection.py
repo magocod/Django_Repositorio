@@ -17,6 +17,7 @@ class CollectionPublicListView(APIView, PageNumberPagination):
     """
     ...
     """
+
     permission_classes = (AllowAny,)
     serializer = CollectionSlugSerializer
 

@@ -57,7 +57,7 @@ def db_populate(tag=0, theme=0, category=0, collection=0, article=0):
 
     # relations
     quantity_relations = (0, 1, 2, 3)
-    
+
     for collection in Collection.objects.all():
 
         quantity: int = random.choice(quantity_relations)
